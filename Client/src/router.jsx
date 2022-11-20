@@ -14,11 +14,11 @@ const Routes = () => {
       <Switch>
       <Route index path="/" exact component={Home} />
       <Route path="/category" component={Category} />
-      <Route path="/user" component={<User />} />
-      <Route path="/admin" component={<Admin />} />
-      <Route path="/product" component={<ProductInfo/>} />
-      <Route path="/cart" component={<Cart />} />
-      <Route path="/payment" component={<Payment/>} />
+      <Route path="/user" component={User} />
+      <Route path="/admin" component={Admin} />
+      <Route path="/product" component={ProductInfo} />
+      <Route path="/cart" component={Cart} />
+      <Route path="/payment" component={Payment} />
     </Switch>
     </BrowserRouter>
 

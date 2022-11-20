@@ -33,15 +33,15 @@ export const Wrapper = styled.div`
 height: 100%;
 display: flex;
 transition: all 1.5s ease;
-transform: translateX(${(props) => props.slideIndex * -100}vw);
+transform: translateX(${(props) => props.slideIndex * -30}vw);
 `;
 
 export const Slide = styled.div`
-width: 100vw;
-height: 100vh;
+height: 500px;
+width: 300px;
 display: flex;
-align-items: center;
-justify-content:center;
+align-items: start;
+justify-content:start;
 background-color: #${(props) => props.bg};
 `;
 

@@ -9,7 +9,7 @@ const CategoryItem = ({ item }) => {
   console.log("categoria",categorySelect)
 
     return (
-      <Container bg={item.bg}
+      <Container bg={item.bg} 
       onMouseDown={() => setCategorySelect(item.cat)}
        >
         <Link to={'/category'}> 

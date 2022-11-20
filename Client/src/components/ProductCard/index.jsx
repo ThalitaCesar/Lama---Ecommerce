@@ -1,8 +1,10 @@
-import { Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@material-ui/core';
+import { Card, CardActions, CardContent, CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, IconButton, Typography } from '@material-ui/core';
 import { Add, Favorite, Share } from '@material-ui/icons';
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 function ProductCard() {
+
 
     return (
 <>
@@ -29,11 +31,15 @@ function ProductCard() {
           <Share />
         </IconButton>
         </div>
+        <Link to='/product'>
         <IconButton aria-label="details" style={{background:"#e61919", borderRadius:"8px"}}>
           <Typography variant="body1" color="secondary">
           Detalhes
         </Typography>
         </IconButton>
+        </Link>
+     
+   
         </CardActions>
     </Card>
 </>

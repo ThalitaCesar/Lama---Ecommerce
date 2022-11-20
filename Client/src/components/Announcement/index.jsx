@@ -9,7 +9,7 @@ const Announcement = () => {
             
             <TextCursor>
          <LocalShippingOutlined style={{margin:"7px"}}/> 
-        Frete <Strong>GRÁTIS</Strong> para pedidos acima de <Strong>R$120,00 !</Strong> 
+        Frete <Strong>GRÁTIS</Strong> para pedidos acima de <Strong>R$120,00 !</Strong> ✨
             </TextCursor>
         </Container>
         </>

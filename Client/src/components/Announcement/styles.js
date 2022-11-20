@@ -15,7 +15,7 @@ export const blinkTextCursor = keyframes`
 
   export const Container = styled.div`
   height: 40px;
-  background: var(--background);
+  background: var(--black);
   color: white;
   display: flex;
   align-items: center;
@@ -47,4 +47,5 @@ export const Strong = styled.span`
   font-weight: 500;
   margin:5px;
   font-weight: bold;
+  color: #e61919;
 `;
