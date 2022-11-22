@@ -3,14 +3,16 @@ import React, { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalState";
 import { categories } from "../../data";
 import CategoryItem from "../CategoryItem";
-import { Container, Flex, Title } from "./styles";
+import { CategoriesDiv, Container, Flex, Title } from "./styles";
 
 
 const Categories = () => {
 
-    return (<>
-     <Title>NAVEGUE POR CATEGORIAS</Title>
+    return (
+      <CategoriesDiv>
+      <Title>NAVEGUE POR CATEGORIAS</Title>
       <Container>
+      
       <Grid container>
 
         {categories.map((item) => (
@@ -21,7 +23,8 @@ const Categories = () => {
   
       </Grid>
       </Container>
-      </>
+      </CategoriesDiv>
+     
     );
   };
   

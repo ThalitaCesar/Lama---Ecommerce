@@ -8,7 +8,7 @@ margin-right: auto;
 margin-top: 60px;
 margin-bottom: 60px;
 
-  ${mobile({marginBottom:"20px", marginLeft:"10px" })}
+  ${mobile({display:"none"})}
 `;
 
 export const ImgMarks = styled.img`

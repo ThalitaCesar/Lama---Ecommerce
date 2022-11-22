@@ -38,12 +38,12 @@ html{
     color: var(--black);
  }
  a{
-    font-weight: 600;
-    color: var(--grey);
-    
+    font-weight: 400;
+    color: blue; 
  }
  a:hover{
-    color: var(--grey) 
+    color: var(--black);
+    text-decoration: underline;
     }
 
  button{

@@ -1,17 +1,28 @@
 
+import { Backdrop } from '@material-ui/core';
+import { ArrowBackIosOutlined } from '@material-ui/icons';
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom';
+import Announcement from '../../components/Announcement';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
+import Info from './Info';
 import Slider from './Slider';
-import { Container, Left, Right } from './styles';
+import { BackButton, Container, Left, Right } from './styles';
 
 function ProductInfo() {
 
-
+  const history = useHistory();
     return (
 <>
+<Announcement/>
 <Navbar/>
 
+<BackButton onClick={() => { history.goBack()}}>
+  <Backdrop/> 
+  <ArrowBackIosOutlined/> 
+  Voltar
+  </BackButton>
       <Container>
         <Left>
 
@@ -48,7 +59,7 @@ function ProductInfo() {
            
         </Left>
         <Right>
-          Informações do
+          <Info/>
         </Right>
       </Container>
       <Footer/>

@@ -7,7 +7,7 @@ height: 100vh;
 display: flex;
 position: relative;
 overflow: hidden;
-${mobile({ height: "100%"})}
+${mobile({ display: "none"})}
 `;
 
 export const Arrow = styled.div`
@@ -38,7 +38,6 @@ transform: translateX(${(props) => props.slideIndex * -30}vw);
 
 export const Slide = styled.div`
 height: 500px;
-width: 300px;
 display: flex;
 align-items: start;
 justify-content:start;

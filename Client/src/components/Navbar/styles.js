@@ -5,7 +5,7 @@ export const Container = styled.div`
 height: 60px;
 margin-right: 30px;
 margin-left: 30px;
-
+padding:10px;
 ${mobile({ height: "50px" })}
 `;
 
@@ -38,6 +38,7 @@ justify-content: space-between;
 align-items: space-between;
 margin-left: 25px;
 padding: 5px;
+${mobile({ display: "none" })}
 `;
 
 export const Input = styled.input`
@@ -66,7 +67,6 @@ flex: 1;
 display: flex;
 align-items: center;
 justify-content: flex-end;
-${mobile({ flex: 2, justifyContent: "center" })}
 `;
 
 export const MenuItem = styled.div`
@@ -79,3 +79,7 @@ margin-left: 25px;
 }
 ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
+
+export const NotMobile = styled.div`
+${mobile({ display: "none" })}
+`

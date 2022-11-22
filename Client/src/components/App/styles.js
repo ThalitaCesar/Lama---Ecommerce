@@ -25,7 +25,7 @@ margin-top:30px;
 display:flex;
 ${mobile({ 
     flexDirection:"column",
-marginBottom:"60px" })}
+    marginBottom:"30px" })}
 `;
 
 export const ImgButton = styled.img`
@@ -33,4 +33,14 @@ width: 194px;
 height: 61px;
 margin-right:30px;
 cursor: pointer;
+${mobile({ margin:"10px" })}
+`;
+
+export const H1 = styled.h1`
+${mobile({ display:"none" })}
+`;
+
+export const H1Mobile = styled.h2`
+display:none;
+${mobile({ display:"block" })}
 `;

@@ -18,6 +18,7 @@ import {
     Left, 
     Logo, 
     MenuItem, 
+    NotMobile, 
     Right, 
     SearchContainer, 
     Wrapper 
@@ -48,7 +49,7 @@ const Navbar = () => {
             </Badge>
             </MenuItem>
             </Link>
-      
+            <NotMobile>
             <Link to="/cart" style={{color:"var(--black)"}}>
             <MenuItem>
               <Badge color="primary">
@@ -56,6 +57,7 @@ const Navbar = () => {
               </Badge>
             </MenuItem>
             </Link>
+            </NotMobile>
             <MenuItem>
               <Badge color="primary">
                 <HeadsetMicRounded />

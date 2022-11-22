@@ -2,6 +2,7 @@ import { Badge, Grid } from '@material-ui/core';
 import {  HeadsetMicRounded, PersonOutline, ShoppingCartOutlined } from '@material-ui/icons';
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
+import Announcement from '../../components/Announcement';
 import Footer from '../../components/Footer';
 import { MenuItem } from '../../components/Navbar/styles';
 import ProductCard from '../../components/ProductCard';
@@ -22,6 +23,7 @@ function Category() {
 
     return (
     <>
+              <Announcement/>
               <ContainerSearchBar>
               <Link to="/" style={{color:"var(--black)", textDecoration:"none"}}>
               <TitleSearch>

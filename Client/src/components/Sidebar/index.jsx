@@ -1,4 +1,4 @@
-import { Checkbox, Divider, FormControl, FormControlLabel, FormLabel, Slider } from '@material-ui/core';
+import { Button, Checkbox, Divider, FormControl, FormControlLabel, FormLabel, IconButton, Slider } from '@material-ui/core';
 import { FilterListOutlined } from '@material-ui/icons';
 import React, { useContext, useState } from 'react'
 import { GlobalContext } from '../../context/GlobalState';
@@ -26,9 +26,8 @@ function SideBar() {
     return (
 <>
 <Container>
-
+<br></br>
 <TitleFilter><FilterListOutlined/> Filtros</TitleFilter>
-
 
 {categorySelect == 'feminino' && (
   <FormControl>
@@ -72,7 +71,13 @@ Entre {value[0]} e {value[1]}
       />
     )}
   />
+
 ))}
+
+
+<br></br>
+<Button variant="contained" color="primary">
+  Filtrar</Button>
 
 </FormControl>
 )}
@@ -122,6 +127,10 @@ Entre {value[0]} e {value[1]}
   />
 ))}
 
+<br></br>
+<Button variant="contained" color="primary">
+  Filtrar
+  </Button>
 </FormControl>
 )}
 
@@ -155,6 +164,10 @@ color="primary"
 />
 Entre {value[0]} e {value[1]} 
 
+<br></br>
+<Button variant="contained" color="primary">
+  Filtrar
+  </Button>
 </FormControl>
 )}
 
@@ -188,6 +201,10 @@ color="primary"
 />
 Entre {value[0]} e {value[1]} 
 
+<br></br>
+<Button variant="contained" color="primary">
+  Filtrar
+  </Button>
 </FormControl>
 )}
 

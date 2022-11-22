@@ -24,5 +24,10 @@ margin-right:100px;
  display:flex;
  align-items:center;
  justify-content:center;
- ${mobile({ marginLeft: "10px", marginRight: "10px", marginTop:"60px" })}
+ ${mobile({ display: "none" })}
+`;
+
+export const CategoriesDiv = styled.div`
+
+ ${mobile({ display: "none" })}
 `;

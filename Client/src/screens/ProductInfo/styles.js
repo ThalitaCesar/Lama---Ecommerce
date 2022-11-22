@@ -15,7 +15,15 @@ width:50%;
 `
 
 export const Right = styled.div`
-display: flex;
-align-items: center;
 width:50%;
+
+`
+
+export const BackButton = styled.button`
+margin-top: 30px;
+margin-left:60px;
+display:flex;
+justify-content: flex-end;
+flex-direction: row;
+background: transparent;
 `

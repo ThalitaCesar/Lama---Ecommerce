@@ -8,18 +8,19 @@ display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
-${mobile({ margin: "0", borderRadius:"16px", marginBottom:"30px" })}
+${mobile({ margin: "0"})}
 `;
 export const Title = styled.h1`
 font-size: 60px;
 margin-bottom: 20px;
+${mobile({ padding:"30px", marginBottom:"0px"})}
 `;
 
 export const Desc = styled.div`
 font-size: 18px;
 font-weight: 300;
 margin-bottom: 20px;
-${mobile({ textAlign: "center" })}
+${mobile({ textAlign: "center", padding:"30px" })}
 `;
 
 export const InputContainer = styled.div`
@@ -30,7 +31,7 @@ display: flex;
 justify-content: space-between;
 border: 1px solid lightgray;
 border-radius:20px;
-${mobile({ width: "80%" })}
+${mobile({ width: "80%", width: "80%" })}
 `;
 
 export const Input = styled.input`
@@ -40,7 +41,8 @@ padding-left: 20px;
 border-radius:20px;
 &:focus, select:focus {
     outline: 0;
-}
+};
+${mobile({ paddingLeft: "0px" })}
 `;
 
 export const Button = styled.button`

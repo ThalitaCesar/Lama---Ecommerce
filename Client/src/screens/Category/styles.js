@@ -8,6 +8,7 @@ margin-left: 30px;
 padding: 10px 20px;
 display: flex;
 align-items: center;
+padding-top:10px;
 justify-content: space-between;
 ${mobile({ height: "50px", padding: "10px 0px" })}
 `

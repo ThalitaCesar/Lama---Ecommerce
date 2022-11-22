@@ -19,7 +19,7 @@ from {
 
 export const SliderWrapper = styled.div`
   width: 80%;
-  height: 450px;
+  height: 520px;
   border: none;
   position: relative;
 
@@ -100,6 +100,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  margin-top: 60px;
 
   .list-dot {
     display: flex;
