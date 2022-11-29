@@ -9,7 +9,7 @@ flex-direction: column;
 padding: 30px 40px;
 width: 20vw;
 border-right: 2px solid var(--grey);
-${mobile({ height: "100%"})}
+${mobile({ display: "none"})}
 `;
 
 export const Title = styled.h5`

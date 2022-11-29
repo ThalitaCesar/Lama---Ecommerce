@@ -38,7 +38,7 @@ justify-content: space-between;
 align-items: space-between;
 margin-left: 25px;
 padding: 5px;
-${mobile({ display: "none" })}
+${mobile({ })}
 `;
 
 export const Input = styled.input`
@@ -82,4 +82,40 @@ ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 
 export const NotMobile = styled.div`
 ${mobile({ display: "none" })}
+`
+export const SearchBox = styled.div`
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 2px solid var(--grey);
+    border-radius:20px;
+    background-color: var(--grey);
+    height:40px;
+  .search-btn {
+    float: right;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 2s;
+  }
+  
+  
+  .search-input {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    font-size: 19px;
+    transition: 0.4s;
+    line-height: 50px;
+    width: 0;
+  }
+  
+  &:hover > .search-input {
+    width: 250px;
+    padding: 0 7px;
+  }
 `

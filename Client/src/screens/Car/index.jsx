@@ -1,10 +1,16 @@
 import React from 'react'
+import Footer from '../../components/Footer';
+import FooterMobile from '../../components/FooterMobile';
+import Navbar from '../../components/Navbar';
 
 function Cart() {
 
     return (
 <>
-<h1>Categorias</h1>
+<Navbar/>
+<h1>compras</h1>
+<Footer/>
+<FooterMobile/>
 </>
   )} 
   

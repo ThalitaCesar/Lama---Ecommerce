@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { mobile } from "../../../responsive";
 
 const aniSlider = keyframes`
 from {
@@ -22,6 +23,7 @@ export const SliderWrapper = styled.div`
   height: 520px;
   border: none;
   position: relative;
+  ${mobile({ display: "none"})};
 
   .image {
     position: absolute;
@@ -101,6 +103,7 @@ export const Wrapper = styled.div`
   justify-content: start;
   align-items: center;
   margin-top: 60px;
+  ${mobile({ display: "none"})};
 
   .list-dot {
     display: flex;

@@ -14,20 +14,27 @@ export const Title = styled.h1`
  margin:60px;
  font-size: 30px;
 
- ${mobile({ margin: "10px", fontSize: "18px", textAlign:"start", marginTop:"60px"})}
+ ${mobile({ 
+ margin: "10px", 
+ fontSize: "20px",
+ marginLeft:"30px",
+ textAlign:"start", 
+ marginTop:"60px"})}
 `;
 
 export const Container = styled.div`
-margin-right:100px;
+ margin-right:100px;
  margin-left:120px;
  margin-bottom:120px;
  display:flex;
  align-items:center;
  justify-content:center;
- ${mobile({ display: "none" })}
-`;
+ ${mobile({ 
+    marginLeft: "30px", 
+    marginRignt:"0",
+ })}
+ `;
 
 export const CategoriesDiv = styled.div`
 
- ${mobile({ display: "none" })}
 `;

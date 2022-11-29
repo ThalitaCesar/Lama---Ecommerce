@@ -6,6 +6,7 @@ display: flex;
 align-items: center;
 justify-content:start;
 margin:10px;
+${mobile({ flexDirection: "column" })}
 `
 
 export const Left = styled.div`
@@ -16,7 +17,7 @@ width:50%;
 
 export const Right = styled.div`
 width:50%;
-
+${mobile({ width: "90%" })}
 `
 
 export const BackButton = styled.button`
@@ -26,4 +27,5 @@ display:flex;
 justify-content: flex-end;
 flex-direction: row;
 background: transparent;
+${mobile({ marginLeft: "20px" })}
 `

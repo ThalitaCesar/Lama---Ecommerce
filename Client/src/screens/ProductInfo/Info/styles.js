@@ -1,8 +1,9 @@
 import styled from "styled-components";
-
+import { mobile } from "../../../responsive";
 
 export const Container = styled.div`
 width:550px;
+${mobile({ width: "100%", marginBottom:"60px"})}
 `
 
 export const NameProduct = styled.h3`
@@ -51,12 +52,13 @@ margin-bottom:7px;
 `
 
 export const Tam = styled.div`
-display:flex
+display:flex;
+flex-wrap: wrap;
 `
 
 export const TamTitle = styled.h4`
 margin-top:16px;
-margin-bottom:10px;
+margin-bottom:25px;
 `
 
 export const ButtonTam = styled.button`
@@ -97,6 +99,7 @@ margin-top:4px;
 margin-bottom:7px;
 align-items:center;
 display:flex;
+${mobile({ width: "100%" })}
 `
 
 export const Description = styled.p`
@@ -104,4 +107,5 @@ font-size:12px;
 margin-top:16px;
 text-align: justify;
 margin-bottom:30px;
+${mobile({ width: "100%" })}
 `

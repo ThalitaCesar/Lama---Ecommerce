@@ -10,7 +10,7 @@ display: flex;
 align-items: center;
 padding-top:10px;
 justify-content: space-between;
-${mobile({ height: "50px", padding: "10px 0px" })}
+${mobile({ height: "50px", padding: "10px 0px", marginTop:'16px' })}
 `
 
 export const TitleSearch = styled.h1`
@@ -44,6 +44,7 @@ export const Left = styled.div`
 
 export const Right = styled.div`
 display:flex;
+${mobile({ marginLeft: "26px", marginTop:"30px"})}
 `
 
 
@@ -53,5 +54,6 @@ display:flex;
 
 export const Icons = styled.div`
 display:flex;
+${mobile({ display: "none"})}
 
 `

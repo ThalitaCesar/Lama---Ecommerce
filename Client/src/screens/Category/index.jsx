@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Announcement from '../../components/Announcement';
 import Footer from '../../components/Footer';
+import FooterMobile from '../../components/FooterMobile';
 import { MenuItem } from '../../components/Navbar/styles';
 import ProductCard from '../../components/ProductCard';
 import SearchBar from '../../components/SearchBar';
@@ -69,9 +70,9 @@ function Category() {
               </Left>
 
               <Right>
-                <Grid container>
+                <Grid container spacing={2}>
                 <ProductCard/>
-                <ProductCard/>
+                <ProductCard />
                 <ProductCard/>
                 <ProductCard/>
                 <ProductCard/>
@@ -79,6 +80,8 @@ function Category() {
               </Right>
               </Flex>
     <Footer/>
+    <FooterMobile/>
+
     </>
   )} 
   

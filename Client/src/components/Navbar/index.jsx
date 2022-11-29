@@ -20,6 +20,7 @@ import {
     MenuItem, 
     NotMobile, 
     Right, 
+    SearchBox, 
     SearchContainer, 
     Wrapper 
 } from "./styles";
@@ -35,13 +36,16 @@ const Navbar = () => {
           </Link>
           </Left>
           <Center>        
-          <SearchContainer>
-              <Input placeholder="Search" />
-              <Search style={{ color: "var(--black)", fontSize: 25 }} />
-            </SearchContainer>
+            <SearchBox>
+            <input class="search-input" type="text" name="" placeholder="Pesquise"/>
+            <a href="#" class="search-btn">
+            <Search  size={28} style={{ color: "var(--black)" }} />
+            </a>     
+            </SearchBox>
           </Center>
+        
+          <NotMobile>
           <Right>
-
             <Link to="/user" style={{color:"var(--black)"}}>
             <MenuItem>
             <Badge color="primary">
@@ -49,21 +53,22 @@ const Navbar = () => {
             </Badge>
             </MenuItem>
             </Link>
-            <NotMobile>
             <Link to="/cart" style={{color:"var(--black)"}}>
             <MenuItem>
-              <Badge color="primary">
+              <Badge badgeContent={4} color="primary">
                 <ShoppingCartOutlined />
               </Badge>
             </MenuItem>
-            </Link>
-            </NotMobile>
+           </Link>
+            <Link to="/help" style={{color:"var(--black)"}}>
             <MenuItem>
               <Badge color="primary">
                 <HeadsetMicRounded />
               </Badge>
             </MenuItem>
+            </Link>
           </Right>
+          </NotMobile>
         </Wrapper>
       </Container>
     );

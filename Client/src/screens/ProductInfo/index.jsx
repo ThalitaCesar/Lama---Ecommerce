@@ -5,9 +5,11 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import Announcement from '../../components/Announcement';
 import Footer from '../../components/Footer';
+import FooterMobile from '../../components/FooterMobile';
 import Navbar from '../../components/Navbar';
 import Info from './Info';
 import Slider from './Slider';
+import SliderMobile from './SliderMobile';
 import { BackButton, Container, Left, Right } from './styles';
 
 function ProductInfo() {
@@ -25,6 +27,7 @@ function ProductInfo() {
   </BackButton>
       <Container>
         <Left>
+          <SliderMobile/>
 
         <Slider
         images={[
@@ -63,6 +66,7 @@ function ProductInfo() {
         </Right>
       </Container>
       <Footer/>
+      <FooterMobile/>
       </>
   )} 
   

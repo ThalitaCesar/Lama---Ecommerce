@@ -3,6 +3,7 @@ import Announcement from '../../components/Announcement';
 import AppCard from '../../components/App';
 import Categories from '../../components/Categories';
 import Footer from '../../components/Footer';
+import FooterMobile from '../../components/FooterMobile';
 import Marks from '../../components/Marks';
 import Navbar from '../../components/Navbar';
 import Newsletter from '../../components/Newsletter';
@@ -21,6 +22,7 @@ function Home() {
       <AppCard/>
       <Newsletter/>
       <Footer/>
+      <FooterMobile/>
 </>
   )} 
 

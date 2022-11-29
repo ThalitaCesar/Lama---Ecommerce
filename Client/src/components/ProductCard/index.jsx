@@ -8,7 +8,10 @@ function ProductCard() {
 
     return (
 <>
-<Card style={{width:"280px", height:"550px", margin:"30px"}}>
+<Card 
+style={{width:"280px", 
+height:"550px",
+margin:"30px"}}>
 <Link to='/product'>
       <CardMedia
         component="img"
