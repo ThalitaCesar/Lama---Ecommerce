@@ -13,6 +13,7 @@ export const Left = styled.div`
 display: flex;
 align-items: center;
 width:50%;
+${mobile({ width: "90%", marginBottom:"30px" })}
 `
 
 export const Right = styled.div`

@@ -40,6 +40,7 @@ border: none;
 flex: 8;
 padding-left: 20px;
 border-radius:20px;
+color: var(--black);
 &:focus, select:focus {
     outline: 0;
 };

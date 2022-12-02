@@ -7,5 +7,5 @@ height: 100vh;
 display: flex;
 position: relative;
 overflow: hidden;
-${mobile({ display: "none"})}
+${mobile({ height: "100%", marginTop:"30px"})}
 `;
