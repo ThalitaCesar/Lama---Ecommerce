@@ -1,9 +1,10 @@
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@material-ui/core';
-import { ExpandMoreOutlined } from '@material-ui/icons';
+import { ContactPhone, ContactSupport, ExpandMoreOutlined } from '@material-ui/icons';
 import React from 'react'
 import Footer from '../../components/Footer';
 import FooterMobile from '../../components/FooterMobile';
 import Navbar from '../../components/Navbar';
+import { FlexContent, FlexItem, IconContent, Text, TextTitle } from '../User/Adresses/Card/styles';
 import { ContactContainer, Container } from './styles';
 
 function Help() {
@@ -151,13 +152,22 @@ pedido.</p>
 
 
       <ContactContainer>
-          <h3>Como faço para entrar em contato?</h3>
-          <br></br>
+
+      <FlexItem>
+      <IconContent>
+      <ContactPhone size={60} style={{marginBottom:"10px"}}/>
+      </IconContent>
+      <FlexContent>
+          <Text>
           <Typography>
         Entre em contato pelo email <a href="mailto:faleconosco@lama.com.br">faleconosco@lama.com.br</a>
         <br></br>
-        Ou pelo nosso telefone: <a href="tel:08002324560">0800 232 4560</a>
+        Ou pelo telefone: <a href="tel:08002324560">0800 232 4560</a>
        </Typography>
+          </Text>
+      </FlexContent>
+  </FlexItem>
+      
        </ContactContainer>
     
 

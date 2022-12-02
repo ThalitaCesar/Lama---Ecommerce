@@ -5,9 +5,11 @@ import Cart from './screens/Car';
 import Category from './screens/Category';
 import Help from './screens/Help';
 import Home from './screens/Home';
-import Payment from './screens/Payment';
 import ProductInfo from './screens/ProductInfo';
 import User from './screens/User';
+import Adresses from './screens/User/Adresses';
+import PersonalData from './screens/User/PersonalData';
+import Request from './screens/User/Requests';
 
 const Routes = () => {
     return (
@@ -20,7 +22,10 @@ const Routes = () => {
       <Route path="/product" component={ProductInfo} />
       <Route path="/cart" component={Cart} />
       <Route path="/help" component={Help} />
-      <Route path="/payment" component={Payment} />
+      <Route path="/user/adresses" component={Adresses} />
+      <Route path="/user/personaldata" component={PersonalData} />
+      <Route path="/user/request" component={Request} />
+
     </Switch>
     </BrowserRouter>
 

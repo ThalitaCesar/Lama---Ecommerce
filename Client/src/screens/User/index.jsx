@@ -1,11 +1,21 @@
 import React from 'react'
+import Footer from '../../components/Footer';
 import FooterMobile from '../../components/FooterMobile';
+import Navbar from '../../components/Navbar';
+import SideBar from './Sidebar';
+import SidebarMobile from './SidebarMobile';
+import { StyleContainer } from './styles';
 
 function User() {
 
     return (
 <>
-<h1>User</h1>
+<Navbar/>
+<StyleContainer>
+<SidebarMobile/>
+<SideBar/>
+</StyleContainer>
+<Footer/>
 <FooterMobile/>
 </>
   )} 
