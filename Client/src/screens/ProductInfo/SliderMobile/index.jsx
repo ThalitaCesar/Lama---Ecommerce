@@ -19,7 +19,7 @@ export default function SliderMobile() {
       }}
        navigation={true}
        zoom={true}
-        modules={[Zoom, Navigation]} className="mySwiper">
+      modules={[Zoom, Navigation]} className="mySwiper">
   
          <SwiperSlide className="swiper-slide">
           <div className="swiper-zoom-container">

@@ -49,10 +49,6 @@ html{
  button{
     cursor:pointer;
     border-style:none;
-    border-radius:60px;
-    background:var(--black);
-    border: 2px solid var(--grey);
-    padding: 10px 10px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;

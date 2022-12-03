@@ -1,8 +1,62 @@
 import { Box, Button, ButtonGroup, Divider, TextField } from '@material-ui/core';
 import React from 'react'
+import { useModalContext } from '../../../context/ModalContext';
 import { Title } from '../Requests/styles';
 
 function PersonalData() {
+
+  const { openModal } = useModalContext();
+  const testModal = () => openModal({ message: <Message/> });
+
+  const Message =()=>{
+    return <>
+    <Box
+      component="form"
+      noValidate
+      autoComplete="off"
+    >
+
+      <div>
+        <TextField
+          required
+          id="standard-required"
+          label="Senha antiga"
+          type="password"
+          defaultValue=""
+          variant="standard"
+          style={{marginTop:"7px"}}
+        />
+
+        <TextField
+          required
+          id="standard-required"
+          label="Nova senha"
+          type="password"
+          defaultValue=""
+          variant="standard"
+          style={{marginBottom:"7px"}}
+        />
+
+        <TextField
+          required
+          id="standard-required"
+          label="Confirmar nova senha"
+          type="password"
+          defaultValue=""
+          variant="standard"
+          style={{marginBottom:"7px"}}
+        />
+
+        
+      </div>
+    </Box>
+     
+    <Button variant="contained" color="primary" size="large" style={{marginTop:"30px"}}>
+        Salvar Alterações
+    </Button> 
+
+    </>
+  }
 
     return (
 <>
@@ -68,10 +122,19 @@ function PersonalData() {
       </div>
     </Box>
       <ButtonGroup>
-      <Button variant="contained" color="primary" size="large" style={{margin:"30px", marginRight:"0"}}>
+      <Button 
+      variant="contained" 
+      color="primary" 
+      size="large" 
+      style={{margin:"30px", marginRight:"0"}}
+      onClick={testModal}>
         Mudar Senha
     </Button> 
-    <Button variant="contained" color="primary" size="large" style={{margin:"30px"}}>
+    <Button 
+    variant="contained" 
+    color="primary" 
+    size="large" 
+    style={{margin:"30px"}}>
         Salvar Alterações
     </Button> 
       </ButtonGroup>

@@ -1,7 +1,9 @@
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import Modal from './components/Modal';
 import GlobalState from './context/GlobalState';
+import { ModalProvider } from './context/ModalContext';
 import Routes from './router';
 import Home from './screens/Home';
 import { GlobalStyle } from './styles/global';
@@ -31,12 +33,15 @@ function App() {
 return (
   <>
    <BrowserRouter>
-   <GlobalState>
-   <MuiThemeProvider theme={theme}>
+    <GlobalState>
+      <ModalProvider>
+          <MuiThemeProvider theme={theme}>
             <Routes/>
-    </MuiThemeProvider>
-            <GlobalStyle/>
-      </GlobalState>
+            <Modal/>
+          </MuiThemeProvider>
+          <GlobalStyle/>
+      </ModalProvider>
+    </GlobalState>
   </BrowserRouter>
   </>
 )

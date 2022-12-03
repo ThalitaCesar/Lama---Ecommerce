@@ -12,7 +12,9 @@ background: var(--grey);
 padding:15px;
 `
 
-export const IconContent = styled.div`
+export const IconContent = styled.button`
+border:none;
+boder-box:0;
 color: #FFFFFF;
 background: #e61919;
 display:flex;
