@@ -1,4 +1,4 @@
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import { createTheme, MuiThemeProvider } from '@material-ui/core';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Modal from './components/Modal';
@@ -10,7 +10,7 @@ import { GlobalStyle } from './styles/global';
 
 function App() {
 
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       primary: {
         main: '#e61919',

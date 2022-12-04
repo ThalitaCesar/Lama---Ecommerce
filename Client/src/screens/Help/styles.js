@@ -7,10 +7,8 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 margin:60px;
-
 `
 
 export const ContactContainer= styled.div`
 margin-top:60px;
-
 `

@@ -14,3 +14,9 @@ td, th {
   }
   
 `
+
+export const Div =styled.div`
+.custome-step .ant-steps-item-process {
+  color: red !important;
+}
+`

@@ -37,8 +37,8 @@ const Navbar = () => {
           </Left>
           <Center>        
             <SearchBox>
-            <input class="search-input" type="text" name="" placeholder="Pesquise"/>
-            <a href="#" class="search-btn">
+            <input className="search-input" type="text" name="" placeholder="Pesquise"/>
+            <a href="#" className="search-btn">
             <Search  size={28} style={{ color: "var(--black)" }} />
             </a>     
             </SearchBox>
