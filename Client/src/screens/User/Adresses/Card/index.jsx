@@ -107,20 +107,16 @@ function Card() {
     return (
 <>
 <FlexItem>
-      <IconContent onClick={editModal}>
-      <Edit size={60} 
-      style={{marginBottom:"10px"}} />
-      <small>Editar</small>
-      </IconContent>
       <FlexContent>
           <TextTitle>
             <strong>Rua Treze de Maio, 5842,</strong>
-          </TextTitle>
-          <Text>
-            <p>Alecrim, Natal-RN</p>
-            <p>CEP: 59000-000</p>
-          </Text>
+            <p> Alecrim, Natal-RN. CEP: 59000-000</p>
+            </TextTitle>
       </FlexContent>
+      <IconContent onClick={editModal}>
+      <Edit size={60} 
+      style={{marginBottom:"10px"}} />
+      </IconContent>
   </FlexItem>
 
 </>

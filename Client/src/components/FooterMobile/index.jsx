@@ -1,4 +1,4 @@
-import { BottomNavigationAction, Box } from '@material-ui/core';
+import { Badge, BottomNavigationAction, Box } from '@material-ui/core';
 import { HeadsetMicRounded, HomeOutlined, PersonOutline, ShoppingCartOutlined } from '@material-ui/icons';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -24,8 +24,8 @@ function FooterMobile() {
         icon={<PersonOutline />} />
         </Link>
 
-        <Link to="/cart" style={{color:"var(--black)"}}>
-        <BottomNavigationAction 
+        <Link to="/cart" style={{color:"var(--black)"}}>   
+        <BottomNavigationAction  badgeContent={4} 
         icon={<ShoppingCartOutlined />} />
         </Link>
 

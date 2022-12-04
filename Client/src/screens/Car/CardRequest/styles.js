@@ -8,13 +8,14 @@ export const Card = styled.div`
  margin:30px;
  align-items:center;
  width:80vw;
+ border: 1px solid var(--grey);
  justify-content: space-between;
  ${mobile({flexDirection: "column", justifyContent:"center"})}
 `;
 
 export const ImgContainer = styled.div`
 height: 170px;
-width:110px;
+width:130px;
 margin-right:30px;
 border: 1px solid #f4f4f4;
 background: url("${(props) => props.background}");

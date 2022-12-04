@@ -107,8 +107,9 @@ export const SearchBox = styled.div`
     background: none;
     outline: none;
     float: left;
-    padding: 0;
+    padding: 5px;
     font-size: 19px;
+    margin-left:15px;
     transition: 0.4s;
     line-height: 50px;
     width: 0;
@@ -117,5 +118,7 @@ export const SearchBox = styled.div`
   &:hover > .search-input {
     width: 250px;
     padding: 0 7px;
+    ${mobile({ width: "80px" })}
+
   }
 `

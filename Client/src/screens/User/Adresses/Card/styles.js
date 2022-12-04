@@ -1,15 +1,16 @@
 import styled from 'styled-components';
+import { mobile } from '../../../../responsive';
 
 export const TextTitle = styled.p`
 font-size: 16px;
-color: #FFFFFF;
 `
 
 export const FlexContent = styled.div`
 display:flex;
-flex-direction:column;
+flex-direction:row;
 background: var(--grey);
 padding:15px;
+${mobile({flexDirection: "column"})}
 `
 
 export const IconContent = styled.button`
@@ -31,8 +32,7 @@ export const FlexItem = styled.div`
 display:flex;
 border-radius: 16px;
 margin:35px;
-height: 100%;
-width: 400px;
+max-width: 80vw;
 text-decoration:none;
 @media(max-width: 900px) {
   width: 320px;
