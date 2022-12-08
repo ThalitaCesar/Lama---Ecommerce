@@ -1,11 +1,10 @@
-import knex from "knex";
+import {Knex, knex,} from "knex";
 import dotenv from "dotenv";
-import Knex from "knex";
 
 dotenv.config();
 
 export class DataBase {
-  private connection: null | Knex= null;
+  private connection: null | Knex = null;
   protected getConnection() {
     if (!this.connection) {
       this.connection = knex({

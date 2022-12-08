@@ -4,18 +4,18 @@ import { AuthenticationData } from "../types/types";
 
 
 export class Autheticator {
-  public generateToken = (payload: AuthenticationData) => {
-    const token = jwt.sign(payload, process.env.JWT_KEY as string, {
-      expiresIn: process.env.EXPIRES_IN,
+  public generateToken = (id: string) => {
+    const token = jwt.sign( { id }, process.env.JWT_KEY as string, {
+     expiresIn: "1h" 
     });
     return token;
   };
 
-  public getTokenData = (token: string): AuthenticationData => {
-    const tokenData = jwt.verify(
+  public tokenData = (token: string): AuthenticationData => {
+    const payload = jwt.verify(
       token,
       process.env.JWT_KEY as string
     ) as AuthenticationData;
-    return tokenData;
+    return payload;
   };
 }

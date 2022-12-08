@@ -5,7 +5,7 @@ import { DataBase } from "./DataBase";
 export class CartData extends DataBase {
   async createCart(cart: ProductRequest) {
     try {
-      await this.getConnection().from("Recipes").insert({
+      await this.getConnection().from("Lama_ProductRequestt").insert({
         id: cart.getId(),
         product_id: cart.getProductId(),
         user_id: cart.getUserId(),
@@ -19,7 +19,7 @@ export class CartData extends DataBase {
   async getRequestsByUser(user_id: string) {
     try {
       const result = await this.getConnection()
-        .from("ProductRequest")
+        .from("Lama_ProductRequest")
         .select("id", "product_id", "user_id")
         .innerJoin("Product", "Product.name", "Product.price")
         .where("user_id", "LIKE", `${user_id}`);
@@ -33,7 +33,7 @@ export class CartData extends DataBase {
   async deleteRequest(token: string, id: string) {
     try {
       const result = await this.getConnection()
-        .from("ProductRequest")
+        .from("Lama_ProductRequest")
         .select()
         .where("id", id);
 
@@ -41,7 +41,7 @@ export class CartData extends DataBase {
         throw new Error("Pedido não encontrada");
       }
       await this.getConnection()
-        .from("ProductRequest")
+        .from("Lama_ProductRequest")
         .delete()
         .where("user_id", "LIKE", `${token}`)
         .andWhere("id", "LIKE", `${id}`);

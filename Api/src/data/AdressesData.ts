@@ -1,69 +1,53 @@
-import { Recipe } from "../models/Adresses";
+import { Adresses } from "../models/Adresses";
 import { DataBase } from "./DataBase";
 
-export class RecipeData extends DataBase {
-  async createRecipe(recipe: Recipe) {
+
+export class AdressesData extends DataBase {
+  async createAdresses(adresses: Adresses) {
     try {
-      await this.getConnection().from("Recipes").insert({
-        id: recipe.getId(),
-        title: recipe.getTitle(),
-        description: recipe.getDescription(),
-        created: recipe.getCreated(),
-        user_id: recipe.getUserId(),
+      await this.getConnection().from("Adresses").insert({
+        id: adresses.getId(),
+        cep: adresses.getCep(),
+        streat: adresses.getStreet(),
+        district: adresses.getDistrict(),
+        state: adresses.getState(),
+        number: adresses.getNumber(),
+        city: adresses.getCity(),
+        complement: adresses.getComplement(),
+        user_id: adresses.getUserId(),
       });
-      return "Receita criado com sucesso";
+      return "Endereço criado com sucesso";
     } catch (error:any) {
       return error.sqlMessage || error.message;
     }
   }
 
-  async getRecipe(id: string) {
+  async getAllAdressesByUser(user_id: string) {
     try {
       const result = await this.getConnection()
-        .select("id", "title", "description", "created")
-        .from("Recipes")
-        .where("id", "LIKE", `%${id}%`);
+        .select("id", "cep", "street", "district", "number", "complement", "city", "state")
+        .from("Lama_Adresses")
+        .where("user_id", "LIKE", `%${user_id}%`);
       return result;
     } catch (error:any) {
       return error.sqlMessage;
     }
   }
 
-  async getUserRecipeFeed(id: string) {
-    try {
-      const result = await this.getConnection()
-        .from("Follow")
-        .select(
-          "Recipes.id",
-          "title",
-          "description",
-          "created",
-          "Recipes.user_id",
-          "User.name"
-        )
-        .innerJoin("Recipes", "Follow.user_to_follow_id", "Recipes.user_id")
-        .innerJoin("User", "User.id", "Follow.user_to_follow_id")
-        .where("Follow.user_id", "LIKE", `%${id}%`);
-
-      if (result.length < 1) {
-        throw new Error("Você ainda não segue essa pessoa");
-      }
-
-      return result;
-    } catch (error:any) {
-      return error.sqlMesage;
-    }
-  }
-
-  async updateRecipe(
-    idUser: string,
+  async updateAdresses(
+    userId: string,
     id: string,
-    title?: string,
-    description?: string
+    cep: string,
+    street: string,
+    district: string,
+    city: string,
+    number: number,
+    state: string,
+    complement?:string
   ) {
     try {
       const result = await this.getConnection()
-        .from("Recipes")
+        .from("Lama_Adresses")
         .select()
         .where("id", "LIKE", `${id}`);
 
@@ -71,37 +55,42 @@ export class RecipeData extends DataBase {
         throw new Error("Receita não encontrada");
       }
       await this.getConnection()
-        .from("Recipes")
+        .from("Lama_Adresses")
         .update({
-          title,
-          description,
+          cep,
+          street,
+          district,
+          city,
+          number,
+          state,
+          complement,
         })
-        .where("user_id", "LIKE", `${idUser}`)
+        .where("user_id", "LIKE", `${userId}`)
         .andWhere("id", "LIKE", `${id}`);
 
-      return "Receita alterada com sucesso";
+      return "Endereço alterado com sucesso";
     } catch (error:any) {
       return error.sqlMessage || error.message;
     }
   }
 
-  async deletRecipe(token: string, id: string) {
+  async deleteAdresses(token: string, id: string) {
     try {
       const result = await this.getConnection()
-        .from("Recipes")
+        .from("Lama_Adresses")
         .select()
         .where("id", id);
 
       if (result.length === 0) {
-        throw new Error("Receita não encontrada");
+        throw new Error("Endereço não encontrada");
       }
       await this.getConnection()
-        .from("Recipes")
+        .from("Lama_Adresses")
         .delete()
         .where("user_id", "LIKE", `${token}`)
         .andWhere("id", "LIKE", `${id}`);
 
-      return "Receita deletada com sucesso";
+      return "Endereço deletada com sucesso";
     } catch (error:any) {
       return error.sqlMessage || error.message;
     }

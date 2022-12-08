@@ -13,6 +13,7 @@ export enum CATEGORIES {
         private id: string,
         private name: string,
         private description: string,
+        private price:string,
         private created: string,
         private category: CATEGORIES
       ) {}
@@ -20,11 +21,14 @@ export enum CATEGORIES {
       getId() {
         return this.id;
       }
-      getTitle() {
+      getName() {
         return this.name;
       }
       getDescription() {
         return this.description;
+      }
+      getPrice(){
+        return this.price;
       }
       getCreated() {
         return this.created;

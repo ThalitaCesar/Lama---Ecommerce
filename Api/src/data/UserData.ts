@@ -1,11 +1,14 @@
+import { CustomError } from "../error/customError";
 import { User } from "../models/User";
 import { Autheticator } from "../services/Authenticator";
+import { user } from "../types/user";
 import { DataBase } from "./DataBase";
 
 export class UserData extends DataBase {
+
   async signUpUser(user: User) {
     try {
-      await this.getConnection().from("User").insert({
+      await this.getConnection().from("Lama_User").insert({
         id: user.getId(),
         cpf: user.getCpf(),
         data:user.getData(),
@@ -15,10 +18,7 @@ export class UserData extends DataBase {
         role: user.getRole(),
       });
       const newtoken = new Autheticator();
-      const token = newtoken.generateToken({
-        id: user.getId(),
-        roles: user.getRole(),
-      });
+      const token = newtoken.generateToken(user.getId());
       return token;
     } catch (error:any) {
       return error.sqlMesage || error.message;
@@ -29,7 +29,7 @@ export class UserData extends DataBase {
     try {
       const result = await this.getConnection()
         .select()
-        .from("User")
+        .from("Lama_User")
         .where("email", "LIKE", `%${email}%`);
       return result;
     } catch (error:any) {
@@ -40,7 +40,7 @@ export class UserData extends DataBase {
   async getProfile(id: string) {
     try {
       const result = await this.getConnection()
-        .from("User")
+        .from("Lama_User")
         .select("id", "name", "email", "data", "cpf")
         .where("id", "LIKE", `%${id}%`);
       return result;
@@ -49,10 +49,22 @@ export class UserData extends DataBase {
     }
   }
 
+  public getProfileByEmail = async (email: string) => {
+    try {
+      const result = await this.getConnection()
+        .from("Lama_User")
+        .select()
+        .where({email});
+      return result[0];
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
+    }
+  };
+
   async getProfileById(id: string) {
     try {
       const result = await this.getConnection()
-        .from("User")
+        .from("Lama_User")
         .select("id", "name", "email", "data", "cpf")
         .where("id", "LIKE", `%${id}%`);
       return result;
@@ -65,12 +77,11 @@ export class UserData extends DataBase {
     id: string,
     cpf: string,
     data: string,
-    name: string,
-    email: string,
+    name: string
   ) {
     try {
       const result = await this.getConnection()
-        .from("User")
+        .from("Lama_User")
         .select()
         .where("id", "LIKE", `${id}`);
 
@@ -78,12 +89,11 @@ export class UserData extends DataBase {
         throw new Error("Usuário não encontrada");
       }
       await this.getConnection()
-        .from("User")
+        .from("Lama_User")
         .update({
           cpf,
           data,
           name,
-          email,
         })
         .where("id", "LIKE", `${id}`)
       return "Alterações realizadas com sucesso";
@@ -98,7 +108,7 @@ export class UserData extends DataBase {
   ) {
     try {
       const result = await this.getConnection()
-        .from("User")
+        .from("Lama_User")
         .select()
         .where("id", "LIKE", `${id}`);
 
@@ -106,7 +116,7 @@ export class UserData extends DataBase {
         throw new Error("Usuário não encontrada");
       }
       await this.getConnection()
-        .from("User")
+        .from("Lama_User")
         .update({
          password
         })
@@ -120,7 +130,7 @@ export class UserData extends DataBase {
   async deleteUser(token: string) {
     try {
       await this.getConnection()
-        .from("User")
+        .from("Lama_User")
         .where("user_id", token)
         .delete();
 
