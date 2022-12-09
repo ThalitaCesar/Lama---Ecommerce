@@ -13,7 +13,7 @@ function CardAdresses() {
     <FlexItem>
     <p> <strong>Rua Treze de Maio, 5842, </strong>
     Alecrim, Natal-RN. CEP: 59000-000</p>
-            <a>Trocar</a>
+    <a>Trocar</a>
     </FlexItem>
 
 </>
