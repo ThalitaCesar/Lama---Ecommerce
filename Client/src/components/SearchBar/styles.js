@@ -18,7 +18,7 @@ background-color: transparent;
 outline: none;
 color: #080808;
 border: none;
-margin-left: 25px;
+margin-left: 15px;
 font-size: 0.9rem;
 width: 180px;
 ${mobile({ width:"90px"})}

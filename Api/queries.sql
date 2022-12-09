@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS Lama_User(
     role ENUM ("NORMAL","ADMIN") DEFAULT "NORMAL"
 );
 
-
 CREATE TABLE IF NOT EXISTS Lama_Adresses(
 	id VARCHAR(255) PRIMARY KEY,
 	cep VARCHAR(255) NOT NULL,
@@ -19,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Lama_Adresses(
     state VARCHAR(255) NOT NULL,
     number INT NOT NULL,
     user_id VARCHAR(255) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES User(id)
+    FOREIGN KEY (user_id) REFERENCES Lama_User(id)
 );
 
 CREATE TABLE IF NOT EXISTS Lama_Product(
@@ -28,31 +27,24 @@ CREATE TABLE IF NOT EXISTS Lama_Product(
     price VARCHAR(255) NOT NULL,
     description VARCHAR(500) NOT NULL,
     created DATE NOT NULL,
-    category ENUM ("FEM","MASC", "SPORT", "BA", "FOOTWEAR") DEFAULT "FEM",
+    category ENUM ("FEM","MASC", "SPORT", "BA", "FOOTWEAR") DEFAULT "FEM"
 );
 
 CREATE TABLE IF NOT EXISTS Lama_Images(
 	id VARCHAR(255) PRIMARY KEY,
 	photos VARCHAR(255) NOT NULL,
     product_id VARCHAR(255) NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES Product(id)
+    FOREIGN KEY (product_id) REFERENCES Lama_Product(id)
 );
 
 CREATE TABLE IF NOT EXISTS Lama_Size(
 	id VARCHAR(255) PRIMARY KEY,
 	sizes VARCHAR(100) NOT NULL,
     product_id VARCHAR(255) NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES Product(id)
+    FOREIGN KEY (product_id) REFERENCES Lama_Product(id)
 );
 
 
-CREATE TABLE IF NOT EXISTS Lama_ProductRequest(
-    id VARCHAR(255) PRIMARY KEY,
-    product_id VARCHAR(255) NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES Product(id),
-    user_id VARCHAR(255) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES User(id)
-)
 
 
 

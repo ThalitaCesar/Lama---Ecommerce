@@ -11,7 +11,7 @@
     "engines": {
       "node":"v16.14.0"
     },
-    "author": "Labenu",
+    "author": "Thalita",
     "license": "ISC",
     "dependencies": {
       "bcryptjs": "^2.4.3",

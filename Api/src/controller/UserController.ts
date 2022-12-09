@@ -1,6 +1,5 @@
 import express from "express";
 import { Request, Response } from "express";
-import { UserBusiness } from "../business/UserBusiness";
 import { UserData } from "../data/UserData";
 import { ROLES, User } from "../models/User";
 import { Autheticator } from "../services/Authenticator";
@@ -8,17 +7,20 @@ import { GenerateId } from "../services/GenerateId";
 import { HashManager } from "../services/HashManager";
 
 export class UserController {
+
+  // Criar usuário 
+
    async signUpUser(req: Request, res: Response) {
       let erroStatus = 500;
       try {
-        const { name, email, cpf, data, password, role } = req.body;
+        const { name, cpf, data, email, password, role } = req.body;
         const id = new GenerateId().generateId();
   
         if (!name) {
           erroStatus = 422;
           throw new Error("Digite um nome");
         }
-        if (!role || (role !== ROLES.NOMAL && role !== ROLES.ADMIN)) {
+        if (!role || (role !== ROLES.NORMAL && role !== ROLES.ADMIN)) {
           erroStatus = 422;
           throw new Error("Parametro ROLE invalido");
         }
@@ -31,7 +33,7 @@ export class UserController {
           throw new Error("Digite password valido, nominimo 6 digitos");
         }
         const newPassword = await new HashManager().generateHash(password);
-        const newUser = new User(id, name, cpf,data, email, newPassword, role);
+        const newUser = new User(id, name, cpf, data, email, newPassword, role);
         const userdata = new UserData();
         const result = await userdata.signUpUser(newUser);
         console.log(result);
@@ -55,16 +57,6 @@ export class UserController {
         }
         const userData = new UserData();
         const [result] = await userData.loginUser(email);
-  
-      //   const validHash = new HashManager();
-      //   const newPassword = validHash.compareHash(password, result.password);
-      //   console.log(newPassword);
-  
-      //   if (!newPassword) {
-      //     erroStatus = 401;
-      //     throw new Error("Senha inválida");
-      //   }
-  
         const authenticator = new Autheticator().generateToken(result);
         res.status(200).send({ result: authenticator });
       } catch (error:any) {
@@ -72,6 +64,9 @@ export class UserController {
       }
     }
   
+
+    // Pega os dados do usuário logado
+
     async getProfile(req: Request, res: Response) {
       let erroStatus = 500;
       try {
@@ -88,6 +83,8 @@ export class UserController {
       }
     }
   
+    // Pega usuário especifico por id 
+
     async getProfileById(req: Request, res: Response) {
       let erroStatus = 500;
       try {
@@ -97,30 +94,97 @@ export class UserController {
           erroStatus = 401;
           throw new Error("Digite parametros necessarios");
         }
-        const [result] = await new UserData().getProfile(id);
+        const [result] = await new UserData().getProfileById(id);
         res.status(200).send({ result: result });
       } catch (error:any) {
         res.status(erroStatus).send(error.sqlMessage || error.message);
       }
     }
+
+    // Alterar dados do usuário logado
+
+    async updateProfile(req: Request, res: Response) {
+      let errorstatus = 500;
+      try {
+        const {id, name, cpf, data} = req.body;
+        const token = req.headers.authorization;
+        if (!token) {
+          errorstatus = 401;
+          throw new Error("Digite um token");
+        }
+        const authenticator = new Autheticator().tokenData(token);
+        if (
+          authenticator.roles !== ROLES.NORMAL &&
+          authenticator.roles !== ROLES.ADMIN
+        ) {
+          errorstatus = 401;
+          throw new Error("Token invalido");
+        }
+        if (!id) {
+          errorstatus = 422;
+          throw new Error("Parametro id e obrigatório");
+        }
+        const result = await new UserData().updateUser(
+          authenticator.id,
+          name,
+          cpf,
+          data
+        );
+        res.status(201).send(result);
+      } catch (error:any) {
+        res.status(errorstatus).send(error.message || error.sqlMessage);
+      }
+    }
   
+    // Excluir conta
     async deleteAccount(req: Request, res: Response) {
       let erroStatus = 500;
       try {
         const token:any = req.headers.authorization;
-        const newtoken = new Autheticator().tokenData(token);
+        const id = req.params.id;
         if (!token) {
           erroStatus = 422;
           throw new Error("Digite um token");
         }
-        if (newtoken.roles !== ROLES.ADMIN) {
-          erroStatus = 401;
-          throw new Error("Usuario não autorizado");
-        }
-        const result = await new UserData().deleteUser(newtoken.id);
+        const result = await new UserData().deleteUser(id);
         res.status(200).send({ Result: result });
       } catch (error:any) {
         res.status(erroStatus).send(error.sqlMessage || error.message);
+      }
+    }
+
+    async updatePassword(req: Request, res: Response) {
+      let errorstatus = 500;
+      try {
+        const {id, password} = req.body;
+        const token = req.headers.authorization;
+        if (!token) {
+          errorstatus = 401;
+          throw new Error("Digite um token");
+        }
+        if (!id || !password) {
+          errorstatus = 422;
+          throw new Error("Parametro id e password são obrigatórios");
+        }
+        const authenticator = new Autheticator().tokenData(token);
+        if (
+          authenticator.roles !== ROLES.NORMAL &&
+          authenticator.roles !== ROLES.ADMIN
+        ) {
+          errorstatus = 401;
+          throw new Error("Token invalido");
+        }
+  
+        if (!id) {
+          errorstatus = 422;
+          throw new Error("Parametro id e obrigatori");}
+        const result = await new UserData().updatePassword(
+          authenticator.id,
+          password,
+        );
+        res.status(201).send(result);
+      } catch (error:any) {
+        res.status(errorstatus).send(error.message || error.sqlMessage);
       }
     }
 }
@@ -129,20 +193,10 @@ export const userRouter = express.Router()
 
 const userController = new UserController()
 
-userRouter.get('/profileid', userController.getProfileById)
-userRouter.get('/users', userController.getProfile)
+userRouter.get('/profile/:id', userController.getProfileById)
+userRouter.get('/profile', userController.getProfile)
 userRouter.post('/signup', userController.signUpUser)
 userRouter.post('/login', userController.loginUser)
-// userRouter.put('/edit/:id',userController.)
-// userRouter.put('/edit/password/:id',userController.editPassword)
-userRouter.delete('/deleteuser', userController.deleteAccount)
-
-
-// {
-//    "result": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhMDFhMDRkLTQzYzItNGI1Yy05ZGI5LTMwY2E3MzAwYThkMCIsImlhdCI6MTY3MDUxMzcxNSwiZXhwIjoxNjcwNTE3MzE1fQ.QhF1NtsTa5AzRH9MSMQp-jvQY9UehQvd0kM0fT_BylE"
-// }
-
-// TOKEN CLIENT:
-// {
-//    "result": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkxYjlhMWFkLTljM2YtNGE4ZC1iYmVjLTJlNDg3MDIzYTZlZCIsImlhdCI6MTY3MDUxMzg1NywiZXhwIjoxNjcwNTE3NDU3fQ.j5HoCwjmXFN-6y2Tv7m50ZK8zV4OA24batDzmvvK6qk"
-// }
+userRouter.put('/updateuser/:id',userController.updateProfile)
+userRouter.put('/updatepassword/:id',userController.updatePassword)
+userRouter.delete('/deleteuser/:id', userController.deleteAccount)

@@ -3,7 +3,6 @@ import React from 'react'
 import { useModalContext } from '../../../../context/ModalContext';
 import { Div, TableStyle } from './styles';
 import { Box, Step, StepLabel, Stepper } from '@material-ui/core';
-import CardOrder from '../CardOrder';
 
 
 

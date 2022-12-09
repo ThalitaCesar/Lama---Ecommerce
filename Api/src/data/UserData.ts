@@ -1,7 +1,5 @@
-import { CustomError } from "../error/customError";
 import { User } from "../models/User";
 import { Autheticator } from "../services/Authenticator";
-import { user } from "../types/user";
 import { DataBase } from "./DataBase";
 
 export class UserData extends DataBase {
@@ -41,7 +39,19 @@ export class UserData extends DataBase {
     try {
       const result = await this.getConnection()
         .from("Lama_User")
-        .select("id", "name", "email", "data", "cpf")
+        .select("id", "name", "cpf", "data", "email", "role")
+        .where("id", "LIKE", `%${id}%`);
+      return result;
+    } catch (error:any) {
+      return error.sqlMesage || error.message;
+    }
+  }
+
+  async getProfileById(id: string) {
+    try {
+      const result = await this.getConnection()
+        .from("Lama_User")
+        .select("id", "name", "cpf", "data", "email", "role")
         .where("id", "LIKE", `%${id}%`);
       return result;
     } catch (error:any) {
@@ -56,28 +66,17 @@ export class UserData extends DataBase {
         .select()
         .where({email});
       return result[0];
-    } catch (error: any) {
-      throw new CustomError(400, error.message);
-    }
-  };
-
-  async getProfileById(id: string) {
-    try {
-      const result = await this.getConnection()
-        .from("Lama_User")
-        .select("id", "name", "email", "data", "cpf")
-        .where("id", "LIKE", `%${id}%`);
-      return result;
     } catch (error:any) {
       return error.sqlMesage || error.message;
     }
-  }
+  };
+
 
   async updateUser(
     id: string,
+    name: string,
     cpf: string,
-    data: string,
-    name: string
+    data: string
   ) {
     try {
       const result = await this.getConnection()
@@ -91,9 +90,9 @@ export class UserData extends DataBase {
       await this.getConnection()
         .from("Lama_User")
         .update({
+          name,
           cpf,
           data,
-          name,
         })
         .where("id", "LIKE", `${id}`)
       return "Alterações realizadas com sucesso";
@@ -131,7 +130,7 @@ export class UserData extends DataBase {
     try {
       await this.getConnection()
         .from("Lama_User")
-        .where("user_id", token)
+        .where("id", token)
         .delete();
 
       return "Conta deletada com sucesso";
