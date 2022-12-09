@@ -6,8 +6,8 @@ export class Adresses {
       private district: string,
       private city: string,
       private complement:string,
-      private number: number,
-      private userId: string,
+      private number: string,
+      private user_id: string,
       private state: string,
     ) {}
   
@@ -33,7 +33,7 @@ export class Adresses {
       return this.number;
     }
     getUserId() {
-      return this.userId;
+      return this.user_id;
     }
     getState() {
       return this.state;

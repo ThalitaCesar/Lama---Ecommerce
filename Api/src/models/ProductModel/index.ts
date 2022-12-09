@@ -1,6 +1,4 @@
 export enum CATEGORIES {
-    ADMIN = "ADMIN",
-    NOMAL = "NORMAL",
     FEM = "FEM",
     MASC = "MASC", 
     SPORT = "SPORT", 
