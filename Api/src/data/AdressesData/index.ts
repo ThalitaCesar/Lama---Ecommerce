@@ -1,32 +1,34 @@
-import { Adresses } from "../models/Adresses";
-import { DataBase } from "./DataBase";
+import { Adresses } from "../../models/AdressesModel";
+import { DataBase } from "../DataBase";
 
 
 export class AdressesData extends DataBase {
+
+
   async createAdresses(adresses: Adresses) {
-    try {
-      await this.getConnection().from("Adresses").insert({
-        id: adresses.getId(),
-        cep: adresses.getCep(),
-        streat: adresses.getStreet(),
-        district: adresses.getDistrict(),
-        state: adresses.getState(),
-        number: adresses.getNumber(),
-        city: adresses.getCity(),
-        complement: adresses.getComplement(),
-        user_id: adresses.getUserId(),
-      });
-      return "Endereço criado com sucesso";
-    } catch (error:any) {
-      return error.sqlMessage || error.message;
-    }
+      try {
+        await this.getConnection().from("Lama_Adresse").insert({
+          id: adresses.getId(),
+          cep: adresses.getCep(),
+          street: adresses.getStreet(),
+          district: adresses.getDistrict(),
+          state: adresses.getState(),
+          number: adresses.getNumber(),
+          city: adresses.getCity(),
+          complement: adresses.getComplement(),
+          user_id: adresses.getUserId(),
+        });
+        return "Imagem adicionada com sucesso";
+      } catch (error:any) {
+        return error.sqlMessage || error.message;
+      }
   }
 
   async getAllAdressesByUser(user_id: string) {
     try {
       const result = await this.getConnection()
         .select("id", "cep", "street", "district", "number", "complement", "city", "state")
-        .from("Lama_Adresses")
+        .from("Lama_Adresse")
         .where("user_id", "LIKE", `%${user_id}%`);
       return result;
     } catch (error:any) {
@@ -35,7 +37,7 @@ export class AdressesData extends DataBase {
   }
 
   async updateAdresses(
-    userId: string,
+    user_id: string,
     id: string,
     cep: string,
     street: string,
@@ -47,15 +49,15 @@ export class AdressesData extends DataBase {
   ) {
     try {
       const result = await this.getConnection()
-        .from("Lama_Adresses")
+        .from("Lama_Adresse")
         .select()
         .where("id", "LIKE", `${id}`);
 
       if (result.length === 0) {
-        throw new Error("Receita não encontrada");
+        throw new Error("Endereço não encontrado");
       }
       await this.getConnection()
-        .from("Lama_Adresses")
+        .from("Lama_Adresse")
         .update({
           cep,
           street,
@@ -65,7 +67,7 @@ export class AdressesData extends DataBase {
           state,
           complement,
         })
-        .where("user_id", "LIKE", `${userId}`)
+        .where("user_id", "LIKE", `${user_id}`)
         .andWhere("id", "LIKE", `${id}`);
 
       return "Endereço alterado com sucesso";
@@ -74,10 +76,10 @@ export class AdressesData extends DataBase {
     }
   }
 
-  async deleteAdresses(token: string, id: string) {
+  async deleteAdresses( id: string) {
     try {
       const result = await this.getConnection()
-        .from("Lama_Adresses")
+        .from("Lama_Adresse")
         .select()
         .where("id", id);
 
@@ -85,12 +87,11 @@ export class AdressesData extends DataBase {
         throw new Error("Endereço não encontrada");
       }
       await this.getConnection()
-        .from("Lama_Adresses")
+        .from("Lama_Adresse")
         .delete()
-        .where("user_id", "LIKE", `${token}`)
-        .andWhere("id", "LIKE", `${id}`);
+        .where("id", "LIKE", `${id}`);
 
-      return "Endereço deletada com sucesso";
+      return "Endereço deletado com sucesso";
     } catch (error:any) {
       return error.sqlMessage || error.message;
     }

@@ -1,7 +1,8 @@
-import { Images, Product, Size } from "../models/Products";
-import { DataBase } from "./DataBase";
+import { Images, Product, Size } from "../../models/ProductModel";
+import { DataBase } from "../DataBase";
 
 export class ProductData extends DataBase {
+  
     async createProduct(product: Product) {
       try {
           await this.getConnection().from("Lama_Product").insert({
@@ -21,7 +22,7 @@ export class ProductData extends DataBase {
   async getAllProducts() {
     try {
       const result = await this.getConnection()
-        .select("id", "name", "description", "price", "description", "created", "category")
+        .select()
         .from("Lama_Product")
       return result;
     } catch (error:any) {
@@ -41,12 +42,24 @@ export class ProductData extends DataBase {
     }
   }
 
+  async getAllProductByCategory(category: string) {
+    try {
+      const result = await this.getConnection()
+        .select()
+        .from("Lama_Product")
+        .where("category", "LIKE", `%${category}%`);
+      return result;
+    } catch (error:any) {
+      return error.sqlMessage;
+    }
+  }
+
   async updateProduct(
     id: string,
-    price: string,
     name: string,
-    category: string,
-    description?: string,
+    price: string,
+    description: string,
+    category: string
   ) {
     try {
       const result = await this.getConnection()
@@ -55,14 +68,14 @@ export class ProductData extends DataBase {
         .where("id", "LIKE", `${id}`);
 
       if (result.length === 0) {
-        throw new Error("Receita não encontrada");
+        throw new Error("Produto não encontrado");
       }
       await this.getConnection()
         .from("Lama_Product")
         .update({
             id,
-            price,
             name,
+            price,
             description,
             category,
         })
@@ -74,7 +87,7 @@ export class ProductData extends DataBase {
     }
   }
 
-  async deletProduct( id: string) {
+  async deleteProduct( id: string) {
     try {
       const result = await this.getConnection()
         .from("Lama_Product")
@@ -123,7 +136,7 @@ export class ImageData extends DataBase {
   }
 
 
-  async deletImage( id: string) {
+  async deleteImage( id: string) {
     try {
       const result = await this.getConnection()
         .from("Lama_Images")
@@ -148,7 +161,7 @@ export class ImageData extends DataBase {
 
 
 export class SizeData extends DataBase {
-    async createImage(size: Size) {
+    async createSize(size: Size) {
       try {
           await this.getConnection().from("Lama_Size").insert({
           id: size.getId(),
@@ -174,7 +187,7 @@ export class SizeData extends DataBase {
   }
 
 
-  async deletSize( id: string) {
+  async deleteSize( id: string) {
     try {
       const result = await this.getConnection()
         .from("Lama_Size")

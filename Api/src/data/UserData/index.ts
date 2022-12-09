@@ -1,6 +1,6 @@
-import { User } from "../models/User";
-import { Autheticator } from "../services/Authenticator";
-import { DataBase } from "./DataBase";
+import { User } from "../../models/UserModel";
+import { Autheticator } from "../../services/Authenticator";
+import { DataBase } from "../DataBase";
 
 export class UserData extends DataBase {
 
@@ -32,6 +32,17 @@ export class UserData extends DataBase {
       return result;
     } catch (error:any) {
       return error.sqlMesage || error.message;
+    }
+  }
+
+  async getAllUsers() {
+    try {
+      const result = await this.getConnection()
+        .select("id", "name", "cpf", "data", "email", "role")
+        .from("Lama_User")
+      return result;
+    } catch (error:any) {
+      return error.sqlMessage;
     }
   }
 
@@ -76,7 +87,8 @@ export class UserData extends DataBase {
     id: string,
     name: string,
     cpf: string,
-    data: string
+    data: string,
+    email:string
   ) {
     try {
       const result = await this.getConnection()
@@ -93,6 +105,7 @@ export class UserData extends DataBase {
           name,
           cpf,
           data,
+          email
         })
         .where("id", "LIKE", `${id}`)
       return "Alterações realizadas com sucesso";

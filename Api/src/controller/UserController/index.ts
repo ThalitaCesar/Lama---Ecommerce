@@ -1,15 +1,14 @@
 import express from "express";
 import { Request, Response } from "express";
-import { UserData } from "../data/UserData";
-import { ROLES, User } from "../models/User";
-import { Autheticator } from "../services/Authenticator";
-import { GenerateId } from "../services/GenerateId";
-import { HashManager } from "../services/HashManager";
+import { UserData } from "../../data/UserData";
+import { ROLES, User } from "../../models/UserModel";
+import { Autheticator } from "../../services/Authenticator";
+import { GenerateId } from "../../services/GenerateId";
+import { HashManager } from "../../services/HashManager";
 
 export class UserController {
 
   // Criar usuário 
-
    async signUpUser(req: Request, res: Response) {
       let erroStatus = 500;
       try {
@@ -64,7 +63,25 @@ export class UserController {
       }
     }
   
+// Pegar todos os usuários
 
+async getAllUsers(req: Request, res: Response) {
+  let errorstatus = 500;
+  try {
+    const [user] = await new UserData().getAllUsers();
+    const result = {
+      id: user.id,
+      name: user.name,
+      cpf: user.cpf,
+      data: user.data,
+      email: user.email,
+      role: user.role
+    };
+    res.status(200).send({ Result: result });
+  } catch (error:any) {
+    res.status(errorstatus).send(error.message || error.sqlMessage);
+  }
+}
     // Pega os dados do usuário logado
 
     async getProfile(req: Request, res: Response) {
@@ -106,29 +123,17 @@ export class UserController {
     async updateProfile(req: Request, res: Response) {
       let errorstatus = 500;
       try {
-        const {id, name, cpf, data} = req.body;
-        const token = req.headers.authorization;
-        if (!token) {
-          errorstatus = 401;
-          throw new Error("Digite um token");
-        }
-        const authenticator = new Autheticator().tokenData(token);
-        if (
-          authenticator.roles !== ROLES.NORMAL &&
-          authenticator.roles !== ROLES.ADMIN
-        ) {
-          errorstatus = 401;
-          throw new Error("Token invalido");
-        }
+        const {id, name, cpf, data, email} = req.body;
         if (!id) {
           errorstatus = 422;
           throw new Error("Parametro id e obrigatório");
         }
         const result = await new UserData().updateUser(
-          authenticator.id,
+          id,
           name,
           cpf,
-          data
+          data,
+          email
         );
         res.status(201).send(result);
       } catch (error:any) {
@@ -157,29 +162,16 @@ export class UserController {
       let errorstatus = 500;
       try {
         const {id, password} = req.body;
-        const token = req.headers.authorization;
-        if (!token) {
-          errorstatus = 401;
-          throw new Error("Digite um token");
-        }
         if (!id || !password) {
           errorstatus = 422;
           throw new Error("Parametro id e password são obrigatórios");
         }
-        const authenticator = new Autheticator().tokenData(token);
-        if (
-          authenticator.roles !== ROLES.NORMAL &&
-          authenticator.roles !== ROLES.ADMIN
-        ) {
-          errorstatus = 401;
-          throw new Error("Token invalido");
-        }
   
         if (!id) {
           errorstatus = 422;
-          throw new Error("Parametro id e obrigatori");}
+          throw new Error("Parametro id e obrigatório");}
         const result = await new UserData().updatePassword(
-          authenticator.id,
+          id,
           password,
         );
         res.status(201).send(result);
@@ -189,10 +181,15 @@ export class UserController {
     }
 }
 
+
+// Rotas 
+
 export const userRouter = express.Router()
 
 const userController = new UserController()
 
+
+userRouter.get('/profiles', userController.getAllUsers)
 userRouter.get('/profile/:id', userController.getProfileById)
 userRouter.get('/profile', userController.getProfile)
 userRouter.post('/signup', userController.signUpUser)
