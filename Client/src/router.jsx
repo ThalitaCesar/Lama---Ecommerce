@@ -1,31 +1,47 @@
-import React from 'react'
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { BrowserRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom'
+import { GlobalContext } from './context/GlobalState';
 import Admin from './screens/Admin';
 import Cart from './screens/Car';
 import Category from './screens/Category';
 import Help from './screens/Help';
 import Home from './screens/Home';
+import Login from './screens/Login';
 import ProductInfo from './screens/ProductInfo';
 import User from './screens/User';
 import Adresses from './screens/User/Adresses';
 import PersonalData from './screens/User/PersonalData';
 import Request from './screens/User/Requests';
 
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+
+  const {token} = useContext(GlobalContext)
+
+  return (
+    <Route
+      {...rest}
+      render={() => (token ? <Component /> : <Redirect to={{ pathname: '/login' }} />)}
+    />
+  );
+};
+
 const Routes = () => {
+  const {token} = useContext(GlobalContext)
     return (
       <BrowserRouter>
       <Switch>
-      <Route index path="/" exact component={Home} />
-      <Route path="/category" component={Category} />
-      <Route path="/user" component={User} />
-      <Route path="/admin" component={Admin} />
-      <Route path="/product" component={ProductInfo} />
-      <Route path="/cart" component={Cart} />
-      <Route path="/help" component={Help} />
-      <Route path="/user/adresses" component={Adresses} />
-      <Route path="/user/personaldata" component={PersonalData} />
-      <Route path="/user/request" component={Request} />
-
+      <Route path="/login" render={() => (token ? <Redirect to="/" /> : <Login />)}/>
+      <PrivateRoute index path="/" exact component={Home} />
+      <PrivateRoute path="/category" component={Category} />
+      <PrivateRoute path="/user" component={User} />
+      <PrivateRoute path="/admin" component={Admin} />
+      <PrivateRoute path="/product" component={ProductInfo} />
+      <PrivateRoute path="/cart" component={Cart} />
+      <PrivateRoute path="/help" component={Help} />
+      <PrivateRoute path="/user/adresses" component={Adresses} />
+      <PrivateRoute path="/user/personaldata" component={PersonalData} />
+      <PrivateRoute path="/user/request" component={Request} />
     </Switch>
     </BrowserRouter>
 

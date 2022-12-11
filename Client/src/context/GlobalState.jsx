@@ -10,13 +10,16 @@ export const GlobalState = ({ children }) => {
 
   const [productSelect, setProductSelect] = useState([]);
   const [categorySelect, setCategorySelect] = useState([]);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   return (
     <GlobalContext.Provider value={{
       productSelect, 
       setProductSelect, 
       categorySelect, 
-      setCategorySelect }} 
+      setCategorySelect,
+      token,
+      setToken }} 
     children={children}/> )
 };
 

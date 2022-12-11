@@ -1,17 +1,23 @@
-import React from "react";
-import { Container, MenuContainer, MenuItem, NavLink, ContainerDashboard } from './styles';
+import React, { useContext } from "react";
+import { Container, MenuContainer, ContainerDashboard } from './styles';
 import { useState } from "react";
 import { Chip, Divider } from "@material-ui/core";
-import { CardGiftcard, Face, Payment, PersonPinCircle } from "@material-ui/icons";
 import Adresses from "../Adresses";
 import PersonalData from "../PersonalData";
 import Request from "../Requests";
+import { GlobalContext } from "../../../context/GlobalState";
 
 
 const SidebarMobile = () => {
 
   const [selected, setSelected] = useState(<Request/>);
   console.log("select", selected)
+  const {token, setToken} = useContext(GlobalContext)
+  console.log("token", token)
+
+  const outLocalStorage =() =>{
+    setToken("")
+  }
 
   return (
 <>
@@ -20,9 +26,10 @@ const SidebarMobile = () => {
 <MenuContainer>
 
 
-      <Chip label="Dados Pessoais"onClick={() => { setSelected(<PersonalData/>)}} />
-      <Chip label="Meus Pedidos" onClick={() => { setSelected(<Request/>)}}/>
-      <Chip label="Meus Endereços" onClick={() => { setSelected(<Adresses/>)}}/>
+      <Chip style={{margin:"7px"}} label="Dados Pessoais"onClick={() => { setSelected(<PersonalData/>)}} />
+      <Chip style={{margin:"7px"}}  label="Meus Pedidos" onClick={() => { setSelected(<Request/>)}}/>
+      <Chip style={{margin:"7px"}}  label="Meus Endereços" onClick={() => { setSelected(<Adresses/>)}}/>
+      <Chip style={{margin:"7px"}}  label="Sair" onClick={outLocalStorage}/>
 
 </MenuContainer>
 
