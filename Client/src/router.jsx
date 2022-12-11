@@ -7,17 +7,16 @@ import Category from './screens/Category';
 import Help from './screens/Help';
 import Home from './screens/Home';
 import Login from './screens/Login';
+import Register from './screens/Login/Register/register';
 import ProductInfo from './screens/ProductInfo';
 import User from './screens/User';
 import Adresses from './screens/User/Adresses';
 import PersonalData from './screens/User/PersonalData';
 import Request from './screens/User/Requests';
 
-
 const PrivateRoute = ({ component: Component, ...rest }) => {
 
-  const {token} = useContext(GlobalContext)
-
+const {token} = useContext(GlobalContext)
   return (
     <Route
       {...rest}
@@ -28,10 +27,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
 const Routes = () => {
   const {token} = useContext(GlobalContext)
+
     return (
       <BrowserRouter>
       <Switch>
       <Route path="/login" render={() => (token ? <Redirect to="/" /> : <Login />)}/>
+      <Route path="/register" render={() => (token ? <Redirect to="/" /> : <Register/>)} />
       <PrivateRoute index path="/" exact component={Home} />
       <PrivateRoute path="/category" component={Category} />
       <PrivateRoute path="/user" component={User} />
@@ -40,8 +41,9 @@ const Routes = () => {
       <PrivateRoute path="/cart" component={Cart} />
       <PrivateRoute path="/help" component={Help} />
       <PrivateRoute path="/user/adresses" component={Adresses} />
-      <PrivateRoute path="/user/personaldata" component={PersonalData} />
-      <PrivateRoute path="/user/request" component={Request} />
+      <Route path="/user/personaldata" component={PersonalData} />
+      <Route path="/user/request" component={Request} />
+
     </Switch>
     </BrowserRouter>
 

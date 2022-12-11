@@ -17,7 +17,7 @@ const SideBar = () => {
   console.log("token", token)
 
   const outLocalStorage =() =>{
-    setToken("")
+    setToken( "")
   }
 
   return (

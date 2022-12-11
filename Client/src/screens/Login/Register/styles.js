@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mobile } from "../../responsive";
+import { mobile } from "../../../responsive";
 
  export const Lama = styled.div`
     width: 500px;
@@ -11,7 +11,7 @@ import { mobile } from "../../responsive";
     flex-direction:column;
     margin-left:60px;
     img{
-        width: 200px;
+    width: 200px;
     };
     ${mobile({ display: "none"})}
  `
@@ -19,26 +19,13 @@ export const Container = styled.div`
 display:flex;
 background: #e61919;
 height: 100vh;
+justify-content:center;
+align-items:center;
 ${mobile({ flexDirection: "column", width:"100vw", alignItems:"center"})}
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  .container {
-    background: #e61919;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    ${mobile({ alignItems: "start"})}
-  }
-  
   .signin {
     width: 700px;
     min-height: 450px;
-    max-height: 650px;
+    max-height: 950px;
     border-radius: 3px;
     box-shadow: 3px 3px 5px #001324dc;
     ${mobile({ width: "80vw"})}
