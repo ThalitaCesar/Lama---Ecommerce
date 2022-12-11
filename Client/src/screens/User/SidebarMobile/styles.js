@@ -7,8 +7,9 @@ export const MenuContainer = styled.section`
     display:flex;
     height: 100%;
     flex-direction: row;
+    justify-content:center;
     margin: 20px 20px;
-    margin-top:30px;
+    flex-wrap:wrap
 `
 
 
