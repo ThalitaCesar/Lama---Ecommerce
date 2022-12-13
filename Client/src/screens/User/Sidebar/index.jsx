@@ -13,13 +13,12 @@ const SideBar = () => {
 
   const [selected, setSelected] = useState(<Request/>);
   console.log("select", selected)
-  const {token, setToken} = useContext(GlobalContext)
-  console.log("token", token)
+  const {tokenLogin, setTokenLogin} = useContext(GlobalContext)
+  console.log("token", tokenLogin)
 
   const outLocalStorage =() =>{
-    setToken("")
+    setTokenLogin("")
   }
-
   return (
 <>
 

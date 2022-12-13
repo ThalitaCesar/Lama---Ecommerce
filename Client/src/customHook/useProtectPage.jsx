@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const useProtectedPage = () => {
-  const navigate = useNavigate()
+  const navigate = useHistory()
 
   useEffect(() => {
     const token = localStorage.getItem('token')
 
     if (token === null) {
       console.log('Acesso Negado. Usuário não está autenticado.')
-      navigate('/')
+      navigate.push('/')
     }
   }, [navigate])
 }
