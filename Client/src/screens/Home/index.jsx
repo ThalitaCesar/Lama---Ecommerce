@@ -8,10 +8,10 @@ import Marks from '../../components/Marks';
 import Navbar from '../../components/Navbar';
 import Newsletter from '../../components/Newsletter';
 import Slider from '../../components/Slider';
+import useProtectedPage from '../../customHook/useProtectPage';
 
 
 function Home() {
-
     return (
 <>
     <Announcement />

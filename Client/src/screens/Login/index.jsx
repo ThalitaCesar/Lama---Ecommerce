@@ -10,7 +10,7 @@ import { GlobalContext } from '../../context/GlobalState';
 
 function Login() {
 
-  const {setToken} = useContext(GlobalContext)
+  const {tokenLogin, setTokenLogin} = useContext(GlobalContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -32,20 +32,22 @@ function Login() {
     }
     axios
     .post('http://localhost:3003/user/login', body)
-    .then(res => {
-      setToken('token', res.data.token)
-      history.push('/')
+    .then(response => {
+        localStorage.setItem('token', response.data.result);
+        setTokenLogin(response.data.result);
+        console.log("response", response.data.result);
+        history.push('/')
     })
-    .catch(err => 
-      alert("Erro ao fazer o login. Verifique o usuário e senha e tente novamente."))
+    .catch((err)=>{
+      console.log(err)
+    })
   }
 
-
-
-  return (
-  <>
-  <Navbar/>
-    <Container>
+  console.log('token', tokenLogin)
+      return(
+        <>
+      <Navbar/>
+      <Container>
       <Lama>
       <img src={logo}/>
       <h1>.LAMA</h1>

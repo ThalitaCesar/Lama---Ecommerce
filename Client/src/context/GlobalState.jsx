@@ -1,5 +1,6 @@
 
 import {createContext, useContext, useState } from "react"
+import { getToken } from "../services/isAutenticated";
 
 
 export const GlobalContext = createContext(null);
@@ -10,7 +11,7 @@ export const GlobalState = ({ children }) => {
 
   const [productSelect, setProductSelect] = useState([]);
   const [categorySelect, setCategorySelect] = useState([]);
-  const [token, setToken] = useState(localStorage.getItem('token', ""));
+  const [tokenLogin, setTokenLogin] = useState(getToken());
 
   return (
     <GlobalContext.Provider value={{
@@ -18,8 +19,8 @@ export const GlobalState = ({ children }) => {
       setProductSelect, 
       categorySelect, 
       setCategorySelect,
-      token,
-      setToken }} 
+      tokenLogin,
+      setTokenLogin }} 
     children={children}/> )
 };
 

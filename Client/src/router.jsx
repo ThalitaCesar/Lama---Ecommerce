@@ -13,26 +13,29 @@ import User from './screens/User';
 import Adresses from './screens/User/Adresses';
 import PersonalData from './screens/User/PersonalData';
 import Request from './screens/User/Requests';
+import { isAuthenticated } from './services/isAutenticated';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
 
-const {token} = useContext(GlobalContext)
+const {tokenLogin} = useContext(GlobalContext)
+
   return (
     <Route
       {...rest}
-      render={() => (token ? <Component /> : <Redirect to={{ pathname: '/login' }} />)}
+      render={() => (tokenLogin ? <Component /> : <Redirect to={{ pathname: '/login' }} />)}
     />
   );
 };
 
 const Routes = () => {
-  const {token} = useContext(GlobalContext)
-
     return (
       <BrowserRouter>
       <Switch>
-      <Route path="/login" render={() => (token ? <Redirect to="/" /> : <Login />)}/>
-      <Route path="/register" render={() => (token ? <Redirect to="/" /> : <Register/>)} />
+      <Route
+          path="/login"
+          render={() => (isAuthenticated() ? <Redirect to="/" /> : <Login />)}
+        />
+      <Route path="/register" component={Register}/>
       <PrivateRoute index path="/" exact component={Home} />
       <PrivateRoute path="/category" component={Category} />
       <PrivateRoute path="/user" component={User} />
