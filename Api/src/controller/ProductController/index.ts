@@ -36,24 +36,15 @@ export class ProductController {
 
 // Pegar todos os produtos
 
-  async getAllProducts(req: Request, res: Response) {
+  async getAllProducts(req: Request, res: Response): Promise<void> {
     let errorstatus = 500;
     try {
-      const [product] = await new ProductData().getAllProducts();
-      const result = {
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        created: product.created,
-        category: product.category
-      };
-      res.status(200).send({ Result: result });
+      const product = await new ProductData().getAllProducts();
+      res.status(200).send({ Result: product });
     } catch (error:any) {
       res.status(errorstatus).send(error.message || error.sqlMessage);
     }
   }
-
 //  Pegar produtos por id
 
   async getProductById(req: Request, res: Response) {
@@ -65,7 +56,8 @@ export class ProductController {
         errorStatus = 401;
         throw new Error("O parâmetro id é necessário");
       }
-      const [product] = await new ProductData().getAllProductById(id);
+      const product = await new ProductData().getAllProductById(id);
+      console.log(product)
       const result = {
         name: product.name,
         description: product.description,
@@ -78,6 +70,31 @@ export class ProductController {
       res.status(errorStatus).send(error.message || error.sqlMessage);
     }
   }
+// Pegar produto por categoria 
+
+async getProductByCategory(req: Request, res: Response) {
+  let errorStatus = 500;
+  const category = req.params.categoy as string;
+  try {
+    
+    if ( !category) {
+      errorStatus = 401;
+      throw new Error("A categoria é necessária");
+    }
+    const product = await new ProductData().getAllProductByCategory(category);
+    console.log(product)
+    const result = {
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      created: product.created,
+      category: product.category
+    };
+    res.status(200).send({ Result: result });
+  } catch (error:any) {
+    res.status(errorStatus).send(error.message || error.sqlMessage);
+  }
+}
 
 //  Editar produto
 
@@ -241,8 +258,9 @@ export const productRouter = express.Router()
 
 const productController = new ProductController()
 
-productRouter.get('/products', productController.getAllProducts)
+productRouter.get('/getproducts', productController.getAllProducts)
 productRouter.get('/product/:id', productController.getProductById)
+productRouter.get('/product/:category', productController.getProductByCategory)
 productRouter.get('/getAllImagesByProduct/:id', productController.getImagesByProduct)
 productRouter.get('/getAllSizesByProduct/:id', productController.getSizesByProduct)
 productRouter.post('/postproduct', productController.postProduct)
