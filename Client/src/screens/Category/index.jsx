@@ -17,10 +17,22 @@ function Category() {
   const {categorySelect, setCategorySelect } = useContext(GlobalContext)
   console.log('category', categorySelect)
   const [searchedString, setSearchedString] = useState('');
+  const [categoryList, setCategoryList] = useState('');
+  const [productsList, setProductsList] = useState('');
 
   const onChangeHandler = (e) => {
     setSearchedString(e.target.value);
 }
+
+const getProducts =()=>{
+  axios.get(`http://localhost:3003/product/products`)
+    .then(res => setProductsList(res.data.trips))
+    .catch(err => console.log(err))
+    }   
+    useEffect(()=>{
+      getProducts()
+    },[])
+    console.log("allProducts", productsList)
 
     return (
     <>
