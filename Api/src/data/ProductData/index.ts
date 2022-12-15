@@ -45,7 +45,7 @@ export class ProductData extends DataBase {
         .from("Lama_Product as p")
         .join("Lama_Size as s", "s.product_id", "p.id")
         .join("Lama_Images AS i", "p.id", "i.product_id")
-        .where("p.id", "LIKE", `%${id}%`);
+        .where("p.id","like", `%${id}%`)
         for(let product of result){
           products.push(product);
   }
@@ -63,7 +63,8 @@ export class ProductData extends DataBase {
         .from("Lama_Product as p")
         .join("Lama_Size as s", "s.product_id", "p.id")
         .join("Lama_Images AS i", "p.id", "i.product_id")
-        .where("category", "LIKE", `%${category}%`);
+        .where("p.id","like","i.product_id")
+        .orWhere("p.category","like",`%${category}%`);
         for(let product of result){
           products.push(product);
   }

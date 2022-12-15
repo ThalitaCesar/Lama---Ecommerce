@@ -57,15 +57,7 @@ export class ProductController {
         throw new Error("O parâmetro id é necessário");
       }
       const product = await new ProductData().getAllProductById(id);
-      console.log(product)
-      const result = {
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        created: product.created,
-        category: product.category
-      };
-      res.status(200).send({ Result: result });
+      res.status(200).send({ Result: product });
     } catch (error:any) {
       res.status(errorStatus).send(error.message || error.sqlMessage);
     }
@@ -74,23 +66,14 @@ export class ProductController {
 
 async getProductByCategory(req: Request, res: Response) {
   let errorStatus = 500;
-  const category = req.params.categoy as string;
+  const category = req.params.id as string;
   try {
-    
     if ( !category) {
       errorStatus = 401;
       throw new Error("A categoria é necessária");
     }
     const product = await new ProductData().getAllProductByCategory(category);
-    console.log(product)
-    const result = {
-      name: product.name,
-      description: product.description,
-      price: product.price,
-      created: product.created,
-      category: product.category
-    };
-    res.status(200).send({ Result: result });
+    res.status(200).send({ Result: product });
   } catch (error:any) {
     res.status(errorStatus).send(error.message || error.sqlMessage);
   }
@@ -260,7 +243,7 @@ const productController = new ProductController()
 
 productRouter.get('/getproducts', productController.getAllProducts)
 productRouter.get('/product/:id', productController.getProductById)
-productRouter.get('/product/:category', productController.getProductByCategory)
+productRouter.get('/product/category', productController.getProductByCategory)
 productRouter.get('/getAllImagesByProduct/:id', productController.getImagesByProduct)
 productRouter.get('/getAllSizesByProduct/:id', productController.getSizesByProduct)
 productRouter.post('/postproduct', productController.postProduct)

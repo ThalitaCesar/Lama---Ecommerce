@@ -1,6 +1,6 @@
 import { Badge, Grid } from '@material-ui/core';
 import {  HeadsetMicRounded, PersonOutline, ShoppingCartOutlined } from '@material-ui/icons';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Announcement from '../../components/Announcement';
 import Footer from '../../components/Footer';
@@ -10,6 +10,7 @@ import ProductCard from '../../components/ProductCard';
 import SearchBar from '../../components/SearchBar';
 import SideBar from '../../components/Sidebar';
 import { GlobalContext } from '../../context/GlobalState';
+import axios from 'axios'
 import { ColumnRight, ContainerSearchBar, Flex, Icons, Left, Right, TitleSearch } from './styles';
 
 function Category() {
@@ -25,15 +26,19 @@ function Category() {
 }
 
 const getProducts =()=>{
-  axios.get(`http://localhost:3003/product/products`)
-    .then(res => setProductsList(res.data.trips))
+  axios.get(`http://localhost:3003/product/getproducts`)
+    .then(res => setProductsList(res.data.result))
     .catch(err => console.log(err))
     }   
+
     useEffect(()=>{
       getProducts()
     },[])
-    console.log("allProducts", productsList)
 
+  // const newCategory = productsList.filter(product => product.category === "BA")
+  //   setCategoryList(newCategory)
+
+    console.log("allProducts", productsList)
     return (
     <>
               <Announcement/>
