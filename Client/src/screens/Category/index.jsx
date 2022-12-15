@@ -1,6 +1,6 @@
 import { Badge, Grid } from '@material-ui/core';
 import {  HeadsetMicRounded, PersonOutline, ShoppingCartOutlined } from '@material-ui/icons';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Announcement from '../../components/Announcement';
 import Footer from '../../components/Footer';
@@ -10,6 +10,7 @@ import ProductCard from '../../components/ProductCard';
 import SearchBar from '../../components/SearchBar';
 import SideBar from '../../components/Sidebar';
 import { GlobalContext } from '../../context/GlobalState';
+import axios from 'axios'
 import { ColumnRight, ContainerSearchBar, Flex, Icons, Left, Right, TitleSearch } from './styles';
 
 function Category() {
@@ -17,11 +18,27 @@ function Category() {
   const {categorySelect, setCategorySelect } = useContext(GlobalContext)
   console.log('category', categorySelect)
   const [searchedString, setSearchedString] = useState('');
+  const [categoryList, setCategoryList] = useState('');
+  const [productsList, setProductsList] = useState('');
 
   const onChangeHandler = (e) => {
     setSearchedString(e.target.value);
 }
 
+const getProducts =()=>{
+  axios.get(`http://localhost:3003/product/getproducts`)
+    .then(res => setProductsList(res.data.result))
+    .catch(err => console.log(err))
+    }   
+
+    useEffect(()=>{
+      getProducts()
+    },[])
+
+  // const newCategory = productsList.filter(product => product.category === "BA")
+  //   setCategoryList(newCategory)
+
+    console.log("allProducts", productsList)
     return (
     <>
               <Announcement/>

@@ -1,5 +1,6 @@
 import { User } from "../../models/UserModel";
 import { Autheticator } from "../../services/Authenticator";
+import { Users } from "../../types/types";
 import { DataBase } from "../DataBase";
 
 export class UserData extends DataBase {
@@ -37,22 +38,32 @@ export class UserData extends DataBase {
 
   async getAllUsers() {
     try {
+      const users: Users[] = [];
       const result = await this.getConnection()
-        .select("id", "name", "cpf", "data", "email", "role")
+        .select("*")
         .from("Lama_User")
-      return result;
+        for(let user of result){
+          users.push(user);
+        }
+
+      return users;
     } catch (error:any) {
       return error.sqlMessage;
     }
   }
 
   async getProfile(id: string) {
+    
     try {
+      const users: Users[] = [];
       const result = await this.getConnection()
         .from("Lama_User")
         .select("id", "name", "cpf", "data", "email", "role")
         .where("id", "LIKE", `%${id}%`);
-      return result;
+        for(let user of result){
+          users.push(user);
+        }
+      return users;
     } catch (error:any) {
       return error.sqlMesage || error.message;
     }

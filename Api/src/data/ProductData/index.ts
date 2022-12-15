@@ -1,4 +1,5 @@
 import { Images, Product, Size } from "../../models/ProductModel";
+import { AllProducts } from "../../types/types";
 import { DataBase } from "../DataBase";
 
 export class ProductData extends DataBase {
@@ -21,10 +22,16 @@ export class ProductData extends DataBase {
 
   async getAllProducts() {
     try {
+      const products: AllProducts[] = [];
       const result = await this.getConnection()
-        .select()
-        .from("Lama_Product")
-      return result;
+      .select("p.id",  "p.name", "p.price", "p.description", "p.created", "p.category", "s.sizes", "i.photos")
+      .from("Lama_Product as p")
+      .join("Lama_Size as s", "s.product_id", "p.id")
+      .join("Lama_Images AS i", "p.id", "i.product_id")
+      for(let product of result){
+        products.push(product);
+}
+      return products;
     } catch (error:any) {
       return error.sqlMessage;
     }
@@ -32,11 +39,17 @@ export class ProductData extends DataBase {
 
   async getAllProductById(id: string) {
     try {
+      const products: AllProducts[] = [];
       const result = await this.getConnection()
-        .select("id", "name", "description", "price", "description", "created", "category")
-        .from("Lama_Product")
-        .where("id", "LIKE", `%${id}%`);
-      return result;
+        .select("p.id",  "p.name", "p.price", "p.description", "p.created", "p.category", "s.sizes", "i.photos")
+        .from("Lama_Product as p")
+        .join("Lama_Size as s", "s.product_id", "p.id")
+        .join("Lama_Images AS i", "p.id", "i.product_id")
+        .where("p.id","like", `%${id}%`)
+        for(let product of result){
+          products.push(product);
+  }
+        return products;
     } catch (error:any) {
       return error.sqlMessage;
     }
@@ -44,11 +57,18 @@ export class ProductData extends DataBase {
 
   async getAllProductByCategory(category: string) {
     try {
+      const products: AllProducts[] = [];
       const result = await this.getConnection()
-        .select()
-        .from("Lama_Product")
-        .where("category", "LIKE", `%${category}%`);
-      return result;
+        .select("p.id",  "p.name", "p.price", "p.description", "p.created", "p.category", "s.sizes", "i.photos")
+        .from("Lama_Product as p")
+        .join("Lama_Size as s", "s.product_id", "p.id")
+        .join("Lama_Images AS i", "p.id", "i.product_id")
+        .where("p.id","like","i.product_id")
+        .orWhere("p.category","like",`%${category}%`);
+        for(let product of result){
+          products.push(product);
+  }
+        return products;
     } catch (error:any) {
       return error.sqlMessage;
     }
@@ -158,9 +178,8 @@ export class ImageData extends DataBase {
   }
 }
 
-
-
 export class SizeData extends DataBase {
+
     async createSize(size: Size) {
       try {
           await this.getConnection().from("Lama_Size").insert({
