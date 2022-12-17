@@ -1,36 +1,69 @@
 import { Button, FormLabel } from '@material-ui/core';
 import { Label, LocalShippingOutlined, ShoppingCartOutlined, StraightenOutlined } from '@material-ui/icons';
-import React from 'react'
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react'
+import { GlobalContext } from '../../../context/GlobalState';
 import { A, ButtonTam, Container, Description, Frete, NameProduct, Offer, OldPrice, Percentual, Price, SixX, Tam, TamTitle } from './styles';
 
 function Info() {
 
+    const {productSelect} = useContext(GlobalContext)
+    const [product, setProduct] = useState([])
+    const [sizes, setSizes] = useState([])
+    console.log("productSelect", productSelect)
+  
+    const getProductById =()=>{
+      axios.get(`http://localhost:3003/product/product/${productSelect}`)
+      .then(function (response) {
+        setProduct(response.data.Result)
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    }
+
+    const getSizes =()=>{
+        axios.get(`http://localhost:3003/product/getAllSizesByProduct/${productSelect}`)
+        .then(function (response) {
+          setSizes(response.data.Result)
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+      }
+    
+        useEffect(()=>{
+        getProductById(),
+        getSizes()
+        },[productSelect])
+  
+  console.log("product", product)
+
     return (
+      
 <Container>
+
+{product.map((product)=>(
+    <>
     <NameProduct>
-     Macacão cami Ponto suíço Amarração frontal Bainha em camadas
+     {product.name}
     </NameProduct>
     <Offer>
         Oferta de Natal
     </Offer>
     <Price>
-    R$74,99
-    <OldPrice>
-        <s>R$83,90</s>
-    </OldPrice>
+    {product.price}
     <Percentual>-11%</Percentual>
     </Price>
-    <SixX>6x de R$12,50 sem juros</SixX>
+    <SixX>ou 6x no cartão s/ juros</SixX>
 
     <TamTitle>Tamanhos</TamTitle>
     <Tam>
-        <ButtonTam>PP</ButtonTam>
-        <ButtonTam>P</ButtonTam>
-        <ButtonTam>M</ButtonTam>
-        <ButtonTam>G</ButtonTam>
-        <ButtonTam>XG</ButtonTam>
-        <ButtonTam>XGG</ButtonTam>
-        <ButtonTam>T. ÚNICO</ButtonTam>
+        {sizes.map((size)=>(
+        <ButtonTam key={size.id}>{size.sizes}</ButtonTam>
+        ))}
     </Tam>
     <A> <StraightenOutlined style={{marginRight:"7px"}}/>Guia de tamanhos</A>
     <Frete>
@@ -38,25 +71,13 @@ function Info() {
     </Frete>
     <TamTitle>Descrição</TamTitle>
     <Description>
-    Cor: Rosa empoeirado
-    Estilo:	Boho
-    Estampa: Simples
-    Detalhes: Costas nuas / sem costas, Franja, Nó, Em camadas, Zíper
-    Tipo: Suspensório
-    Tipo de gola: Alcinha
-    Comprimento da Manga: Sem Mangas
-    Linha da cintura:Cintura Alta
-    Comprimento:Curto
-    Tipo de Ajuste:	Ajuste Regular
-    Tecido:	Não elástico
-    Material: Tecido
-    Composição:	100% Poliéster
-    Instruções de manutenção:Lavagem de máquina ou lavagem profissional a seco
-    Translúcido: Não
+   {product.description}
     </Description>
     <Button variant="contained" color="primary" size="large">
     Adicionar ao Carrinho <ShoppingCartOutlined style={{marginLeft:"10px"}}/>
     </Button>   
+    </>
+   ))}
   
 </Container>
   )} 

@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS Lama_Product(
     price VARCHAR(255) NOT NULL,
     description VARCHAR(500) NOT NULL,
     created DATE NOT NULL,
-    category ENUM ("FEM","MASC", "SPORT", "BA", "FOOTWEAR") DEFAULT "FEM"
+    category ENUM ("FEM","MASC", "SPORT", "BA", "FOOTWEAR") DEFAULT "FEM",
+    folder VARCHAR(500) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Lama_Images(

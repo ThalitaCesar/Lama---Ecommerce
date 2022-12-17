@@ -11,7 +11,7 @@ export enum ROLES {
       private data: string,
       private cpf: string,
       private password: string,
-      private role: ROLES
+      private role: ROLES,
     ) {}
     getId() {
       return this.id;
@@ -40,4 +40,5 @@ export enum ROLES {
     getRole() {
       return this.role;
     }
+
   }

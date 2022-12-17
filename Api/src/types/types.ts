@@ -1,4 +1,3 @@
-import { StringifyOptions } from "querystring";
 
 export type AuthenticationData = {
    id: string;
@@ -13,9 +12,19 @@ export type AuthenticationData = {
   price:string;
   created: string;
   category: string;
+  folder: string;
+}
+
+export type AllImages = {
+  id: string;
   photos: string;
+}
+
+export type AllSizes = {
+  id: string;
   sizes: string;
 }
+
 
 export type Users ={
   id: string;

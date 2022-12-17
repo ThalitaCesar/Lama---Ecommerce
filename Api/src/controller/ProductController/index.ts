@@ -12,8 +12,8 @@ export class ProductController {
     try {
       const id = new GenerateId().generateId();
 
-      const { name, description, price, created,  category } = req.body;
-      if ( !name|| !description || !price || !created || !category ) {
+      const { name, description, price, created,  category, folder } = req.body;
+      if ( !name|| !description || !price || !created || !category  || !folder) {
         errorstatus = 422;
         throw new Error("Digite os parametros necessarios ");
       }
@@ -23,7 +23,8 @@ export class ProductController {
         description,
         price,
         created,
-        category
+        category,
+        folder,
       );
       const productdata = new ProductData();
       const result = await productdata.createProduct(newProduct);
@@ -51,7 +52,6 @@ export class ProductController {
     let errorStatus = 500;
     const id = req.params.id as string;
     try {
-      
       if ( !id) {
         errorStatus = 401;
         throw new Error("O parâmetro id é necessário");
@@ -89,7 +89,8 @@ async getProductByCategory(req: Request, res: Response) {
         name,
         price,
         description,
-        category, } = req.body;
+        category,
+        folder } = req.body;
       if (!id) {
         errorstatus = 422;
         throw new Error("Parâmetro id é obrigatório");
@@ -101,6 +102,7 @@ async getProductByCategory(req: Request, res: Response) {
             price,
             description,
             category,
+            folder
       );
 
       res.status(201).send(result);
@@ -154,17 +156,12 @@ async getProductByCategory(req: Request, res: Response) {
     let errorstatus = 500;
     const product_id = req.params.id;
     try {
-      const [images] = await new ImageData().getAllImagesForProduct(product_id);
-      const result = {
-        id: images.id,
-        photos: images.photos,
-      };
+      const result = await new ImageData().getAllImagesForProduct(product_id);
       res.status(200).send({ Result: result });
     } catch (error:any) {
       res.status(errorstatus).send(error.message || error.sqlMessage);
     }
   }
-
    //  Deletar imagens do produto
 
   async deleteImages(req: Request, res: Response) {
@@ -210,11 +207,7 @@ async getProductByCategory(req: Request, res: Response) {
     let errorstatus = 500;
     const product_id = req.params.id;
     try {
-      const [sizes] = await new SizeData().getAllSizesForProduct(product_id);
-      const result = {
-        id: sizes.id,
-        sizes: sizes.sizes,
-      };
+      const result = await new SizeData().getAllSizesForProduct(product_id);
       res.status(200).send({ Result: result });
     } catch (error:any) {
       res.status(errorstatus).send(error.message || error.sqlMessage);
