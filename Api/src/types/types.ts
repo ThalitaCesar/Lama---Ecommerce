@@ -46,3 +46,12 @@ export type Adresses ={
   user_id: string;
   state: string;
 }
+
+export type AllOrderByUser = {
+  id: string;
+  name: string;
+  folder: string;
+  size: string;
+  price:string;
+  userId: string;
+}

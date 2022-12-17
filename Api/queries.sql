@@ -45,6 +45,16 @@ CREATE TABLE IF NOT EXISTS Lama_Size(
     FOREIGN KEY (product_id) REFERENCES Lama_Product(id)
 );
 
+CREATE TABLE IF NOT EXISTS Lama_OrderUser(
+	id VARCHAR(255) PRIMARY KEY,
+	name VARCHAR(255) NOT NULL,
+    folder VARCHAR(255) NOT NULL,
+    size VARCHAR(255) NOT NULL,
+    price VARCHAR(255) NOT NULL,
+    user_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Lama_User(id)
+);
+
 
 
 
