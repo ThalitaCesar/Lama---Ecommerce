@@ -71,6 +71,6 @@ export const orderRouter = express.Router()
 
 const orderController = new OrderController()
 
-orderRouter.get('/getorderbyuser', orderController.getOrdersByUser)
+orderRouter.get('/getorderbyuser/:id', orderController.getOrdersByUser)
 orderRouter.post('/postorder', orderController.postOrder)
 orderRouter.delete('/deleteorder/:id', orderController.deleteOrder)
