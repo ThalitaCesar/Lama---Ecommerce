@@ -6,7 +6,7 @@ import Announcement from '../../components/Announcement';
 import Footer from '../../components/Footer';
 import FooterMobile from '../../components/FooterMobile';
 import { MenuItem } from '../../components/Navbar/styles';
-import ProductCard from '../../components/ProductCard';
+import ProductCard from './ProductCard';
 import SearchBar from '../../components/SearchBar';
 import SideBar from '../../components/Sidebar';
 import { GlobalContext } from '../../context/GlobalState';
@@ -18,27 +18,32 @@ function Category() {
   const {categorySelect, setCategorySelect } = useContext(GlobalContext)
   console.log('category', categorySelect)
   const [searchedString, setSearchedString] = useState('');
-  const [categoryList, setCategoryList] = useState('');
-  const [productsList, setProductsList] = useState('');
+  const [categoryList, setCategoryList] = useState();
+  const [productsList, setProductsList] = useState([]);
 
   const onChangeHandler = (e) => {
     setSearchedString(e.target.value);
 }
 
 const getProducts =()=>{
-  axios.get(`http://localhost:3003/product/getproducts`)
-    .then(res => setProductsList(res.data.result))
-    .catch(err => console.log(err))
-    }   
+  axios.get('http://localhost:3003/product/getproducts')
+  .then(function (response) {
+    setProductsList(response.data.Result)
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
 
+    
     useEffect(()=>{
       getProducts()
-    },[])
+    },[productsList])
 
-  // const newCategory = productsList.filter(product => product.category === "BA")
-  //   setCategoryList(newCategory)
+    const result = productsList.filter(product => product.category == categorySelect);
 
-    console.log("allProducts", productsList)
+    console.log("result", result)
     return (
     <>
               <Announcement/>
@@ -88,11 +93,10 @@ const getProducts =()=>{
 
               <Right>
                 <Grid container spacing={2}>
-                <ProductCard/>
-                <ProductCard />
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
+                {result.map((result) => (
+                <ProductCard key={result.id} product={result} productId={result.id}/>
+                ))}
+            
                 </Grid>
               </Right>
               </Flex>

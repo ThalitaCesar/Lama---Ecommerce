@@ -1,19 +1,41 @@
 
 import { Backdrop } from '@material-ui/core';
 import { ArrowBackIosOutlined } from '@material-ui/icons';
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import Announcement from '../../components/Announcement';
 import Footer from '../../components/Footer';
 import FooterMobile from '../../components/FooterMobile';
 import Navbar from '../../components/Navbar';
+import { GlobalContext } from '../../context/GlobalState';
 import Info from './Info';
 import Slider from './Slider';
 import SliderMobile from './SliderMobile';
 import { BackButton, Container, Left, Right } from './styles';
 
 function ProductInfo() {
+  
+  const {productSelect} = useContext(GlobalContext)
+  const [photos, setPhotos] = useState([])
+  console.log("productSelect", productSelect)
 
+  const getPhotos =()=>{
+    axios.get(`http://localhost:3003/product/getAllImagesByProduct/${productSelect}`)
+    .then(function (response) {
+      setPhotos(response.data.Result)
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
+  
+      useEffect(()=>{
+        getPhotos()
+      },[])
+
+console.log("images", photos)
   const history = useHistory();
     return (
 <>
@@ -29,37 +51,7 @@ function ProductInfo() {
         <Left>
           <SliderMobile/>
 
-        <Slider
-        images={[
-          {
-            id: 1,
-            src:
-              "https://img.ltwebstatic.com/images3_pi/2021/11/19/16372847220483d3fc5f5320a781c5ebd34333ff84_thumbnail_600x.webp"
-          },
-          {
-            id: 2,
-            src:
-              "https://img.ltwebstatic.com/images3_pi/2021/11/19/1637284725d9569a24e6f415912bb191d03569ac78_thumbnail_600x.webp"
-          },
-          {
-            id: 3,
-            src:
-              "https://img.ltwebstatic.com/images3_pi/2021/11/19/1637284727afe8c41215207c9f58c78df2bf3e4da2_thumbnail_600x.webp"
-          },
-          {
-            id: 4,
-            src:
-              "https://img.ltwebstatic.com/images3_pi/2021/11/19/1637284729855dd0c2030f19a7c48b8e0ba6e7694f_thumbnail_600x.webp"
-          },
-          {
-            id: 5,
-            src:
-              "https://img.ltwebstatic.com/images3_pi/2021/11/19/1637284726d84f00501ca36f7197380ab18e1907b4_thumbnail_600x.webp"
-          }
-        ]}
-      />
-  
-           
+        <Slider/>  
         </Left>
         <Right>
           <Info/>

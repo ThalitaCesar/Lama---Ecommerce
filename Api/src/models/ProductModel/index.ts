@@ -13,7 +13,8 @@ export enum CATEGORIES {
         private description: string,
         private price:string,
         private created: string,
-        private category: CATEGORIES
+        private category: CATEGORIES,
+        private folder: string,
       ) {}
     
       getId() {
@@ -33,6 +34,9 @@ export enum CATEGORIES {
       }
       getCategory() {
         return this.category;
+      }
+      getFolder() {
+        return this.folder;
       }
     }
 

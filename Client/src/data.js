@@ -10,7 +10,7 @@
         id: 2,
         img: "https://cdn-icons-png.flaticon.com/512/2346/2346858.png",
         title: "Roupas Masculinas",
-        cat:"masculino",
+        cat:"MASC",
         bg: "MASC",
       },
       {

@@ -1,5 +1,5 @@
 import { Images, Product, Size } from "../../models/ProductModel";
-import { AllProducts } from "../../types/types";
+import { AllImages, AllProducts, AllSizes } from "../../types/types";
 import { DataBase } from "../DataBase";
 
 export class ProductData extends DataBase {
@@ -13,6 +13,7 @@ export class ProductData extends DataBase {
           description: product.getDescription(),
           created: product.getCreated(),
           category: product.getCategory(),
+          folder: product.getFolder(),
         });
         return "Produto criado com sucesso";
       } catch (error:any) {
@@ -24,10 +25,8 @@ export class ProductData extends DataBase {
     try {
       const products: AllProducts[] = [];
       const result = await this.getConnection()
-      .select("p.id",  "p.name", "p.price", "p.description", "p.created", "p.category", "s.sizes", "i.photos")
-      .from("Lama_Product as p")
-      .join("Lama_Size as s", "s.product_id", "p.id")
-      .join("Lama_Images AS i", "p.id", "i.product_id")
+      .select("*")
+      .from("Lama_Product")
       for(let product of result){
         products.push(product);
 }
@@ -41,11 +40,9 @@ export class ProductData extends DataBase {
     try {
       const products: AllProducts[] = [];
       const result = await this.getConnection()
-        .select("p.id",  "p.name", "p.price", "p.description", "p.created", "p.category", "s.sizes", "i.photos")
-        .from("Lama_Product as p")
-        .join("Lama_Size as s", "s.product_id", "p.id")
-        .join("Lama_Images AS i", "p.id", "i.product_id")
-        .where("p.id","like", `%${id}%`)
+      .select("*")
+      .from("Lama_Product")
+      .where("id","like", `%${id}%`)
         for(let product of result){
           products.push(product);
   }
@@ -59,12 +56,9 @@ export class ProductData extends DataBase {
     try {
       const products: AllProducts[] = [];
       const result = await this.getConnection()
-        .select("p.id",  "p.name", "p.price", "p.description", "p.created", "p.category", "s.sizes", "i.photos")
-        .from("Lama_Product as p")
-        .join("Lama_Size as s", "s.product_id", "p.id")
-        .join("Lama_Images AS i", "p.id", "i.product_id")
-        .where("p.id","like","i.product_id")
-        .orWhere("p.category","like",`%${category}%`);
+        .select("*")
+        .from("Lama_Product")
+        .where("category","like",`%${category}%`);
         for(let product of result){
           products.push(product);
   }
@@ -79,7 +73,8 @@ export class ProductData extends DataBase {
     name: string,
     price: string,
     description: string,
-    category: string
+    category: string,
+    folder: string,
   ) {
     try {
       const result = await this.getConnection()
@@ -98,6 +93,7 @@ export class ProductData extends DataBase {
             price,
             description,
             category,
+            folder,
         })
         .where("id", "LIKE", `${id}`);
 
@@ -132,12 +128,13 @@ export class ProductData extends DataBase {
 export class ImageData extends DataBase {
     async createImage(images: Images) {
       try {
-          await this.getConnection().from("Lama_Images").insert({
+         await this.getConnection().from("Lama_Images").insert({
           id: images.getId(),
           photos: images.getPhotos(),
           product_id: images.getProductId(),
         });
         return "Imagem adicionada com sucesso";
+
       } catch (error:any) {
         return error.sqlMessage || error.message;
       }
@@ -145,10 +142,14 @@ export class ImageData extends DataBase {
 
   async getAllImagesForProduct(product_id: string) {
     try {
+      const images: AllImages[] = [];
       const result = await this.getConnection()
         .select("id", "photos")
         .from("Lama_Images")
         .where("product_id", "LIKE", `${product_id}`)
+        for(let image of result){
+          images.push(image);
+  }
       return result;
     } catch (error:any) {
       return error.sqlMessage;
@@ -195,10 +196,14 @@ export class SizeData extends DataBase {
 
   async getAllSizesForProduct(product_id: string) {
     try {
+      const sizes: AllSizes[] = [];
       const result = await this.getConnection()
         .select("id", "sizes")
         .from("Lama_Size")
-        .where("product_id", "LIKE", `${product_id}`)
+        .where("product_id", "LIKE", `${product_id}`) 
+        for(let size of result){
+          sizes.push(size);
+  }
       return result;
     } catch (error:any) {
       return error.sqlMessage;

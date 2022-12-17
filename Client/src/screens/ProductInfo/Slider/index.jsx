@@ -1,8 +1,30 @@
-import React, {useState } from "react";
+import React, {useContext, useEffect, useState } from "react";
 import { SliderWrapper, Wrapper } from "./styles";
 import { ArrowLeftOutlined, ArrowLeftRounded, ArrowRightAltRounded, ArrowRightRounded } from "@material-ui/icons";
+import { GlobalContext } from "../../../context/GlobalState";
+import axios from "axios";
 
-const Slider = ({ images }) => {
+const Slider = () => {
+  const {productSelect} = useContext(GlobalContext)
+const [images, setImages] = useState([])
+console.log("productSelect", productSelect)
+
+const getPhotos =()=>{
+  axios.get(`http://localhost:3003/product/getAllImagesByProduct/${productSelect}`)
+  .then(function (response) {
+    setImages(response.data.Result)
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+
+    useEffect(()=>{
+      getPhotos()
+    },[])
+
+    console.log("photosmobile", images)
   console.log("=====", images);
   const [currentIndex, setCurrenIndex] = useState(0);
   const [active, setActive] = useState("active");
@@ -75,7 +97,7 @@ const Slider = ({ images }) => {
           <img
             className={active}
             alt=""
-            src={imageSelect.src}
+            src={imageSelect?.photos}
             onClick={showModal}
           />
         </div>
@@ -102,7 +124,7 @@ const Slider = ({ images }) => {
             <span className="close" onClick={() => setIsOpen(false)}>
               X
             </span>
-            <img src={imageSelect.src} alt="Full Size" />
+            <img src={imageSelect?.photos} alt="Full Size" />
           </div>
         )}
       </SliderWrapper>
@@ -110,7 +132,7 @@ const Slider = ({ images }) => {
         {listSlider.map((item, index) => (
           <img
             key={item.id}
-            src={item.src}
+            src={item.photos}
             alt=""
             className={`dot ${item.id === currentIndex + 1 ? "active" : ""}`}
             onClick={() => handleSelectImage(item.id - 1)}
