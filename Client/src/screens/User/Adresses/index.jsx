@@ -30,7 +30,7 @@ function Adresses() {
     getAdressesByUser()
   },[])
 
-  const results =[adressesByUser]
+  const results = adressesByUser
 
   console.log("adressesByUser", adressesByUser)
 
