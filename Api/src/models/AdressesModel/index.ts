@@ -6,9 +6,9 @@ export class Adresses {
       private district: string,
       private city: string,
       private complement:string,
+      private state: string,
       private number: string,
       private user_id: string,
-      private state: string,
     ) {}
   
     getId() {
@@ -32,10 +32,10 @@ export class Adresses {
     getNumber() {
       return this.number;
     }
-    getUserId() {
-      return this.user_id;
-    }
     getState() {
       return this.state;
+    }
+    getUserId() {
+      return this.user_id;
     }
   }
