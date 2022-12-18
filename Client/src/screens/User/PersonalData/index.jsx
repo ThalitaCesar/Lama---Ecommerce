@@ -1,10 +1,11 @@
 import { Box, Button, ButtonGroup, Divider, TextField } from '@material-ui/core';
-import React from 'react'
+import React, { useContext } from 'react'
+import { GlobalContext } from '../../../context/GlobalState';
 import { useModalContext } from '../../../context/ModalContext';
 import { Title } from '../Requests/styles';
 
 function PersonalData() {
-
+  const {userId} = useContext(GlobalContext)
   const { openModal } = useModalContext();
   const testModal = () => openModal({ message: <Message/> });
 

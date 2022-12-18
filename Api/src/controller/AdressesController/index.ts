@@ -50,7 +50,7 @@ export class AdressesController {
     let errorstatus = 500;
     const user_id = req.params.id;
     try {
-      const [adresses] = await new AdressesData().getAllAdressesByUser(user_id);
+      const adresses = await new AdressesData().getAllAdressesByUser(user_id);
       res.status(200).send({ Result: adresses });
     } catch (error:any) {
       res.status(errorstatus).send(error.message || error.sqlMessage);
@@ -105,7 +105,6 @@ export class AdressesController {
       res.status(errorstatus).send(error.message || error.sqlMessage);
     }
   }
-
 }
 
 // Rotas 

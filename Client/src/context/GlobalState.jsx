@@ -12,6 +12,7 @@ export const GlobalState = ({ children }) => {
   const [productSelect, setProductSelect] = useState([]);
   const [categorySelect, setCategorySelect] = useState([]);
   const [tokenLogin, setTokenLogin] = useState(getToken());
+  const [userId, setUserId] = useState();
 
   return (
     <GlobalContext.Provider value={{
@@ -20,7 +21,9 @@ export const GlobalState = ({ children }) => {
       categorySelect, 
       setCategorySelect,
       tokenLogin,
-      setTokenLogin }} 
+      setTokenLogin,
+      userId,
+      setUserId }} 
     children={children}/> )
 };
 

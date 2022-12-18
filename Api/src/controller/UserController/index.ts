@@ -117,6 +117,18 @@ async getAllUsers(req: Request, res: Response) {
         res.status(erroStatus).send(error.sqlMessage || error.message);
       }
     }
+     // Pega id do usuário por email 
+
+     async getIdUserByEmail(req: Request, res: Response) {
+      let erroStatus = 500;
+      try {
+        const email = req.params.email as string;
+        const [result] = await new UserData().getIdUserByEmail(email);
+        res.status(200).send({ result: result });
+      } catch (error:any) {
+        res.status(erroStatus).send(error.sqlMessage || error.message);
+      }
+    }
 
     // Alterar dados do usuário logado
 
@@ -191,6 +203,7 @@ const userController = new UserController()
 
 userRouter.get('/profiles', userController.getAllUsers)
 userRouter.get('/profile/:id', userController.getProfileById)
+userRouter.get('/userid/:email', userController.getIdUserByEmail)
 userRouter.get('/profile', userController.getProfile)
 userRouter.post('/signup', userController.signUpUser)
 userRouter.post('/login', userController.loginUser)

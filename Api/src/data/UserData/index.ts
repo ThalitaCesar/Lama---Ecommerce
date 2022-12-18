@@ -63,7 +63,6 @@ export class UserData extends DataBase {
         for(let user of result){
           users.push(user);
         }
-
       return users;
     } catch (error:any) {
       return error.sqlMesage || error.message;
@@ -76,6 +75,18 @@ export class UserData extends DataBase {
         .from("Lama_User")
         .select("id", "name", "cpf", "data", "email", "role")
         .where("id", "LIKE", `%${id}%`);
+      return result;
+    } catch (error:any) {
+      return error.sqlMesage || error.message;
+    }
+  }
+
+  async getIdUserByEmail(email: string) {
+    try {
+      const result = await this.getConnection()
+        .from("Lama_User")
+        .select("id")
+        .where("email", "LIKE", `%${email}%`);
       return result;
     } catch (error:any) {
       return error.sqlMesage || error.message;

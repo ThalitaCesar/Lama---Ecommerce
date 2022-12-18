@@ -19,6 +19,21 @@ const SideBar = () => {
   const outLocalStorage =() =>{
     setTokenLogin("")
   }
+
+  const {userId} = useContext(GlobalContext);
+  const [adressesByUser, setAdressesByUser] = useState()
+
+  const getAdressesByUser = () => {
+    axios
+    .get(`http://localhost:3003/adresses/getadresses/${userId}`)
+    .then(response => {
+      console.log(response);
+      setAdressesByUser(response.data.result)
+    })
+    .catch((err)=>{
+      console.log(err);
+      });
+  }
   return (
 <>
 

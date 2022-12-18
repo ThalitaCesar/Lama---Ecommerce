@@ -52,22 +52,6 @@ export class ProductData extends DataBase {
     }
   }
 
-  async getAllProductByCategory(category: string) {
-    try {
-      const products: AllProducts[] = [];
-      const result = await this.getConnection()
-        .select("*")
-        .from("Lama_Product")
-        .where("category","like",`%${category}%`);
-        for(let product of result){
-          products.push(product);
-  }
-        return products;
-    } catch (error:any) {
-      return error.sqlMessage;
-    }
-  }
-
   async updateProduct(
     id: string,
     name: string,
