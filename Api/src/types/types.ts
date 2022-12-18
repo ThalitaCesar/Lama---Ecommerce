@@ -36,13 +36,22 @@ export type Users ={
   role: string;
 }
 
-export type Adresses ={
+export type GetAllAdresses ={
   id: string;
   cep: string;
   street: string;
   city:string;
   complement: string;
-  number: string;
-  user_id: string;
+  number: string;  
   state: string;
+  user_id: string;
+}
+
+export type AllOrderByUser = {
+  id: string;
+  name: string;
+  folder: string;
+  size: string;
+  price:string;
+  userId: string;
 }

@@ -50,7 +50,6 @@ console.log("images", photos)
       <Container>
         <Left>
           <SliderMobile/>
-
         <Slider/>  
         </Left>
         <Right>

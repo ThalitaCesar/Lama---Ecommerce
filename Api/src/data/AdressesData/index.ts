@@ -1,4 +1,5 @@
 import { Adresses } from "../../models/AdressesModel";
+import { GetAllAdresses } from "../../types/types";
 import { DataBase } from "../DataBase";
 
 
@@ -18,7 +19,7 @@ export class AdressesData extends DataBase {
           complement: adresses.getComplement(),
           user_id: adresses.getUserId(),
         });
-        return "Imagem adicionada com sucesso";
+        return "Endereço adicionado com sucesso";
       } catch (error:any) {
         return error.sqlMessage || error.message;
       }
@@ -26,18 +27,21 @@ export class AdressesData extends DataBase {
 
   async getAllAdressesByUser(user_id: string) {
     try {
+      const adresses: GetAllAdresses[] = [];
       const result = await this.getConnection()
-        .select("id", "cep", "street", "district", "number", "complement", "city", "state")
+        .select("*")
         .from("Lama_Adresse")
         .where("user_id", "LIKE", `%${user_id}%`);
-      return result;
+        for(let adresse of result){
+          adresses.push(adresse);
+  }
+        return adresses;
     } catch (error:any) {
       return error.sqlMessage;
     }
   }
 
   async updateAdresses(
-    user_id: string,
     id: string,
     cep: string,
     street: string,
@@ -67,8 +71,7 @@ export class AdressesData extends DataBase {
           state,
           complement,
         })
-        .where("user_id", "LIKE", `${user_id}`)
-        .andWhere("id", "LIKE", `${id}`);
+        .where("id", "LIKE", `${id}`)
 
       return "Endereço alterado com sucesso";
     } catch (error:any) {

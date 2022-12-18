@@ -11,7 +11,6 @@ export class AdressesController {
     let errorstatus = 500;
     try {
       const id = new GenerateId().generateId();
-      const user_id = req.params.id;
       const {  
         cep,
         street,
@@ -19,7 +18,8 @@ export class AdressesController {
         city,
         complement,
         state,
-        number } = req.body;
+        number,
+        user_id} = req.body;
       if ( !cep|| !street || !district || !city || !number  || !user_id  || !number) {
         errorstatus = 422;
         throw new Error("Digite os parametros necessarios ");
@@ -51,16 +51,7 @@ export class AdressesController {
     const user_id = req.params.id;
     try {
       const [adresses] = await new AdressesData().getAllAdressesByUser(user_id);
-      const result = {
-        cep: adresses.cep,
-        street: adresses.street,
-        district: adresses.district,
-        city: adresses.city,
-        complement: adresses.complement,
-        number: adresses.number,
-        state: adresses.number,
-      };
-      res.status(200).send({ Result: result });
+      res.status(200).send({ Result: adresses });
     } catch (error:any) {
       res.status(errorstatus).send(error.message || error.sqlMessage);
     }
@@ -79,8 +70,8 @@ export class AdressesController {
         city,
         complement,
         number,
-        userId,
-        state, } = req.body;
+        state,
+       } = req.body;
       if (!id) {
         errorstatus = 422;
         throw new Error("Parâmetro id é obrigatório");
@@ -93,7 +84,6 @@ export class AdressesController {
         city,
         complement,
         number,
-        userId,
         state,
       );
 
@@ -124,7 +114,7 @@ export const adressesRouter = express.Router()
 
 const adressesController = new AdressesController()
 
-adressesRouter.get('/adresses', adressesController.getAllAdressesByUser)
-adressesRouter.post('/postadresses/:id', adressesController.postAdresses)
+adressesRouter.get('/getadresses/:id', adressesController.getAllAdressesByUser)
+adressesRouter.post('/postadresses/', adressesController.postAdresses)
 adressesRouter.put('/updateadresses', adressesController.updateAdresses)
 adressesRouter.delete('/deleteadresses/:id', adressesController.deleteAdresses)

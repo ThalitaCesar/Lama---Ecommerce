@@ -58,11 +58,12 @@ export class UserData extends DataBase {
       const users: Users[] = [];
       const result = await this.getConnection()
         .from("Lama_User")
-        .select("id", "name", "cpf", "data", "email", "role")
+        .select("*")
         .where("id", "LIKE", `%${id}%`);
         for(let user of result){
           users.push(user);
         }
+
       return users;
     } catch (error:any) {
       return error.sqlMesage || error.message;
