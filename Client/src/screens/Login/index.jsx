@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, InputAdornment, TextField } from '@material-ui/core';
 import { Lock, Person } from '@material-ui/icons';
 import { Container, Lama } from './styles';
@@ -13,6 +13,7 @@ function Login() {
   const {tokenLogin, setTokenLogin} = useContext(GlobalContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const {userId, setUserId} = useContext(GlobalContext)
 
   const history = useHistory()
 
@@ -22,6 +23,12 @@ function Login() {
 
   const onChangePassword = (e) => {
     setPassword(e.target.value)
+  }
+  
+  const headers = {
+    headers: {
+      Authorization: tokenLogin
+    }
   }
 
   const Login = () => {
@@ -40,10 +47,26 @@ function Login() {
     })
     .catch((err)=>{
       console.log(err)
+    });
+    axios
+    .get(`http://localhost:3003/user//userid/${email}`)
+    .then(response => {
+        setUserId(response.data.result.id);
+        console.log("response", response.data.result.id);
+    })
+    .catch((err)=>{
+      console.log(err)
     })
   }
 
+
+  useEffect(()=>{
+    Login()
+  },[tokenLogin, userId])
+
   console.log('token', tokenLogin)
+
+
       return(
         <>
       <Navbar/>
@@ -91,7 +114,7 @@ function Login() {
               required
             />
           
-            <Button variant="contained" color="primary" onClick={Login}>Login</Button>
+            <Button variant="contained" color="primary" onClick={Login} >Login</Button>
               <h4> Ainda não tem cadastro?
                <span className="signup">
                <NavLink to="/register" style={{marginLeft:"10px", textDecoration:"none"}}>

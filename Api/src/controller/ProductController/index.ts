@@ -62,22 +62,7 @@ export class ProductController {
       res.status(errorStatus).send(error.message || error.sqlMessage);
     }
   }
-// Pegar produto por categoria 
 
-async getProductByCategory(req: Request, res: Response) {
-  let errorStatus = 500;
-  const category = req.params.id as string;
-  try {
-    if ( !category) {
-      errorStatus = 401;
-      throw new Error("A categoria é necessária");
-    }
-    const product = await new ProductData().getAllProductByCategory(category);
-    res.status(200).send({ Result: product });
-  } catch (error:any) {
-    res.status(errorStatus).send(error.message || error.sqlMessage);
-  }
-}
 
 //  Editar produto
 
@@ -236,7 +221,6 @@ const productController = new ProductController()
 
 productRouter.get('/getproducts', productController.getAllProducts)
 productRouter.get('/product/:id', productController.getProductById)
-productRouter.get('/product/category', productController.getProductByCategory)
 productRouter.get('/getAllImagesByProduct/:id', productController.getImagesByProduct)
 productRouter.get('/getAllSizesByProduct/:id', productController.getSizesByProduct)
 productRouter.post('/postproduct', productController.postProduct)

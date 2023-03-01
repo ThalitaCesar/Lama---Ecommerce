@@ -20,6 +20,8 @@ function Category() {
   const [searchedString, setSearchedString] = useState('');
   const [categoryList, setCategoryList] = useState();
   const [productsList, setProductsList] = useState([]);
+  const {productSelect, setProductSelect} = useContext(GlobalContext)
+  console.log("productSelect", productSelect)
 
   const onChangeHandler = (e) => {
     setSearchedString(e.target.value);
@@ -35,8 +37,7 @@ const getProducts =()=>{
     console.log(error);
   })
 }
-
-    
+ 
     useEffect(()=>{
       getProducts()
     },[productsList])
@@ -94,9 +95,9 @@ const getProducts =()=>{
               <Right>
                 <Grid container spacing={2}>
                 {result.map((result) => (
-                <ProductCard key={result.id} product={result} productId={result.id}/>
+                <ProductCard key={result.id} product={result}
+                />
                 ))}
-            
                 </Grid>
               </Right>
               </Flex>

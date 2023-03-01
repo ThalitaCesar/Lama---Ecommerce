@@ -4,10 +4,9 @@ import {  Favorite, Share } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../../../context/GlobalState';
 
-const ProductCard = ({product, productId}) => {
-  
-  
+const ProductCard = ({product}) => {
   const {productSelect, setProductSelect} = useContext(GlobalContext)
+  console.log("productSelect", productSelect)
   console.log("product", product)
 
     return (
@@ -16,7 +15,7 @@ const ProductCard = ({product, productId}) => {
     style={{width:"280px", 
     height:"550px",
     margin:"30px"}}
-    onClick={setProductSelect(product.id)}
+    onClick={()=>setProductSelect(product.id)}
     >
     <Link to='/product'>
           <CardMedia
