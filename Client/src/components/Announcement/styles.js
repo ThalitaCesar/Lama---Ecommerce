@@ -1,4 +1,3 @@
-
 import styled, { keyframes } from 'styled-components'
 import { mobile } from '../../responsive';
 
@@ -14,7 +13,7 @@ export const blinkTextCursor = keyframes`
 }
 `;
 
-  export const Container = styled.div`
+export const Container = styled.div`
   height: 40px;
   background: var(--black);
   color: white;
@@ -23,7 +22,9 @@ export const blinkTextCursor = keyframes`
   justify-content: center;
   font-size: 18px;
   font-weight: 500;
-  ${mobile({ display: "none" })}
+  ${mobile`
+    display: none;
+  `}
 `;
 
 export const TextCursor = styled.p`

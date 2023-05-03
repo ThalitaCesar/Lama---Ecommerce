@@ -7,6 +7,7 @@ import { ModalProvider } from './context/ModalContext';
 import Routes from './router';
 import Home from './screens/Home';
 import { GlobalStyle } from './styles/global';
+import { AuthProvider } from './services/isAutenticated';
 
 function App() {
 
@@ -36,7 +37,9 @@ return (
     <GlobalState>
       <ModalProvider>
           <MuiThemeProvider theme={theme}>
-            <Routes/>
+          <AuthProvider>
+            <Routes />
+          </AuthProvider>
             <Modal/>
           </MuiThemeProvider>
           <GlobalStyle/>

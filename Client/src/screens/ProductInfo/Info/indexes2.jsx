@@ -41,11 +41,8 @@ function Info() {
   
 
   const {userId} = useContext(GlobalContext)
-  const {productName} = product.name;
-  const {productFolder} = product.folder;
-  const {productPrice} = product.price;
 
-  const CreateOrder = ({product}) => {
+  const CreateOrder = (product) => {
     const body = {
       name: product.name,
       folder:product.folder,
@@ -61,8 +58,7 @@ function Info() {
       })
       .catch((err)=>{
         console.log(err);
-        alert("Não foi possível adicionar o produto ao carrinho, selecione o tamanho e tente novamente.")
-      });
+        alert("Não foi possível adicionar o produto ao carrinho.")});
     }
     console.log(
      " name:" , product.name,

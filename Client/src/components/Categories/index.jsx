@@ -1,61 +1,54 @@
-import { Divider, Grid } from "@material-ui/core";
-import React, { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalState";
-import { categories } from "../../data";
+import {Divider, Grid} from "@material-ui/core";
+import React, {useContext} from "react";
+import {GlobalContext} from "../../context/GlobalState";
+import {categories} from "../../data";
 import CategoryItem from "../CategoryItem";
-import { CategoriesDiv, CategoriesMobile, Container, Flex, Title } from "./styles";
-import { Swiper, SwiperSlide } from "swiper/react";
+import {CategoriesDiv, CategoriesMobile, Container, Flex, Title} from "./styles";
+import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import { Navigation } from "swiper";
+import {Navigation} from "swiper";
 
 const Categories = () => {
 
-    return (
-      <>
-      <CategoriesDiv>
-      <Title>NAVEGUE POR CATEGORIAS</Title>
-      <Container>
-      
-      <Grid container>
+    return ( 
+    <> 
+    <CategoriesDiv>
+        <Title>NAVEGUE POR CATEGORIAS</Title>
+        <Container>
 
-        {categories.map((item) => (
-          <Flex> 
-          <Divider orientation="vertical" flexItem />
-          <CategoryItem item={item} key={item.id}  />
-          <Divider orientation="vertical" flexItem />
-          </Flex>
-        ))}
-  
-      </Grid>
-      </Container>
-      </CategoriesDiv>
+            <Grid container>
 
-      <CategoriesMobile>
-      <Title>NAVEGUE POR CATEGORIAS</Title>
-      <Container>
+                {categories.map((item) => (
+                    <Flex>
+                        <Divider orientation="vertical" flexItem/>
+                        <CategoryItem item={item} key={item.id}/>
+                        <Divider orientation="vertical" flexItem/>
+                    </Flex>
+                ))}
 
-      <Swiper
-       style={{
+            </Grid>
+        </Container>
+    </CategoriesDiv> < CategoriesMobile > <Title>NAVEGUE POR CATEGORIAS</Title> < Container > <Swiper
+        style={{
         "--swiper-navigation-color": "#e61919",
-        "--swiper-pagination-color": "#fff",
-      }}
-       navigation={true} modules={[Navigation]} className="mySwiper">
-      {categories.map((item) => (
-         <SwiperSlide className="swiper-slide">
-           <CategoryItem item={item} key={item.id}  />
-         </SwiperSlide>
+        "--swiper-pagination-color": "#fff"
+    }}
+        navigation={true}
+        modules={[Navigation]}
+        className="mySwiper">
+        {categories.map((item) => (
+            <SwiperSlide className="swiper-slide">
+                <CategoryItem item={item} key={item.id}/>
+            </SwiperSlide>
         ))}
-        
-      </Swiper>
 
-      </Container>
-      </CategoriesMobile>
-
-    
-     </>
+    </Swiper> 
+    </Container>
+      </CategoriesMobile > 
+      </>
     );
-  };
-  
-  export default Categories;
+};
+
+export default Categories;

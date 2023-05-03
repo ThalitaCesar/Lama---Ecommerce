@@ -6,6 +6,7 @@ export const Container = styled.div`
   padding:40px;
   background: var(--black);
   color: #FFE4C4;
+  overflow-x:hidden;
   ${mobile({ flexDirection: "column" })}
 `;
 
@@ -69,6 +70,7 @@ export const ListItem = styled.li`
 export const Right = styled.div`
   flex: 1;
   padding: 20px;
+    ${mobile({ marginBottom: "30px" })}
 `;
 
 export const ContactItem = styled.div`

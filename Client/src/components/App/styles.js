@@ -12,7 +12,8 @@ margin-top:260px;
 margin-bottom:260px;
 ${mobile({ 
     borderRadius:"16px",  
-    flexDirection:"column" })}
+    flexDirection:"column",
+ })}
 `;
 
 export const Img = styled.img`

@@ -37,15 +37,20 @@ export class ProductController {
 
 // Pegar todos os produtos
 
-  async getAllProducts(req: Request, res: Response): Promise<void> {
-    let errorstatus = 500;
-    try {
-      const product = await new ProductData().getAllProducts();
-      res.status(200).send({ Result: product });
-    } catch (error:any) {
-      res.status(errorstatus).send(error.message || error.sqlMessage);
-    }
+async getAllProducts(req: Request, res: Response): Promise<void> {
+  let errorstatus = 500;
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const perPage = parseInt(req.query.perPage as string) || 8;
+    const query = req.query.query as string | undefined;
+    const product = await new ProductData().getAllProducts(page, perPage, query);
+    res.status(200).send({ Result: product });
+  } catch (error: any) {
+    res.status(errorstatus).send(error.message || error.sqlMessage);
   }
+}
+
+
 //  Pegar produtos por id
 
   async getProductById(req: Request, res: Response) {
@@ -219,7 +224,7 @@ export const productRouter = express.Router()
 
 const productController = new ProductController()
 
-productRouter.get('/getproducts', productController.getAllProducts)
+productRouter.get('/getproducts', productController.getAllProducts);
 productRouter.get('/product/:id', productController.getProductById)
 productRouter.get('/getAllImagesByProduct/:id', productController.getImagesByProduct)
 productRouter.get('/getAllSizesByProduct/:id', productController.getSizesByProduct)

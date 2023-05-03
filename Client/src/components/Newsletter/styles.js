@@ -56,6 +56,7 @@ align-items: center;
 background-color: var(--background);
 color: white;
 cursor: pointer;
+border-radius:20px;
 transition: filter 0.2;
    &:hover{
    filter: brightness(0.9)
