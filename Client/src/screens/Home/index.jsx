@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, {useContext, useEffect} from 'react'
 import Announcement from '../../components/Announcement';
 import AppCard from '../../components/App';
 import Categories from '../../components/Categories';
@@ -8,28 +8,28 @@ import Marks from '../../components/Marks';
 import Navbar from '../../components/Navbar';
 import Newsletter from '../../components/Newsletter';
 import Slider from '../../components/Slider';
-import { GlobalContext } from '../../context/GlobalState';
+import {GlobalContext} from '../../context/GlobalState';
 
 function Home() {
 
-  const {userId} = useContext(GlobalContext)
-  const {tokenLogin} = useContext(GlobalContext)
-  console.log('userid', userId)
+    const {userId} = useContext(GlobalContext)
+    const {tokenLogin} = useContext(GlobalContext)
+    console.log('userid', userId)
 
-  useEffect(()=>{
-  },[tokenLogin, userId])
-    return (
-<>
-    <Announcement />
-      <Navbar />
-      <Slider />
-      <Marks/>
-      <Categories />
-      <AppCard/>
-      <Newsletter/>
-      <Footer/>
-      <FooterMobile/>
-</>
+    useEffect(() => {}, [tokenLogin, userId])
+    return ( 
+    <> 
+    
+    <Announcement/> 
+    <Navbar /> 
+    <Slider/> 
+    <Marks /> 
+    <Categories/> 
+    <AppCard /> 
+    <Newsletter/> 
+    <Footer /> 
+    <FooterMobile/> 
+    </>
   )} 
 
 export default Home;

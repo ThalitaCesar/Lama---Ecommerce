@@ -3,6 +3,7 @@ import { mobile } from "../../../responsive";
 
 export const Container = styled.div`
     display:none;
+    justify-content:center;
     .swiper {
         width: 300px;
         height: 300px;
@@ -42,7 +43,7 @@ export const Container = styled.div`
         object-fit: cover;
       }
       
-    ${mobile({ display: "block"})};
+    ${mobile({ display: "flex"})};
 `
 
 

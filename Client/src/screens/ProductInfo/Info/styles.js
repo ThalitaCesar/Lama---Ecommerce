@@ -99,7 +99,7 @@ margin-top:4px;
 margin-bottom:7px;
 align-items:center;
 display:flex;
-${mobile({ width: "100%" })}
+${mobile({ width: "90%" })}
 `
 
 export const Description = styled.p`
@@ -107,5 +107,5 @@ font-size:12px;
 margin-top:16px;
 text-align: justify;
 margin-bottom:30px;
-${mobile({ width: "100%" })}
+${mobile({ width: "90%" })}
 `

@@ -6,6 +6,7 @@ display: flex;
 align-items: center;
 justify-content:start;
 margin:10px;
+overflow-x:hidden;
 ${mobile({ flexDirection: "column" })}
 `
 
@@ -28,5 +29,6 @@ display:flex;
 justify-content: flex-end;
 flex-direction: row;
 background: transparent;
+overflow-x:hidden;
 ${mobile({ marginLeft: "20px" })}
 `

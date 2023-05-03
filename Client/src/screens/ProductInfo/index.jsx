@@ -35,30 +35,31 @@ function ProductInfo() {
         getPhotos()
       },[])
 
-console.log("images", photos)
+  console.log("images", photos)
   const history = useHistory();
     return (
-<>
-<Announcement/>
-<Navbar/>
+    <>
+    <Announcement/>
+    <Navbar/>
 
-<BackButton onClick={() => { history.goBack()}}>
-  <Backdrop/> 
-  <ArrowBackIosOutlined/> 
-  Voltar
-  </BackButton>
-      <Container>
-        <Left>
-          <SliderMobile/>
+    <BackButton onClick={() => { history.goBack()}}>
+      <Backdrop/> 
+        <ArrowBackIosOutlined/> 
+          Voltar
+    </BackButton>
+      
+    <Container>
+      <Left>
+        <SliderMobile/>
         <Slider/>  
         </Left>
-        <Right>
-          <Info/>
-        </Right>
-      </Container>
-      <Footer/>
-      <FooterMobile/>
-      </>
+      <Right>
+        <Info/>
+      </Right>
+    </Container>
+    <Footer/>
+    <FooterMobile/>
+    </>
   )} 
   
 export default ProductInfo;

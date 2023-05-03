@@ -105,9 +105,8 @@ async getAllUsers(req: Request, res: Response) {
     async getProfileById(req: Request, res: Response) {
       let erroStatus = 500;
       try {
-        const token = req.headers.authorization as string;
         const id = req.params.id as string;
-        if (!token || !id) {
+        if ( !id) {
           erroStatus = 401;
           throw new Error("Digite parametros necessarios");
         }
@@ -207,6 +206,6 @@ userRouter.get('/userid/:email', userController.getIdUserByEmail)
 userRouter.get('/profile', userController.getProfile)
 userRouter.post('/signup', userController.signUpUser)
 userRouter.post('/login', userController.loginUser)
-userRouter.put('/updateuser/:id',userController.updateProfile)
+userRouter.put('/updateuser',userController.updateProfile)
 userRouter.put('/updatepassword/:id',userController.updatePassword)
 userRouter.delete('/deleteuser/:id', userController.deleteAccount)

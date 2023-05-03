@@ -1,21 +1,17 @@
-import { Input, SearchInput} from "./styles";
-import { SearchOutlined } from '@material-ui/icons';
+import {Input, SearchInput} from "./styles";
+import {SearchOutlined} from '@material-ui/icons';
 import React from "react";
 
-const SearchBar = ({
-  onChangeHandler,
-  setSearchedString,
-  searchedString,
-  customPlaceholder
-}) => {
+const SearchBar = ({onChangeHandler, setSearchedString, searchedString, customPlaceholder}) => {
 
-  return (
+    return (
 
-      <SearchInput>
-      <SearchOutlined style={{cursor: 'pointer'}}/>
-            <Input placeholder={customPlaceholder}
-             onChange={e => onChangeHandler(e)}
-            />
-      </SearchInput>
-)}
+        <SearchInput>
+            <SearchOutlined style={{
+                cursor: 'pointer'
+            }}/>
+            <Input placeholder={customPlaceholder} onChange={e => onChangeHandler(e)}/>
+        </SearchInput>
+    )
+}
 export default SearchBar;

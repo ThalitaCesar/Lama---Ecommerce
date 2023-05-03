@@ -21,32 +21,38 @@ export class ProductData extends DataBase {
       }
     }
 
-  async getAllProducts() {
-    try {
-      const products: AllProducts[] = [];
-      const result = await this.getConnection()
-      .select("*")
-      .from("Lama_Product")
-      for(let product of result){
-        products.push(product);
-}
-      return products;
-    } catch (error:any) {
-      return error.sqlMessage;
+    async getAllProducts(page: number, perPage: number, query?: string) {
+      try {
+        const products: AllProducts[] = [];
+        let queryBuilder = this.getConnection()
+          .select("*")
+          .from("Lama_Product")
+          .limit(perPage)
+          .offset((page - 1) * perPage);
+    
+        if (query) {
+          queryBuilder = queryBuilder.where("name", "LIKE", `%${query}%`);
+        }
+    
+        const result = await queryBuilder;
+    
+        for (let product of result) {
+          products.push(product);
+        }
+        return products;
+      } catch (error: any) {
+        return error.sqlMessage;
+      }
     }
-  }
+    
 
   async getAllProductById(id: string) {
     try {
-      const products: AllProducts[] = [];
       const result = await this.getConnection()
       .select("*")
       .from("Lama_Product")
       .where("id","like", `%${id}%`)
-        for(let product of result){
-          products.push(product);
-  }
-        return products;
+        return result;
     } catch (error:any) {
       return error.sqlMessage;
     }

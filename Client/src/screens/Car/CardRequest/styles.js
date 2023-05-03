@@ -42,3 +42,8 @@ font-weight:400;
 export const Value = styled.p`
 font-size:16px;
 `
+
+export const Total = styled.p`
+font-size: 30px;
+color: #e61919;
+`
