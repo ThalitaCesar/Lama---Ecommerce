@@ -74,7 +74,7 @@ font-size: 18px;
 cursor: pointer;
 margin-left: 25px;
 &:hover{
-    color:#e61919;
+    color:var(--red);
    
 }
 ${mobile({ fontSize: "12px", marginLeft: "10px" })}
@@ -91,6 +91,9 @@ export const SearchBox = styled.div`
     border-radius:20px;
     background-color: var(--grey);
     height:40px;
+    input{
+        padding: 16px;
+    }
   .search-btn {
     float: right;
     width: 40px;

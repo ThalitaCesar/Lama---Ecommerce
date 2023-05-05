@@ -199,7 +199,8 @@ function Register() {
                     </Button>
              <h4> 
               <span className="signup">
-              <NavLink to="/login " style={{marginLeft:"10px", textDecoration:"none"}}>
+              <NavLink to="/login " style={{marginLeft:"10px",
+              color: "var(--red)",textDecoration:"none"}}>
               Faça o login agora 
               </NavLink>
               </span> 
@@ -207,12 +208,17 @@ function Register() {
               </>
       ) : (
         <>
-          <form>{getStepContent(activeStep)}</form > <Button
+          <form>{getStepContent(activeStep)}
+          </form > 
+          <Button
+          variant = "contained" 
+          color = "primary" 
                         className={classes.button}
                         disabled={activeStep === 0}
                         onClick={handleBack}>
                         Voltar
-                    </Button> < Button className = {
+                    </Button> 
+                    <Button className = {
                         classes.button
                     }
                     variant = "contained" color = "primary" onClick = {

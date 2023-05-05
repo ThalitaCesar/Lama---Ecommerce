@@ -13,6 +13,7 @@ margin-bottom:260px;
 ${mobile({ 
     borderRadius:"16px",  
     flexDirection:"column",
+    marginTop:"180px"
  })}
 `;
 

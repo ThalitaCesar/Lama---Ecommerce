@@ -43,13 +43,29 @@ async getAllProducts(req: Request, res: Response): Promise<void> {
     const page = parseInt(req.query.page as string) || 1;
     const perPage = parseInt(req.query.perPage as string) || 8;
     const query = req.query.query as string | undefined;
-    const product = await new ProductData().getAllProducts(page, perPage, query);
-    res.status(200).send({ Result: product });
+    const { products, totalCount } = await new ProductData().getAllProducts(page, perPage, query);
+    res.status(200).send({ Result: products, TotalCount: totalCount });
   } catch (error: any) {
     res.status(errorstatus).send(error.message || error.sqlMessage);
   }
 }
 
+//pegar produtos por categoria
+
+async getProductByCategory(req: Request, res: Response): Promise<void> {
+  let errorstatus = 500;
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const perPage = parseInt(req.query.perPage as string) || 8;
+    const category = req.params.category as string;
+    const productData = new ProductData();
+    const products = await productData.getProductByCategory(page, perPage, category);
+    const totalCount = await productData.getTotalCountByCategory(category);
+    res.status(200).send({ Result: products, TotalCount: totalCount });
+  } catch (error: any) {
+    res.status(errorstatus).send(error.message || error.sqlMessage);
+  }
+}
 
 //  Pegar produtos por id
 
@@ -225,6 +241,7 @@ export const productRouter = express.Router()
 const productController = new ProductController()
 
 productRouter.get('/getproducts', productController.getAllProducts);
+productRouter.get('/getproducts/:category', productController.getProductByCategory);
 productRouter.get('/product/:id', productController.getProductById)
 productRouter.get('/getAllImagesByProduct/:id', productController.getImagesByProduct)
 productRouter.get('/getAllSizesByProduct/:id', productController.getSizesByProduct)

@@ -31,7 +31,7 @@ justify-content:center;
 cursor:pointer;
 border:none;
 background: transparent;
-border: 1px solid #FF4C00;
+border: 1px solid var(--red);
 border-radius: 8px;
 font-weight: 700;
 font-size: 12px;
@@ -45,6 +45,8 @@ export const Left = styled.div`
 
 export const Right = styled.div`
 display:flex;
+justify-content:center;
+align-items:center;
 ${mobile({ marginLeft: "26px", marginTop:"30px"})}
 `
 
@@ -52,6 +54,8 @@ ${mobile({ marginLeft: "26px", marginTop:"30px"})}
 export const Flex = styled.div`
 display:flex;
 margin: 60px;
+justify-content:center;
+align-items:center;
 ${mobile({ margin: "20px"})}
 `
 
@@ -61,14 +65,38 @@ ${mobile({ display: "none"})}
 
 `
 
-export const Pagination = styled.div`
-display:flex;
-justify-content: center;
-align-item:center;
-button{
+export const PaginationStyled = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  
+  button {
     font-size: 30px;
     margin: 16px;
     cursor: pointer;
     background: none;
+    border: none;
+    color: var(--red);
+    transition: color 0.2s ease-in-out;
+  }
+
+  button:hover {
+    color: var(--background);
+  }
+
+  button:first-child {
+    margin-left: 0;
+  }
+
+  button:last-child {
+    margin-right: 0;
+  }
+
+  button.active {
+    color: var(--back);
+    font-weight: bold;
+  }
 }
+
 `

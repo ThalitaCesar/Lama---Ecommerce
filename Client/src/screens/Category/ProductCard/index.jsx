@@ -1,54 +1,69 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@material-ui/core';
 import {  Favorite, Share } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 import { GlobalContext } from '../../../context/GlobalState';
 
 const ProductCard = ({product}) => {
-  const {productSelect, setProductSelect} = useContext(GlobalContext)
-  console.log("productSelect", productSelect)
-  console.log("product", product)
+  const { setProductSelect } = useContext(GlobalContext);
+  const history = useHistory();
+ 
 
-    return (
+  const handleClick = () => {
+    setProductSelect(product.id);
+    history.push(`/product/${product.id}`)
+    };
+
+  return (
     <>
-    <Card 
-    style={{width:"280px", 
-    height:"550px",
-    margin:"30px"}}
-    onClick={()=>setProductSelect(product.id)}
-    >
-    <Link to='/product'>
-          <CardMedia
+      <Card 
+        style={{
+          width: "280px", 
+          height: "550px",
+          margin: "30px"
+        }}
+        onClick={handleClick}
+      >
+        <CardMedia
           component="img"
-          height="420"
+          height="410"
           image={product.folder}
+          style={{cursor: 'pointer'}}
         />
-    </Link>
-      <CardContent>
-        <Typography variant="body1" color="text.primary">
-        {product.name}
-        </Typography>
-      </CardContent>
+        <CardContent>
+          <Typography variant="body1" color="text.primary">
+            {product.name}
+          </Typography>
+        </CardContent>
 
-      <CardActions style={{marginBottom:"30px", display:"flex", justifyContent:"space-between"}}>
-        <div>
-        <IconButton aria-label="add to favorites">
-          <Favorite />
-        </IconButton>
+        <CardActions 
+          style={{
+            marginBottom: "30px", 
+            display: "flex", 
+            justifyContent: "space-between"
+          }}
+        >
+          <div>
+            <IconButton aria-label="add to favorites">
+              <Favorite />
+            </IconButton>
 
-        <IconButton aria-label="share">
-          <Share />
-        </IconButton>
-        </div>
-     
+            <IconButton aria-label="share">
+              <Share />
+            </IconButton>
+          </div>
 
-        <Button variant="contained" color="primary" style={{marginBottom:"20px"}}>
-        {product.price}
-        </Button>   
-   
+          <Button 
+            variant="contained" 
+            color="primary" 
+            style={{marginBottom:"20px"}}
+          >
+            {product.price}
+          </Button>   
         </CardActions>
       </Card>
-</>
-  )} 
-  
+    </>
+  );
+};
+
 export default ProductCard;

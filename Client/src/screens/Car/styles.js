@@ -41,7 +41,7 @@ span{
 
 export const Total = styled.p`
 font-size: 30px;
-color: #e61919;
+color: var(--red);
 `
 
 export const CardValue = styled.div``

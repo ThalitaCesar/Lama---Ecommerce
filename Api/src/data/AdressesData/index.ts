@@ -13,9 +13,9 @@ export class AdressesData extends DataBase {
           cep: adresses.getCep(),
           street: adresses.getStreet(),
           district: adresses.getDistrict(),
-          state: adresses.getState(),
           number: adresses.getNumber(),
           city: adresses.getCity(),
+          state: adresses.getState(),
           complement: adresses.getComplement(),
           user_id: adresses.getUserId(),
         });

@@ -11,10 +11,11 @@ const Announcement = () => {
             <LocalShippingOutlined style={{
                 margin: "7px"
             }}/>
-            Frete
-            <Strong>GRÁTIS</Strong>
-            para pedidos acima de
-            <Strong>R$120,00 !</Strong>
+            Frete único
+            <Strong> R$ 20,00
+            </Strong>
+            para todos os
+            <Strong> pedidos! </Strong>
             ✨
         </TextCursor>
     </Container> 

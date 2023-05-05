@@ -8,7 +8,7 @@ export const Container = styled.div`
   cursor: pointer;
   align-items:center;
   &:hover{
-    background:#e61919;
+    background:var(--red);
   };
   ${mobile({marginBottom:"20px", marginLeft:"10px" })}
 `;

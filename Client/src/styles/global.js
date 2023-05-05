@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     --green: #95d0ad;
     --black:#1e1c1c ;
     --background-card: #d1dcd4;
+    --red: #e61919;
 }
 
  *{

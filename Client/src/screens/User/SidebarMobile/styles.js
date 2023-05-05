@@ -32,7 +32,7 @@ export const NavLink = styled(Link)`
       text-decoration: none;
     }
     :focus {
-      color:  #e61919;
+      color:  var(--red);
       font-weight: bold;
     }
     .icon{
@@ -57,7 +57,7 @@ export const Container = styled.div`
 export const ContainerDashboard = styled.div`
 height: 100%;
 width: 70vw;
-margin-top:40px;
+margin-top:0px;
 margin-bottom:50px;
 background-color: #fff;
 ${mobile({ width:"100%"})}

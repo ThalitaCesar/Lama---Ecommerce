@@ -1,27 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Avatar, Badge } from "@material-ui/core";
+import { Badge } from "@material-ui/core";
 import {
-  AirlineSeatIndividualSuiteSharp,
   HeadsetMicRounded,
-  Language,
-  Person,
   PersonOutline,
-  PortableWifiOffOutlined,
   Search,
   ShoppingCartOutlined,
-  VerifiedUserOutlined,
 } from "@material-ui/icons";
 import {
   Center,
   Container,
-  Input,
   Left,
   Logo,
   MenuItem,
   NotMobile,
   Right,
   SearchBox,
-  SearchContainer,
   Wrapper,
 } from "./styles";
 import { Link, useHistory } from "react-router-dom";

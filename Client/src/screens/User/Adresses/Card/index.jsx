@@ -1,20 +1,14 @@
-
-import { Box, Button, ButtonGroup, TextField } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 import { Edit } from '@material-ui/icons';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { useModalContext } from '../../../../context/ModalContext';
-import { FlexContent, FlexItem, IconContent, Text, TextTitle } from './styles';
-
+import { FlexContent, FlexItem, Form, IconContent, Input, Label, Text, TextTitle } from './styles';
 
 function Card({adresses}) {
   const { openModal } = useModalContext();
   const editModal = () => openModal({ message: <MessageEdit/> });
-  console.log("adressesCard", adresses)
-
-
-
   const MessageEdit =()=>{
   const [cep, setCep] = useState(adresses?.cep)
   const [street, setStreet]= useState(adresses?.street)
@@ -25,6 +19,9 @@ function Card({adresses}) {
   const [state, setState]= useState(adresses?.state)
   const history = useHistory()
 
+  console.log("cep" + cep, "street" + street, "number" + number, "district" + district, "complement" + complement,"city"+ city, "state"+ state)
+
+
   const UpdateAdresses = () => {
     const body = {
       id: adresses?.id,
@@ -32,9 +29,9 @@ function Card({adresses}) {
       street: street,
       district: district,
       city: city,
-      complement: complement,
-      state: state,
       number: number,
+      state: state,
+      complement: complement,
     }
     axios
     .put('http://localhost:3003/adresses/updateadresses', body)
@@ -69,83 +66,78 @@ function Card({adresses}) {
 
 
     return <>
- 
-      <div>
-        <TextField
-          required
-          id="standard-required"
-          label="CEP"
-          defaultValue={adresses?.cep}
-          placeholder={adresses?.cep}
+ <Box>
+      <Form>
+        <Label>
+        Cep:
+        <Input
+          type="text" 
+          value={cep}
+          placeholder={cep}
           onChange={(e)=>setCep(e.target.value)}
-          variant="standard"
-          style={{marginTop:"7px"}}
-        />
+      />
+        </Label>
 
-        <TextField
-          required
-          id="standard-required"
-          label="Rua"
-          defaultValue={adresses?.street}
-          placeholder={adresses?.street}
+        <Label>
+        Rua:
+        <Input
+          type="text" 
+          value={street}
+          placeholder={street}
           onChange={(e)=>setStreet(e.target.value)}
-          variant="standard"
-          style={{marginBottom:"7px"}}
-          />
-          <TextField
-          required
-          id="standard-required"
-          label="Número"
-          defaultValue={adresses?.number}
-          placeholder={adresses?.number}
+        />
+        </Label>
+
+        <Label>
+        Número:
+        <Input
+        type="text" 
+          value={number}
+          placeholder={number}
           onChange={(e)=>setNumber(e.target.value)}
-          variant="standard"
-          style={{marginBottom:"7px"}}
         />
-
-        <TextField
-          id="standard-required"
-          label="Complemento"
-          defaultValue={adresses?.complement}
-          placeholder={adresses?.complement}
+        </Label>
+        
+        <Label>
+        Complemento:
+        <Input
+        type="text" 
+          value={complement}
+          placeholder={complement}
           onChange={(e)=>setComplement(e.target.value)}
-          variant="standard"
-          style={{marginBottom:"7px"}}
         />
-            <TextField
-          required
-          id="standard-required"
-          label="Bairro"
-          defaultValue={adresses?.district}
-          placeholder={adresses?.district}
+        </Label> 
+
+        <Label>
+        Bairro:
+        <Input
+          type="text" 
+          value={district}
+          placeholder={district}
           onChange={(e)=>setDistrict(e.target.value)}
-          variant="standard"
-          style={{marginBottom:"7px"}}
-          />
-            <TextField
-          required
-          id="standard-required"
-          label="Cidade"
-          defaultValue={adresses?.city}
-          placeholder={adresses?.city}
-          onChange={(e)=>setCity(e.target.value)}
-          variant="standard"
-          style={{marginBottom:"7px"}}
-          />
-
-          <TextField
-          required
-          id="standard-required"
-          label="Estado"
-          defaultValue={adresses?.state}
-          placeholder={adresses?.state}
-          onChange={(e)=>setState(e.target.value)}
-          variant="standard"
-          style={{marginBottom:"7px"}}
         />
-      </div>
+        </Label> 
+        
+        <Label>
+        Cidade:
+        <Input
+          type="text" 
+          value={city}
+          placeholder={city}
+          onChange={(e)=>setCity(e.target.value)}
+        />
+        </Label> 
 
-      <ButtonGroup>
+        <Label>
+        Estado:
+        <Input
+        type="text" 
+          value={state}
+          placeholder={state}
+          onChange={(e)=>setState(e.target.value)}
+        />
+        </Label> 
+
       <Button 
       variant="contained"
       color="primary" 
@@ -159,10 +151,11 @@ function Card({adresses}) {
     color="primary" 
     size="large" 
     onClick={UpdateAdresses}
-    style={{marginTop:"30px"}}>
+    style={{marginTop:"10px"}}>
         Salvar 
     </Button> 
-      </ButtonGroup>
+    </Form>
+    </Box>
     </>
   }
 

@@ -14,6 +14,11 @@ export const getToken = () => {
     return token;
 };
 
+export const getUserId =()=>{
+    const userId = localStorage.getItem('userId');
+    return userId;
+}
+
 export const AuthProvider = ({children}) => {
     const [token,
         setToken] = useState(getToken());

@@ -10,6 +10,7 @@ display:flex;
 flex-direction:row;
 background: var(--grey);
 padding:15px;
+height: 100%;
 ${mobile({flexDirection: "column"})}
 `
 
@@ -17,7 +18,7 @@ export const IconContent = styled.button`
 border:none;
 boder-box:0;
 color: #FFFFFF;
-background: #e61919;
+background: var(--red);
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -36,7 +37,7 @@ max-width: 80vw;
 text-decoration:none;
 @media(max-width: 900px) {
   width: 320px;
-  height: 90px;
+  height: 100%;
   margin-right:0px;
   margin-bottom:35px;
   justify-content:center;
@@ -57,3 +58,29 @@ export const Text = styled.p`
 font-size: 14px;
 margin-top:5px;
 `
+export const Title= styled.h2`
+   margin: 30px;
+`
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top:20px;
+`;
+
+export const Label = styled.label`
+  color: var(--black);
+  font-size: 14px;
+  font-style: normal;
+`;
+
+export const Input = styled.input`
+background-color: white;
+border: none;
+box-shadow: 0px 2px 0px var(--red);
+padding: 12px;
+width: 100%;
+`;
