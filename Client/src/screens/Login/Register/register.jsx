@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {
     Button,
+    Link,
     makeStyles,
     Step,
     StepLabel,
@@ -26,7 +27,7 @@ function Register() {
         setCpf] = useState('')
     const [data,
         setData] = useState('')
-    const navigate = useHistory()
+    const history = useHistory()
 
     const useStyles = makeStyles((theme) => ({
         button: {
@@ -71,9 +72,6 @@ function Register() {
             .post('http://localhost:3003/user/signup', body)
             .then(res => {
                 alert("Sua conta foi criada com sucesso.");
-                setTimeout(() => {
-                    navigate("/login")
-                  }, 2000)
             })
             .catch(err => alert("Erro ao fazer ao cadastrar. Verifique se todos os dados foram respondidos."))
     }
@@ -200,6 +198,11 @@ function Register() {
                         CreateProfile
                     } > Cadastrar 
                     </Button>
+             <h4> 
+              <span className="signup" onClick={history.push('/login')}>
+              Faça o login agora 
+              </span> 
+              </h4> 
               </>
       ) : (
         <>
