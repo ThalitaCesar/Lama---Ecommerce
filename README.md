@@ -1,4 +1,4 @@
-# Lama-Ecommerce
+# Lama (e-commerce)
 
 This is a project for the Labenu portfolio.
 
