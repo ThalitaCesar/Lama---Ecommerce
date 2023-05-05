@@ -50,5 +50,5 @@ export const Strong = styled.span`
   font-weight: 500;
   margin:5px;
   font-weight: bold;
-  color: #e61919;
+  color: var(--red);
 `;

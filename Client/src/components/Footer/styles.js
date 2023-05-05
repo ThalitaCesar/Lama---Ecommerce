@@ -18,7 +18,7 @@ export const Left = styled.div`
 `;
 
 export const Logo = styled.h1`
-color:#e61919;
+color:var(--red);
 `;
 
 export const Desc = styled.p`

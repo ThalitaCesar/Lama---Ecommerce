@@ -1,211 +1,119 @@
-import { Box, Button, ButtonGroup, Divider, TextField } from '@material-ui/core';
+import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../../../context/GlobalState';
+import ChangePasswordModal from './ModalPassword';
 import { useModalContext } from '../../../context/ModalContext';
-import { Title } from '../Requests/styles';
+import { Form, Input, Label, SubmitButton, Title } from './styles';
+import { Box, Button, Divider } from '@material-ui/core';
+import { format } from 'date-fns';
+
 
 function PersonalData() {
-  const {userId} = useContext(GlobalContext)
+  const { userId } = useContext(GlobalContext);
   const { openModal } = useModalContext();
-  const testModal = () => openModal({ message: <Message/> });
-  const [dataUser, setDataUser] = useState('')
+  const [dataUser, setDataUser] = useState(null);
+  const [name, setName] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [email, setEmail] = useState('');
 
   const getDataUser = () => {
     axios
-    .get(`http://localhost:3003/user/profile/${userId}`)
-    .then(response => {
-      console.log(response);
-      setDataUser(response?.data?.result);
-    })
-    .catch((err)=>{
-      console.log(err);
-      });
-  }
-  useEffect(()=>{
-    getDataUser()
-  },[])
-
-
-  const results = dataUser
-  console.log("results", results)
-  const [name, setName] = useState(results?.name)
-  const [cpf, setCpf]= useState(results?.cpf)
-  const [birthDate, setBirthDate]= useState(results?.data);
-  const [email, setEmail]= useState(results?.email);
-
-  const UpdateUser = () => {
-    const body = {
-      id: userId,
-      name: name, 
-      cpf: cpf,
-      data: birthDate,
-      email: email    
-    }
-    axios
-    .put('http://localhost:3003/user/updateuser', body)
-    .then(response => {
-      console.log(response);
-       alert("Atualizações salvas com sucesso!")
-    })
-    .catch((err)=>{
-      console.log(err);
-      alert("Aconteceu algum erro, veja se todos os campos foram preenchidos.")
-    });
-  }
-
-  console.log(
-    "id:", userId,
-    "name:", name, 
-    "cpf:", cpf,
-    "data:", birthDate,
-    "email:", email 
-  )
-
-  const Message =()=>{
-  const [newPassword, setNewPassword]= useState('');
-  const [passwordConfirm, setPasswordConfirm]= useState('');
-  const {userId} = useContext(GlobalContext)
-
-  const UpdatePassword = () => {
-    const body = {
-      id: userId,
-      password: newPassword,
-    }
-    if(newPassword === passwordConfirm){
-      axios
-      .put(`http://localhost:3003/user/updatepassword/${userId}`, body)
+      .get(`http://localhost:3003/user/profile/${userId}`)
       .then(response => {
         console.log(response);
-         alert("Atualizações salvas com sucesso!")
+        setDataUser(response?.data?.result);
       })
-      .catch((err)=>{
+      .catch(err => {
         console.log(err);
-        alert("Não foi possível alterar sua senha, tente novamente.")
       });
+  };
+
+  useEffect(() => {
+    getDataUser();
+  }, []);
+
+  useEffect(() => {
+    if (dataUser) {
+      setName(dataUser?.name);
+      setCpf(dataUser?.cpf);
+      setBirthDate(dataUser?.data);
+      setEmail(dataUser?.email);
     }
-   else{
-    alert("As senhas não coincidem.")
-    }
+  }, [dataUser]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const body = {
+      id: userId,
+      name: name,
+      cpf: cpf,
+      data: birthDate,
+      email: email
+    };
+    axios
+      .put('http://localhost:3003/user/updateuser', body)
+      .then(response => {
+        console.log(response);
+        alert("Atualizações salvas com sucesso!")
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Aconteceu algum erro, veja se todos os campos foram preenchidos.")
+      });
+  };
+
+  const handlePasswordChange = () => {
+    openModal({ message: <ChangePasswordModal/> });
+  };
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
-
-    return <>
-    <Box
-      component="form"
-      noValidate
-      autoComplete="off"
-    >
-
-      <div>
-
-        <TextField
-          required
-          id="standard-required"
-          label="Nova senha"
-          type="password"
-          defaultValue=""
-          variant="standard"
-          onChange={(e)=>setNewPassword(e.target.value)}
-          style={{marginBottom:"7px"}}
-        />
-
-        <TextField
-          required
-          id="standard-required"
-          label="Confirmar nova senha"
-          type="password"
-          defaultValue=""
-          variant="standard"
-          onChange={(e)=>setPasswordConfirm(e.target.value)}
-          style={{marginBottom:"7px"}}
-        />
-
-        
-      </div>
-    </Box>
-     
-    <Button 
-     variant="contained"
-     color="primary" 
-     size="large" 
-     style={{marginTop:"30px"}}
-     onClick={UpdatePassword}
-     >
-     Salvar Alterações
-    </Button> 
-    </>
-  }
-
-    return (
-<>
-<Title>Dados Pessoais</Title>
-<Divider/>
-      <div>
-        <TextField
-          required
-          id="outlined-required"
-          label="Nome"
-          variant="standard"
-          defaultValue={results?.name} 
-          placeholder={results?.name}
-          onChange={(e)=>setName(e.target.value)}
-          style={{margin:"7px"}}
-        />
-        <TextField
-          required
-          id="outlined-required"
-          label="CPF"
-          defaultValue={results?.cpf}
-          placeholder={results?.cpf}
-          onChange={(e)=>setCpf(e.target.value)}
-          variant="standard"
-          style={{margin:"7px"}}
-        />
-       <TextField
-          required
-          id="outlined-required"
-          label="Data de nascimento"
-          type="date"
-          variant="standard" 
-          defaultValue={results?.data}
-          placeholder={results?.data}
-          onChange={(e)=>setBirthDate(e.target.value)}
-          style={{margin:"7px"}}
-        />
-        <TextField
-          required
-          id="outlined-required"
-          label="Email"
-          defaultValue={results?.email}
-          placeholder={results?.email}
-          onChange={(e)=>setEmail(e.target.value)}
-          variant="standard"
-          style={{margin:"7px"}}
-        />
-
-        
-      </div>
-      <ButtonGroup>
-      <Button 
-      variant="contained" 
-      color="primary" 
-      size="large" 
-      style={{margin:"30px", marginRight:"0"}}
-      onClick={testModal}>
-        Mudar Senha
-    </Button> 
-    <Button 
-    variant="contained" 
-    color="primary" 
-    size="large" 
-    onClick={UpdateUser}
-    style={{margin:"30px"}}>
-        Salvar Alterações
-    </Button> 
-      </ButtonGroup>
-     
-
-</>
-  )} 
   
+
+  return (
+    <>
+    {dataUser && (
+       <>
+    <Title>Dados Pessoais</Title>
+    <Divider/>
+    <Box style={{margin:"30px"}}>
+    <Form onSubmit={handleSubmit}>
+      <Label>
+        Nome:
+        <Input type="text" value={dataUser ? name : ''} onChange={(e) => setName(e.target.value)} />
+      </Label>
+      <Label>
+        CPF:
+        <Input type="text" value={dataUser ? cpf : ''} onChange={(e) => setCpf(e.target.value)} />
+      </Label>
+      <Label>
+        Data de nascimento:
+        <Input type="date" value={dataUser ? formatDate(birthDate) : ''} onChange={(e) => setBirthDate(e.target.value)} />
+      </Label>
+      <Label>
+        Email:
+        <Input type="email" value={email}  disabled/>
+      </Label>   
+      <Button variant="contained" color="primary" size="large"
+     type="button" onClick={handlePasswordChange} style={{marginTop:"20px"}}>
+        Alterar senha
+      </Button> 
+      <Button variant="contained" color="primary" size="large"
+      type="submit">
+        Salvar alterações
+      </Button>   
+    </Form>
+    </Box>
+    </>
+    )}
+    </>
+  );
+};
+
 export default PersonalData;

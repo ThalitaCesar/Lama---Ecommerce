@@ -138,7 +138,7 @@ function CardRequest() {
                 <p
                     style={{
                     marginTop: "30px",
-                    color: " #e61919"
+                    color: " var(--red)"
                 }}>O carrinho está vazio.</p>
             )
     } 

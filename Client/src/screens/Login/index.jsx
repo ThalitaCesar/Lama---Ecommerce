@@ -45,7 +45,7 @@ function Login() {
     axios
       .get(`http://localhost:3003/user/userid/${email}`)
       .then((response) => {
-        setUserId(response.data.result.id);
+        localStorage.setItem('userId', response.data.result.id);
         console.log('response', response.data.result.id);
       })
       .catch((err) => {
@@ -59,39 +59,44 @@ function Login() {
       <Container>
         <Lama>
           <img src={logo} alt="logo" />
-          <h1>.LAMA</h1>
+          <h1>LAMA.</h1>
           <h3>Sua melhor plataforma de compras online.</h3>
         </Lama>
         <div className="signin signin_wrapper" style={{ margin: '100px' }}>
           <form>
             <h2>Entre</h2>
             <TextField
-              name="email"
-              type="text"
-              placeholder="Email"
-              className="textField"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Person
-                      style={{
-                        color: 'var(--background)',
-                        marginRight: '16px',
-                      }}
-                    />
-                  </InputAdornment>
-                ),
-              }}
-              value={email}
-              onChange={onChangeEmail}
-              required
-            />
+  name="email"
+  type="text"
+  placeholder="Email"
+  className="textField"
+  style={{
+    width: "360px"
+  }}
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <Person
+          style={{
+            color: 'var(--background)',
+            marginRight: '16px'
+          }}
+        />
+      </InputAdornment>
+    ),
+    className: "autocomplete-input"
+  }}
+  value={email}
+  onChange={onChangeEmail}
+  required
+/>
 
             <TextField
               name="password"
               type="password"
               placeholder="Password"
               className="textField"
+              style={{width:"360px"}}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -108,7 +113,7 @@ function Login() {
               onChange={onChangePassword}
               required
             />
-
+            <div>
             <Button
               variant="contained"
               color="primary"
@@ -116,9 +121,11 @@ function Login() {
                 handleLogin();
                 getUserId();
               }}
+              style={{ width: "360px", marginTop:"16px", marginBottom:"16px" }}
             >
               Login
             </Button>
+            </div>
             <h4>
               Ainda não tem cadastro?
               <span className="signup">
@@ -127,6 +134,7 @@ function Login() {
                   style={{
                     marginLeft: '10px',
                     textDecoration: 'none',
+                    color: "#ffffff"
                   }}
                 >
                   Registre-se agora

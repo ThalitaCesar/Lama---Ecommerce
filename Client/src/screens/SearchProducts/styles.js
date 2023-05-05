@@ -11,6 +11,7 @@ display: flex;
 align-items: center;
 padding-top:10px;
 overflow:hidden;
+overflow-x: hidden;
 justify-content: space-between;
 ${mobile({ height: "50px", padding: "10px 0px", marginTop:'16px' })}
 `
@@ -33,7 +34,7 @@ justify-content:center;
 cursor:pointer;
 border:none;
 background: transparent;
-border: 1px solid #FF4C00;
+border: 1px solid var(--red);
 border-radius: 8px;
 font-weight: 700;
 font-size: 12px;
@@ -62,20 +63,42 @@ ${mobile({ margin: "20px"})}
 export const Icons = styled.div`
 display:flex;
 ${mobile({ display: "none"})}
-
 `
 
 export const Pagination = styled.div`
-display:flex;
-justify-content: center;
-align-item:center;
-overflow-x:hidden;
-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  
+  button {
     font-size: 30px;
     margin: 16px;
     cursor: pointer;
     background: none;
+    border: none;
+    color: var(--red);
+    transition: color 0.2s ease-in-out;
+  }
+
+  button:hover {
+    color: var(--background);
+  }
+
+  button:first-child {
+    margin-left: 0;
+  }
+
+  button:last-child {
+    margin-right: 0;
+  }
+
+  button.active {
+    color: var(--back);
+    font-weight: bold;
+  }
 }
+
 `
 
 export const SearchBox = styled.div`
@@ -119,4 +142,12 @@ export const SearchBox = styled.div`
     ${mobile({ width: "80px" })}
 
   }
+`
+
+export const SearchError = styled.div`
+display:flex;
+align-items:center;
+justify-content:center;
+margin-top:60px;
+color: var(--red)
 `

@@ -160,8 +160,8 @@ function Help() {
         </AccordionDetails>
       </Accordion > 
       
-      <ContactContainer>
-        <FlexItem>
+      <ContactContainer >
+        <FlexItem style={{width:"100%"}}>
             <IconContent>
                 <ContactPhone
                     size={60}
@@ -172,11 +172,11 @@ function Help() {
             <FlexContent>
                 <Text>
                     <Typography>
-                        Entre em contato pelo email
-                        <a href="mailto:faleconosco@lama.com.br">faleconosco@lama.com.br</a>
+                        Entre em contato pelo email 
+                        <p style={{color:"var(--background"}} href="mailto:faleconosco@lama.com.br"> faleconosco@lama.com.br</p>
                         <br></br>
                         Ou pelo telefone:
-                        <a href="tel:08002324560">0800 232 4560</a>
+                        <p style={{color:"var(--background"}} href="tel:08002324560"> 0800 232 4560</p>
                     </Typography>
                 </Text>
             </FlexContent>

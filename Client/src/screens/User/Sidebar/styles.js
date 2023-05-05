@@ -35,7 +35,7 @@ export const NavLink = styled(Link)`
       text-decoration: none;
     }
     :focus {
-      color:  #e61919;
+      color:  var(--red);
       font-weight: bold;
     }
     .icon{
@@ -61,5 +61,5 @@ width: 70vw;
 margin-top:40px;
 margin-bottom:50px;
 background-color: #fff;
-${mobile({ width:"100%"})}
+${mobile({ display:"none"})}
 `

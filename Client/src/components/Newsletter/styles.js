@@ -3,7 +3,7 @@ import { mobile } from "../../responsive";
 
 export const Container = styled.div`
 height: 60vh;
-background-color: #e61919;
+background-color: var(--red);
 display: flex;
 align-items: center;
 justify-content: center;

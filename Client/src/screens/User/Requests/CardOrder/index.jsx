@@ -16,7 +16,7 @@ function CardOrder() {
   <Quantity>
     Quantidade: 2
   </Quantity>
-  <Value>Valor Total: <span style={{color:" #e61919", fontSize:"20px"}}> R$ 299,90</span></Value>
+  <Value>Valor Total: <span style={{color:" var(--red)", fontSize:"20px"}}> R$ 299,90</span></Value>
   </div>
 </Card>
 </>

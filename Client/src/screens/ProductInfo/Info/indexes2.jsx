@@ -4,16 +4,18 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../../../context/GlobalState';
 import { A, ButtonTam, Container, Description, Frete, NameProduct, Offer, OldPrice, Percentual, Price, SixX, Tam, TamTitle } from './styles';
+import { getUserId } from '../../../services/isAutenticated';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Info() {
 
-    const {productSelect} = useContext(GlobalContext)
+    const { id} = useParams();
     const [product, setProduct] = useState([])
     const [sizes, setSizes] = useState([])
     const [sizeSelected, setSizeSelected] = useState('')
   
     const getProductById =()=>{
-      axios.get(`http://localhost:3003/product/product/${productSelect}`)
+      axios.get(`http://localhost:3003/product/product/${id}`)
       .then(function (response) {
         setProduct(response.data.Result)
         console.log(response.data);
@@ -24,7 +26,7 @@ function Info() {
     }
 
     const getSizes =()=>{
-        axios.get(`http://localhost:3003/product/getAllSizesByProduct/${productSelect}`)
+        axios.get(`http://localhost:3003/product/getAllSizesByProduct/${id}`)
         .then(function (response) {
           setSizes(response.data.Result)
           console.log(response.data);
@@ -40,15 +42,13 @@ function Info() {
         },[])
   
 
-  const {userId} = useContext(GlobalContext)
-
   const CreateOrder = (product) => {
     const body = {
       name: product.name,
       folder:product.folder,
       size: sizeSelected,
       price: product.price,
-      user_id: userId
+      user_id: getUserId()
     }
       axios
       .post(`http://localhost:3003/order/postorder`, body)
@@ -64,8 +64,7 @@ function Info() {
      " name:" , product.name,
       "folder:", product.folder,
       "size:", sizeSelected,
-      "price:", product.price,
-      "user_id:", userId
+      "price:", product.price
     )
     return (
       

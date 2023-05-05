@@ -12,7 +12,7 @@ background: var(--grey);
 align-items:center;
 ${mobile({ height: "100%" })};
 a{
-    color: #e61919;
+    color: var(--red);
     cursor:pointer;
 }
 `

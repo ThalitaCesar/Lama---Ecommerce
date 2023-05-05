@@ -39,11 +39,59 @@ export class ProductData extends DataBase {
         for (let product of result) {
           products.push(product);
         }
+    
+        const totalCount = await this.getTotalCountAllProducts(query);
+    
+        return { products, totalCount };
+      } catch (error: any) {
+        return error.sqlMessage;
+      }
+    }
+    
+    async getTotalCountAllProducts(query?: string) {
+      try {
+        const queryBuilder = this.getConnection().count("* as TotalCount").from("Lama_Product");
+    
+        if (query) {
+          queryBuilder.where("name", "LIKE", `%${query}%`);
+        }
+    
+        const result = await queryBuilder;
+        return result[0].TotalCount;
+      } catch (error: any) {
+        return error.sqlMessage;
+      }
+    }
+
+    async getProductByCategory(page: number, perPage: number, category: string) {
+      try {
+        const products: AllProducts[] = [];
+        const queryBuilder = this.getConnection()
+          .select("*")
+          .from("Lama_Product")
+          .where("category", "=", category)
+          .limit(perPage)
+          .offset((page - 1) * perPage);
+        const result = await queryBuilder;
+        for (let product of result) {
+          products.push(product);
+        }
         return products;
       } catch (error: any) {
         return error.sqlMessage;
       }
     }
+    
+    async getTotalCountByCategory(category: string) {
+      try {
+        const queryBuilder = this.getConnection().count("* as TotalCount").from("Lama_Product").where("category", "=", category);
+        const result = await queryBuilder;
+        return result[0].TotalCount;
+      } catch (error: any) {
+        return error.sqlMessage;
+      }
+    }
+    
     
 
   async getAllProductById(id: string) {

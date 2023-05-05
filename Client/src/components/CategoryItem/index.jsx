@@ -1,25 +1,24 @@
-import React, {useContext} from "react";
-import {Link} from "react-router-dom";
-import {GlobalContext} from "../../context/GlobalState";
-import {Button, Container, Image, Info, Title} from "./styles";
+import React from "react";
+import { Button, Container, Image, Info, Title } from "./styles";
+import { useHistory } from "react-router-dom";
 
-const CategoryItem = ({item}) => {
-    const {categorySelect, setCategorySelect} = useContext(GlobalContext)
+const CategoryItem = ({ item }) => {
+  const history = useHistory();
 
-    console.log("categoria", categorySelect)
+  const handleCategory = () => {
+        history.push(`/category/${item.cat}`);
+  };
 
-    return (
-        <Container bg={item.bg} onMouseDown={() => setCategorySelect(item.cat)}>
-            <Link to={'/category'}>
-                <Info>
-                    <Image src={item.img}/>
-                    <Button>
-                        <Title>{item.title}</Title>
-                    </Button>
-                </Info>
-            </Link>
-        </Container>
-    );
+  return (
+    <Container bg={item.bg} onClick={handleCategory}>
+      <Info>
+        <Image src={item.img} />
+        <Button>
+          <Title>{item.title}</Title>
+        </Button>
+      </Info>
+    </Container>
+  );
 };
 
 export default CategoryItem;

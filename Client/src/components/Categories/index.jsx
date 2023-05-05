@@ -1,6 +1,5 @@
 import {Divider, Grid} from "@material-ui/core";
-import React, {useContext} from "react";
-import {GlobalContext} from "../../context/GlobalState";
+import React from "react";
 import {categories} from "../../data";
 import CategoryItem from "../CategoryItem";
 import {CategoriesDiv, CategoriesMobile, Container, Flex, Title} from "./styles";

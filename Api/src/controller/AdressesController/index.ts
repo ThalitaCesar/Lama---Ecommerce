@@ -7,6 +7,7 @@ import { GenerateId } from "../../services/GenerateId";
 export class AdressesController {
 
 // Criar endereço do usuário
+
   async postAdresses(req: Request, res: Response) {
     let errorstatus = 500;
     try {
@@ -16,9 +17,9 @@ export class AdressesController {
         street,
         district,
         city,
-        complement,
-        state,
         number,
+        state,
+        complement,
         user_id} = req.body;
       if ( !cep|| !street || !district || !city || !number  || !user_id  || !number) {
         errorstatus = 422;
@@ -68,9 +69,9 @@ export class AdressesController {
         street,
         district,
         city,
-        complement,
         number,
         state,
+        complement,
        } = req.body;
       if (!id) {
         errorstatus = 422;
@@ -82,11 +83,10 @@ export class AdressesController {
         street,
         district,
         city,
-        complement,
         number,
         state,
+        complement,
       );
-
       res.status(201).send(result);
     } catch (error:any) {
       res.status(errorstatus).send(error.message || error.sqlMessage);

@@ -17,17 +17,17 @@ import { mobile } from "../../../responsive";
  `
 export const Container = styled.div`
 display:flex;
-background: #e61919;
+background: var(--red);
 height: 100vh;
 justify-content:center;
 align-items:center;
 ${mobile({ flexDirection: "column", width:"100vw", alignItems:"center"})}
   .signin {
     width: 700px;
-    min-height: 450px;
+    min-height: 550px;
     max-height: 950px;
     border-radius: 3px;
-    box-shadow: 3px 3px 5px #001324dc;
+
     ${mobile({ width: "80vw"})}
   }
   
@@ -72,13 +72,12 @@ ${mobile({ flexDirection: "column", width:"100vw", alignItems:"center"})}
   }
   
   button {
-    background: var(--background);
+    background: var(--red);
     width: 100%;
     line-height: 35px;
-    margin: 20px 9px;
+    margin: 14px 9px;
     color: white;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 14px;
     padding: 5px;
     border: none;
     border-radius: 5px;

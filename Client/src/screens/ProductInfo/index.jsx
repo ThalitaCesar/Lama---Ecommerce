@@ -13,15 +13,17 @@ import Info from './Info';
 import Slider from './Slider';
 import SliderMobile from './SliderMobile';
 import { BackButton, Container, Left, Right } from './styles';
+import { useParams } from 'react-router-dom';
+
 
 function ProductInfo() {
-  
-  const {productSelect} = useContext(GlobalContext)
+
   const [photos, setPhotos] = useState([])
-  console.log("productSelect", productSelect)
+  const { id} = useParams();
+  console.log("id: ", id)
 
   const getPhotos =()=>{
-    axios.get(`http://localhost:3003/product/getAllImagesByProduct/${productSelect}`)
+    axios.get(`http://localhost:3003/product/getAllImagesByProduct/${id}`)
     .then(function (response) {
       setPhotos(response.data.Result)
       console.log(response.data);

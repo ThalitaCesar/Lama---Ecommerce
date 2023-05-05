@@ -51,10 +51,10 @@ const Routes = () => {
         />
         <Route path="/register" component={Register} />
         <PrivateRoute isAuthenticated={isAuthenticated} path="/" exact component={Home} />
-        <PrivateRoute isAuthenticated={isAuthenticated} path="/category" component={Category} />
+        <PrivateRoute isAuthenticated={isAuthenticated} path="/category/:cat" component={Category} />
         <PrivateRoute isAuthenticated={isAuthenticated} path="/user" component={User} />
         <PrivateRoute isAuthenticated={isAuthenticated} path="/admin" component={Admin} />
-        <PrivateRoute isAuthenticated={isAuthenticated} path="/product" component={ProductInfo} />
+        <PrivateRoute isAuthenticated={isAuthenticated} path="/product/:id" component={ProductInfo} />
         <PrivateRoute isAuthenticated={isAuthenticated} path="/cart" component={Cart} />
         <PrivateRoute isAuthenticated={isAuthenticated} path="/help" component={Help} />
         <PrivateRoute isAuthenticated={isAuthenticated} path="/user/adresses" component={Adresses} />

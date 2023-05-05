@@ -1,5 +1,5 @@
 import {createContext, useContext, useState} from "react"
-import {getToken} from "../services/isAutenticated";
+import {getToken, getUserId} from "../services/isAutenticated";
 
 export const GlobalContext = createContext(null);
 
@@ -16,8 +16,7 @@ export const GlobalState = ({children}) => {
     const [tokenLogin,
         setTokenLogin] = useState(getToken());
     const [userId,
-        setUserId] = useState();
-
+        setUserId] = useState(getUserId());
     return (<GlobalContext.Provider
         value={{
         productSelect,

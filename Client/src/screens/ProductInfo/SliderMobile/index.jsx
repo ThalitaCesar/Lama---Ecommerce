@@ -7,16 +7,17 @@ import "swiper/css/navigation";
 import {Zoom, Navigation} from "swiper";
 import axios from "axios";
 import {GlobalContext} from "../../../context/GlobalState";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function SliderMobile() {
-    const {productSelect} = useContext(GlobalContext)
+    
+    const { id} = useParams();
     const [photos,
         setPhotos] = useState([])
-    console.log("productSelect", productSelect)
 
     const getPhotos = () => {
         axios
-            .get(`http://localhost:3003/product/getAllImagesByProduct/${productSelect}`)
+            .get(`http://localhost:3003/product/getAllImagesByProduct/${id}`)
             .then(function (response) {
                 setPhotos(response.data.Result)
                 console.log(response.data);
@@ -36,7 +37,7 @@ export default function SliderMobile() {
 
             <Swiper
                 style={{
-                "--swiper-navigation-color": "#e61919",
+                "--swiper-navigation-color": "var(--red)",
                 "--swiper-pagination-color": "#fff"
             }}
                 navigation={true}
