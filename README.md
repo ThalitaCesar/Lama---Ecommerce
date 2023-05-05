@@ -1,20 +1,26 @@
 # Lama---Ecommerce
 
-Projeto para o portifolio labenu
+This is a project for the Labenu portfolio.
 
-## Informações relevantes
-* O projeto é um ecommerce utilizando no backend o node-typescript com o banco de dados mySql e o jwt para autenticação, a Api foi construída em programação orientada a objetos. Já no frontend foi utilizado o React-javascript com axios e material ui.
-* O propósito do projeto consiste em disponibilizar um ecommerce com o que foi aprendido durante o curso de desenvolvimento full stack da labenu(2021-2022). 
+## Relevant Information
 
-## Páginas:
-* Home Page: Com as categorias, menu e footer;
-* Category: É possível navegar pela categoria selecionada e filtrar produtos.
-* Search: Onde o usuário possa pesquisar o produtos desejado e filtrar. 
-* User: Onde o usuário possa editar seus dados pessoais, senha, seus pedidos, gerenciar os endereços e sair do sistema.
-* Cart: Onde está os produtos selecionados pelo usuário com subtotal e total, ele pode excluir um produto do carrinho. 
-* Help: Atendimento ao Cliente e dúvidas
-* Login: Onde o usuário possa fazer seu login, ao realizar o login ee é direcionado ao site ou caso não tenha se cadastrado se direcionar ao registro.
-* Register: Onde possa de cadastrar. 
+The backend of this project is built using Node.js with TypeScript and a MySQL database, and JWT is used for authentication. The API is built with object-oriented programming. The frontend uses React.js with Axios and Material-UI.
+The purpose of this project is to showcase what was learned during the Labenu Full Stack Development Course (2021-2022).
+
+## Pages:
+
+* Login: Allows users to log in. After logging in, they will be directed to the site. If the user has not registered, they will be directed to the registration page.
+* Register: Allows users to register.
+* Home Page: Displays categories, menu, and footer.
+* Category: Allows users to navigate through selected categories and filter products.
+* Search: Enables users to search for and filter products.
+* User: Allows users to edit their personal information, change passwords, manage orders, addresses, and log out of the system.
+* Cart: Displays selected products, subtotal, and total. Allows users to remove products from the cart.
+* Help: Customer support and FAQs.
+
+## How to use:
+
+Open the Client (frontend) and Api(backend) repositories for more information.
 
 ## Images
 
