@@ -1,13 +1,21 @@
-# Lama (e-commerce)
 
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/83131771/236449955-70df7afa-acff-4457-b984-6b517e59ee1a.png" width="230" />
+  <h1>Lama
+    <h3>Your best online shopping platform.</h3>
+  </h2> 
+</div>
+
+<div align="center">
 This is a project for the Labenu portfolio.
+</div>
 
-## Relevant Information
+## :pushpin: Relevant Information
 
 The backend of this project is built using Node.js with TypeScript and a MySQL database, and JWT is used for authentication. The API is built with object-oriented programming. The frontend uses React.js with Axios and Material-UI.
 The purpose of this project is to showcase what was learned during the Labenu Full Stack Development Course (2021-2022).
 
-## Pages:
+## :file_folder: Pages:
 
 * Login: Allows users to log in. After logging in, they will be directed to the site. If the user has not registered, they will be directed to the registration page.
 * Register: Allows users to register.
@@ -18,11 +26,11 @@ The purpose of this project is to showcase what was learned during the Labenu Fu
 * Cart: Displays selected products, subtotal, and total. Allows users to remove products from the cart.
 * Help: Customer support and FAQs.
 
-## How to use:
+## :loudspeaker: How to use:
 
 Create a clone project folder and open the Client (frontend) and Api(backend) repositories for more information.
 
-## Images
+## :movie_camera: Images
 
 ### Desktop
 
