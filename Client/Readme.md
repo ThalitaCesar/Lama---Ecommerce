@@ -1,30 +1,28 @@
-## Frontend
+# Frontend
 
-# Em desenvolvimento...
 
-## Informações relevantes
+## Relevant information
 
-* O frontend foi realizado em react.js com axios.  
-* Para iniciar o projeto é preciso iniciar a api do backend anteriormente. 
+* The frontend was developed using React.js with Axios.
+* To start the project, it is necessary to start the backend API beforehand.
 
-## Intruções
+## Instructions
 
-Primeiro clone o projeto
+First, clone the project:
 
     git clone https://github.com/ThalitaCesar/Lama---Ecommerce
     
-Entre na pasta do reposiório frontend
-
+Then, enter the frontend repository folder:
 
     cd Client
     
-Instalar todas as dependências 
+Install all dependencies:
 
 
     yarn
 
 
-Após iniciar o backend com "yarn dev" iniciar o frontend com o comando:
+After starting the backend with yarn dev, start the frontend with the following command:
 
 
     yarn dev
