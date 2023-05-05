@@ -37,9 +37,6 @@ function Adresses() {
         getAdressesByUser()
     }, [])
 
-
-    console.log("adressesByUser", adressesByUser)
-
     const MessageCreate = () => {
 
         const [userCep,

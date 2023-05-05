@@ -19,9 +19,6 @@ function Card({adresses}) {
   const [state, setState]= useState(adresses?.state)
   const history = useHistory()
 
-  console.log("cep" + cep, "street" + street, "number" + number, "district" + district, "complement" + complement,"city"+ city, "state"+ state)
-
-
   const UpdateAdresses = () => {
     const body = {
       id: adresses?.id,

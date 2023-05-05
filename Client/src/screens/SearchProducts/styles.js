@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mobile } from "../../responsive";
+import { mobile } from "../../styles/responsive";
 
 export const ContainerSearchBar = styled.div`
 height: 60px;

@@ -20,7 +20,6 @@ function SideBar() {
     const [value, setValue] =  useState([100, 500]);
     const rangeSelector = (event, newValue) => {
       setValue(newValue);
-      console.log(newValue)
     };
   
     return (

@@ -1,7 +1,7 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
 import {
     Button,
-    ButtonGroup,
+    Link,
     makeStyles,
     Step,
     StepLabel,
@@ -13,10 +13,10 @@ import {Container} from './styles';
 import {NavLink} from 'react-router-dom';
 import Navbar from '../Navbar';
 import axios from 'axios'
-import {GlobalContext} from '../../../context/GlobalState';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Register() {
-    const {setToken} = useContext(GlobalContext)
+ 
     const [email,
         setEmail] = useState('')
     const [password,
@@ -27,6 +27,7 @@ function Register() {
         setCpf] = useState('')
     const [data,
         setData] = useState('')
+    const history = useHistory()
 
     const useStyles = makeStyles((theme) => ({
         button: {
@@ -70,7 +71,7 @@ function Register() {
         axios
             .post('http://localhost:3003/user/signup', body)
             .then(res => {
-                alert("Sua conta foi criada com sucesso.")
+                alert("Sua conta foi criada com sucesso.");
             })
             .catch(err => alert("Erro ao fazer ao cadastrar. Verifique se todos os dados foram respondidos."))
     }
@@ -198,11 +199,8 @@ function Register() {
                     } > Cadastrar 
                     </Button>
              <h4> 
-              <span className="signup">
-              <NavLink to="/login " style={{marginLeft:"10px",
-              color: "var(--red)",textDecoration:"none"}}>
+              <span className="signup" onClick={history.push('/login')}>
               Faça o login agora 
-              </NavLink>
               </span> 
               </h4> 
               </>

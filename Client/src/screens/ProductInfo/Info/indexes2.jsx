@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../../../context/GlobalState';
 import { A, ButtonTam, Container, Description, Frete, NameProduct, Offer, OldPrice, Percentual, Price, SixX, Tam, TamTitle } from './styles';
-import { getUserId } from '../../../services/isAutenticated';
+import { getUserId } from '../../../context/isAutenticated';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Info() {

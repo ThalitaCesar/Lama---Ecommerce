@@ -20,7 +20,7 @@ function ProductInfo() {
 
   const [photos, setPhotos] = useState([])
   const { id} = useParams();
-  console.log("id: ", id)
+ 
 
   const getPhotos =()=>{
     axios.get(`http://localhost:3003/product/getAllImagesByProduct/${id}`)
@@ -37,7 +37,6 @@ function ProductInfo() {
         getPhotos()
       },[])
 
-  console.log("images", photos)
   const history = useHistory();
     return (
     <>

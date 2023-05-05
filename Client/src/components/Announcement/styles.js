@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components'
-import { mobile } from '../../responsive';
+import { mobile } from '../../styles/responsive';
 
 export const blinkTextCursor = keyframes`
 0%{

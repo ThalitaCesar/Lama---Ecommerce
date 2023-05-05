@@ -5,7 +5,7 @@ import { Chip } from "@material-ui/core";
 import Adresses from "../Adresses";
 import PersonalData from "../PersonalData";
 import Request from "../Requests";
-import { useAuth } from "../../../services/isAutenticated";
+import { useAuth } from "../../../context/isAutenticated";
 
 const SidebarMobile = () => {
   const [selected, setSelected] = useState(<Request />);

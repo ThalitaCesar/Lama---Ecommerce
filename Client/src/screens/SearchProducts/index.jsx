@@ -19,9 +19,7 @@ function SearchProducts() {
   const [totalPages, setTotalPages] = useState(1);
   const [perPage, setPerPage] = useState(8);
   const [isMounted, setIsMounted] = useState(true);
-  const history = useHistory();
   const didMountRef = useRef(false);
-  console.log("totalPagesdesearch", totalPages)
 
   const getProducts = (page, perPage) => {
     axios
