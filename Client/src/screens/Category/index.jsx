@@ -1,4 +1,3 @@
-import { Grid, Select, MenuItem } from '@material-ui/core';
 import React, {useContext, useEffect, useState} from 'react'
 import Announcement from '../../components/Announcement';
 import Footer from '../../components/Footer';
@@ -11,6 +10,7 @@ import {
 } from './styles';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Navbar from '../../components/Navbar';
+import { Grid } from '@material-ui/core';
 
 function Category() {
   const { cat} = useParams();
@@ -19,7 +19,6 @@ function Category() {
   const [totalPages, setTotalPages] = useState(1);
   const [perPage, setPerPage] = useState(8);
   const { orderQuantity } = useContext(GlobalContext);
-  console.log("totalPages", totalPages)
 
   const getProducts = (page, perPage) => {
     let apiUrl = `http://localhost:3003/product/getproducts/${cat}?page=${page}&perPage=${perPage}`;
@@ -56,7 +55,6 @@ function Category() {
       <Announcement/> 
       <Navbar/>
       <Flex> 
-   
         <Grid container spacing={2}>
           {productsList.map((product) => (
             <Grid key={product.id} item xs={12} sm={6} md={6} lg={3} xl={3}>

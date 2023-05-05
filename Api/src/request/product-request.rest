@@ -19,13 +19,16 @@
 {"sizes": "TAMANHO ÚNICO"}
 
 
-### //busca produtos GET http://localhost:3003/product/products  
+### //busca produtos GET http://localhost:3003/product/products 
+
+### //busca produto por categoria GET http://localhost:3003/product//getproducts/:category
 
 ### //busca produtos por id GET http://localhost:3003/product/product/:id
 
 ### //busca imagens por id do produto  GET http://localhost:3003/product/getAllImagesByProduct/:id
 
 ### //busca sizes por id do produto GET http://localhost:3003/product/getAllSizesByProduct/:id
+
 
 ### // editar produto
 

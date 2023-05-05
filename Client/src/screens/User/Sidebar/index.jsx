@@ -6,7 +6,7 @@ import { CardGiftcard, ExitToApp, Face, Payment, PersonPinCircle } from "@materi
 import Adresses from "../Adresses";
 import PersonalData from "../PersonalData";
 import Request from "../Requests";
-import { AuthContext } from "../../../services/isAutenticated";
+import { AuthContext } from "../../../context/isAutenticated";
 
 const SideBar = () => {
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mobile } from "../../../responsive";
+import { mobile } from "../../../styles/responsive";
 
  export const Lama = styled.div`
     width: 500px;

@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
-import Admin from './screens/Admin';
 import Cart from './screens/Car';
 import Category from './screens/Category';
 import Help from './screens/Help';
@@ -13,7 +12,7 @@ import Adresses from './screens/User/Adresses';
 import PersonalData from './screens/User/PersonalData';
 import Request from './screens/User/Requests';
 import SearchProducts from './screens/SearchProducts';
-import {useAuth} from './services/isAutenticated';
+import {useAuth} from './context/isAutenticated';
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
   return (
@@ -53,7 +52,6 @@ const Routes = () => {
         <PrivateRoute isAuthenticated={isAuthenticated} path="/" exact component={Home} />
         <PrivateRoute isAuthenticated={isAuthenticated} path="/category/:cat" component={Category} />
         <PrivateRoute isAuthenticated={isAuthenticated} path="/user" component={User} />
-        <PrivateRoute isAuthenticated={isAuthenticated} path="/admin" component={Admin} />
         <PrivateRoute isAuthenticated={isAuthenticated} path="/product/:id" component={ProductInfo} />
         <PrivateRoute isAuthenticated={isAuthenticated} path="/cart" component={Cart} />
         <PrivateRoute isAuthenticated={isAuthenticated} path="/help" component={Help} />

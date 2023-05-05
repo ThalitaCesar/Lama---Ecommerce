@@ -1,5 +1,5 @@
 import {createContext, useContext, useState} from "react"
-import {getToken, getUserId} from "../services/isAutenticated";
+import {getToken, getUserId} from "../context/isAutenticated";
 
 export const GlobalContext = createContext(null);
 

@@ -1,6 +1,6 @@
 
 import styled from "styled-components";
-import { mobile } from "../../responsive";
+import { mobile } from "../../styles/responsive";
 
 export const Container = styled.div`
 height: 100%;

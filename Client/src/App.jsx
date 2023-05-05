@@ -5,9 +5,8 @@ import Modal from './components/Modal';
 import GlobalState from './context/GlobalState';
 import { ModalProvider } from './context/ModalContext';
 import Routes from './router';
-import Home from './screens/Home';
 import { GlobalStyle } from './styles/global';
-import { AuthProvider } from './services/isAutenticated';
+import { AuthProvider } from './context/isAutenticated';
 
 function App() {
 

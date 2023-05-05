@@ -8,15 +8,11 @@ import Marks from '../../components/Marks';
 import Navbar from '../../components/Navbar';
 import Newsletter from '../../components/Newsletter';
 import Slider from '../../components/Slider';
-import {GlobalContext} from '../../context/GlobalState';
+import { getToken, getUserId } from '../../context/isAutenticated';
 
 function Home() {
 
-    const {userId} = useContext(GlobalContext)
-    const {tokenLogin} = useContext(GlobalContext)
-    console.log('userid', userId)
-
-    useEffect(() => {}, [tokenLogin, userId])
+    useEffect(() => {}, [getToken, getUserId])
     return ( 
     <> 
     

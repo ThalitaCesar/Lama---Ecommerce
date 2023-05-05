@@ -2,9 +2,9 @@ import { Button } from '@material-ui/core';
 import { LocalShippingOutlined, ShoppingCartOutlined, StraightenOutlined } from '@material-ui/icons';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { A, ButtonTam, Container, Description, Frete, NameProduct, Offer, OldPrice, Percentual, Price, SixX, Tam, TamTitle } from './styles';
-import { getUserId } from '../../../services/isAutenticated';
+import { A, ButtonTam, Container, Description, Frete, NameProduct, Offer, Percentual, Price, SixX, Tam, TamTitle } from './styles';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { getUserId } from '../../../context/isAutenticated';
 
 function Info() {
 

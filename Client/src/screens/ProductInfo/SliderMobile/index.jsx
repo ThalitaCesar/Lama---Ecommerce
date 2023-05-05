@@ -30,7 +30,6 @@ export default function SliderMobile() {
     useEffect(() => {
         getPhotos()
     }, [])
-    console.log("photosmobile", photos)
 
     return (
         <Container className="swiper-container">
