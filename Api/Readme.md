@@ -1,32 +1,34 @@
-## Backend
-
-# Em desenvolvimento...
-
-## Informações relevantes
-
-* O repositório é uma api node(express) feita em typescrip com programação orientação a objetos. 
-* Para utilizar a api é necessário estar rodando o node 16.14.0. 
-* O banco de dados utilizado foi o mysql.
-* Não esqueça de criar o arquivo .env com as variáveis que possui no .env.exemple antes de rodar o servidor.
-
-## Intruções
-Primeiro clone o projeto
-
-    git clone https://github.com/ThalitaCesar/Lama---Ecommerce
-    
-Entre na pasta do reposiório backend
+# Backend
 
 
-    cd Api
-    
-Instalar todas as dependências 
+## Relevant Information
+* The repository is a Node.js API built with TypeScript and object-oriented programming using the Express framework.
+* To use the API, Node.js version 16.14.0 is required.
+* The MySQL database is used in this project.
+* Before running the server, make sure to create a .env file with the variables provided in the .env.example.
 
 
-    yarn
+## Instructions
+To get started, clone the project by running the following command:
 
+```
+git clone https://github.com/ThalitaCesar/Lama---Ecommerce
+```
 
-Para rodar o servidor utilize o comando:
+Navigate to the backend repository:
 
+```
+cd Api
+```
 
-    yarn dev
+Install all dependencies by running:
 
+```
+yarn
+```
+
+To start the server, run the following command:
+
+```
+yarn dev
+```
