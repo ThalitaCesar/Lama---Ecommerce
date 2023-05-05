@@ -20,7 +20,7 @@ The purpose of this project is to showcase what was learned during the Labenu Fu
 
 ## How to use:
 
-Open the Client (frontend) and Api(backend) repositories for more information.
+Create a clone project folder and open the Client (frontend) and Api(backend) repositories for more information.
 
 ## Images
 
