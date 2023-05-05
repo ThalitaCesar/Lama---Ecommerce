@@ -1,15 +1,14 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { GlobalContext } from '../../../context/GlobalState';
 import ChangePasswordModal from './ModalPassword';
 import { useModalContext } from '../../../context/ModalContext';
-import { Form, Input, Label, SubmitButton, Title } from './styles';
+import { Form, Input, Label,Title } from './styles';
 import { Box, Button, Divider } from '@material-ui/core';
-import { format } from 'date-fns';
+import { getUserId } from '../../../context/isAutenticated';
 
 
 function PersonalData() {
-  const { userId } = useContext(GlobalContext);
+  const  userId  = getUserId();
   const { openModal } = useModalContext();
   const [dataUser, setDataUser] = useState(null);
   const [name, setName] = useState('');

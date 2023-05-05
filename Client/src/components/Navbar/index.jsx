@@ -21,14 +21,9 @@ import { Link, useHistory } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalState";
 
 const Navbar = () => {
-  const { orderQuantity } = useContext(GlobalContext);
   const [searchTerm, setSearchTerm] = useState("");
   const history = useHistory();
-  const [cartQuantity, setCartQuantity] = useState(orderQuantity);
 
-  useEffect(() => {
-    setCartQuantity(orderQuantity);
-  }, [orderQuantity]);
 
   const handleSearch = () => {
     if (searchTerm.length >= 3) {
@@ -97,7 +92,7 @@ const Navbar = () => {
               }}
             >
               <MenuItem>
-                <Badge badgeContent={cartQuantity} color="primary">
+                <Badge color="primary">
                   <ShoppingCartOutlined />
                 </Badge>
               </MenuItem>

@@ -13,17 +13,17 @@ import {
     Total
 } from './styles';
 import {CardValue, Infos, P} from '../styles';
+import { getUserId } from '../../../context/isAutenticated';
 
 function CardRequest() {
     const [orders,
         setOrders] = useState([]);
-    const {setOrderQuantity, userId} = useContext(GlobalContext);
     const [cartSubtotal,
         setCartSubtotal] = useState(0);
 
     const getOrders = () => {
         axios
-            .get(`http://localhost:3003/order/getorderbyuser/${userId}`)
+            .get(`http://localhost:3003/order/getorderbyuser/${getUserId()}`)
             .then(function (response) {
                 setOrders(response.data.Result.map(order => ({
                     ...order,

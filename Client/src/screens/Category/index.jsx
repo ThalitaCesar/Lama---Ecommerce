@@ -18,7 +18,6 @@ function Category() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [perPage, setPerPage] = useState(8);
-  const { orderQuantity } = useContext(GlobalContext);
 
   const getProducts = (page, perPage) => {
     let apiUrl = `http://localhost:3003/product/getproducts/${cat}?page=${page}&perPage=${perPage}`;
@@ -38,7 +37,7 @@ function Category() {
     
   useEffect(() => {
     getProducts(currentPage, perPage);
-  }, [currentPage, cat, orderQuantity, perPage]);
+  }, [currentPage, cat, perPage]);
 
   const handlePageChange = (direction) => {
     if (direction === "previous" && currentPage > 1) {

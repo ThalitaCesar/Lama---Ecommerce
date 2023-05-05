@@ -14,10 +14,11 @@ export const getToken = () => {
     return token;
 };
 
-export const getUserId =()=>{
+export const getUserId = () => {
     const userId = localStorage.getItem('userId');
-    return userId;
-}
+    return userId ? userId : null;
+  };
+  
 
 export const AuthProvider = ({children}) => {
     const [token,
@@ -26,14 +27,18 @@ export const AuthProvider = ({children}) => {
         ? true
         : false;
 
-    const handleLogin = (token) => {
-        localStorage.setItem(TOKEN_KEY, token);
-        setToken(token);
-    };
+ const handleLogin = (token, userId) => {
+  localStorage.setItem(TOKEN_KEY, token);
+  localStorage.setItem('userId', userId);
+  setToken(token);
+};
+
 
     const handleLogout = () => {
         localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem('userId');
         setToken(null);
+        set
     };
 
     return (

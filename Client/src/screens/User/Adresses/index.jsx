@@ -6,14 +6,14 @@ import {GlobalContext} from '../../../context/GlobalState';
 import {useModalContext} from '../../../context/ModalContext';
 import {Title} from '../Requests/styles';
 import Card from './Card';
-import {DivCep} from './styles';
 import {Form, Input, Label} from './Card/styles';
+import { getUserId } from '../../../context/isAutenticated';
 
 function Adresses() {
 
     const {openModal} = useModalContext();
     const createModal = () => openModal({message: <MessageCreate/>});
-    const {userId} = useContext(GlobalContext);
+    const userId = getUserId();
     const [adressesByUser,
         setAdressesByUser] = useState([])
 
@@ -35,7 +35,7 @@ function Adresses() {
 
     useEffect(() => {
         getAdressesByUser()
-    }, [])
+    }, [results])
 
     const MessageCreate = () => {
 

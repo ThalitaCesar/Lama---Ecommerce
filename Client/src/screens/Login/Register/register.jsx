@@ -26,7 +26,7 @@ function Register() {
     const [cpf,
         setCpf] = useState('')
     const [data,
-        setData] = useState('')
+        setData] = useState("0000-00-00T00:00:00.000Z")
     const history = useHistory()
 
     const useStyles = makeStyles((theme) => ({
@@ -83,36 +83,47 @@ function Register() {
     const getStepContent = (step) => {
         switch (step) {
             case 0:
-                return (<> <TextField
+                return (<> 
+                <TextField
                     name="name"
                     type="text"
                     placeholder="Nome"
                     className="textField"
                     value={name}
                     onChange={onChangeName}
-                    required/> < TextField name = "cpf" type = "text" placeholder = "CPF" className = "textField" value = {
-                    cpf
-                }
-                onChange = {
-                    onChangeCpf
-                }
-                required /> </>);
+                    required/> 
+                    < TextField 
+                    name = "cpf" 
+                    type = "text" 
+                    placeholder = "CPF" 
+                    className = "textField" 
+                    value = {cpf}
+                    onChange = {onChangeCpf}
+                    required /> 
+                
+                </>);
 
             case 1:
-                return (<> <TextField
+                return (
+                <> 
+                <TextField
                     name="email"
                     type="text"
                     placeholder="Email"
                     className="textField"
                     value={email}
                     onChange={onChangeEmail}
-                    required/> < TextField name = "password" type = "password" placeholder = "Password" className = "textField" value = {
-                    password
-                }
-                onChange = {
-                    onChangePassword
-                }
-                required /> </>);
+                    required/> 
+                <TextField 
+                name = "password" 
+                type = "password" 
+                placeholder = "Password" 
+                className = "textField" 
+                value = { password}
+                onChange = {onChangePassword}
+                required /> 
+                </>
+                );
             default:
                 return "unknown step";
         }

@@ -1,14 +1,14 @@
 import { useState, useContext } from 'react';
 import axios from 'axios';
-import { GlobalContext } from '../../../../context/GlobalState';
 import { Form, Input, Label, Title } from '../styles';
 import { Button, Divider } from '@material-ui/core';
+import { getUserId } from '../../../../context/isAutenticated';
 
 
 const ChangePasswordModal = () => {
   const [newPassword, setNewPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const { userId } = useContext(GlobalContext);
+  const  userId  = getUserId();
 
   const handleUpdatePassword = () => {
     const body = {

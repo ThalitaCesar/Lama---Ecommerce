@@ -24,6 +24,17 @@ function Login() {
         setPassword(e.target.value);
     };
 
+    const getUserId = (email) => {
+      axios
+          .get(`http://localhost:3003/user/userid/${email}`)
+          .then((response) => {
+              localStorage.setItem('userId', response.data.result.id);
+          })
+          .catch((err) => {
+              console.log(err);
+          });
+  };
+
     const handleLogin = () => {
         const body = {
             email: email,
@@ -33,20 +44,9 @@ function Login() {
             .post('http://localhost:3003/user/login', body)
             .then((response) => {
                 login(response.data.result);
+                getUserId(email)
                 console.log('response', response.data.result);
                 history.push('/');
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-
-    const getUserId = () => {
-        axios
-            .get(`http://localhost:3003/user/userid/${email}`)
-            .then((response) => {
-                localStorage.setItem('userId', response.data.result.id);
-                console.log('response', response.data.result.id);
             })
             .catch((err) => {
                 console.log(err);
@@ -115,10 +115,7 @@ function Login() {
             <Button
                 variant="contained"
                 color="primary"
-                onClick={() => {
-                handleLogin();
-                getUserId();
-            }}
+                onClick={handleLogin}
                 style={{
                 width: "360px",
                 marginTop: "16px",

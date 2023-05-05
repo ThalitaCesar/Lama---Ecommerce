@@ -12,7 +12,10 @@ import { getToken, getUserId } from '../../context/isAutenticated';
 
 function Home() {
 
-    useEffect(() => {}, [getToken, getUserId])
+    useEffect(() => {
+    }, 
+    [getToken(), getUserId()])
+    console.log("userId", getUserId())
     return ( 
     <> 
     
