@@ -174,10 +174,11 @@ Create a clone project folder and open the Client (frontend) and Api(backend) re
 2. Adicionar o zod.
 3. Melhoria do banco de dados. (migração de banco de dados). E aumentar a segurança na autenticação.  
 4. Adicionar o sequelize ORM. 
-5. Adicionar testes unitários
-6. Utilizar o capacitor para abrir o site também em web view. . 
-7. Adicionar lib de cartão de crédito. 
-8. Adicionar lib de pix. 
+5. Retirar o styles componentes e trocar por outr ui e sass. 
+6. Adicionar testes unitários. 
+7. Utilizar o capacitor para abrir o site também em web view. . 
+8. Adicionar lib de cartão de crédito. 
+9. Adicionar lib de pix. 
 
 
 
