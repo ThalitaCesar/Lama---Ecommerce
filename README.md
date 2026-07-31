@@ -168,6 +168,17 @@ Create a clone project folder and open the Client (frontend) and Api(backend) re
 ![help-mobile](https://user-images.githubusercontent.com/83131771/236364786-2cab8537-aefc-4476-8b6e-1dec28121bdb.png)
 
 
+#### Atualização - melhorias futuras
+
+1. Mudar o gerenciamento de estado do context para o zustand 
+2. Adicionar o zod.
+3. Melhoria do banco de dados. (migração de banco de dados). E aumentar a segurança na autenticação.  
+4. Adicionar o sequelize ORM. 
+5. Adicionar testes unitários
+6. Utilizar o capacitor para abrir o site também em web view. . 
+7. Adicionar lib de cartão de crédito. 
+8. Adicionar lib de pix. 
+
 
 
 
