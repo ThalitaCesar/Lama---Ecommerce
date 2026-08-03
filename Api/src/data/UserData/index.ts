@@ -2,15 +2,16 @@ import { User } from "../../models/UserModel";
 import { Autheticator } from "../../services/Authenticator";
 import { Users } from "../../types/types";
 import { DataBase } from "../DataBase";
+import { UserModel } from "../../models/SequelizeModels";
 
 export class UserData extends DataBase {
 
   async signUpUser(user: User) {
     try {
-      await this.getConnection().from("Lama_User").insert({
+      await UserModel.create({
         id: user.getId(),
         cpf: user.getCpf(),
-        data:user.getData(),
+        data: user.getData(),
         name: user.getName(),
         email: user.getEmail(),
         password: user.getPassword(),
@@ -20,158 +21,96 @@ export class UserData extends DataBase {
       const token = newtoken.generateToken(user.getId());
       return token;
     } catch (error:any) {
-      return error.sqlMesage || error.message;
+      return error.message;
     }
   }
 
   async loginUser(email: string) {
     try {
-      const result = await this.getConnection()
-        .select()
-        .from("Lama_User")
-        .where("email", "LIKE", `%${email}%`);
-      return result;
+      return UserModel.findAll({ where: { email } });
     } catch (error:any) {
-      return error.sqlMesage || error.message;
+      return error.message;
     }
   }
 
   async getAllUsers() {
     try {
-      const users: Users[] = [];
-      const result = await this.getConnection()
-        .select("*")
-        .from("Lama_User")
-        for(let user of result){
-          users.push(user);
-        }
-
-      return users;
+      const users = await UserModel.findAll();
+      return users.map((user) => user.toJSON()) as Users[];
     } catch (error:any) {
-      return error.sqlMessage;
+      return error.message;
     }
   }
 
   async getProfile(id: string) {
-    
     try {
-      const users: Users[] = [];
-      const result = await this.getConnection()
-        .from("Lama_User")
-        .select("*")
-        .where("id", "LIKE", `%${id}%`);
-        for(let user of result){
-          users.push(user);
-        }
-      return users;
+      const users = await UserModel.findAll({ where: { id } });
+      return users.map((user) => user.toJSON()) as Users[];
     } catch (error:any) {
-      return error.sqlMesage || error.message;
+      return error.message;
     }
   }
 
   async getProfileById(id: string) {
     try {
-      const result = await this.getConnection()
-        .from("Lama_User")
-        .select("id", "name", "cpf", "data", "email", "role")
-        .where("id", "LIKE", `%${id}%`);
-      return result;
+      return UserModel.findAll({
+        attributes: ["id", "name", "cpf", "data", "email", "role"],
+        where: { id },
+      });
     } catch (error:any) {
-      return error.sqlMesage || error.message;
+      return error.message;
     }
   }
 
   async getIdUserByEmail(email: string) {
     try {
-      const result = await this.getConnection()
-        .from("Lama_User")
-        .select("id")
-        .where("email", "LIKE", `%${email}%`);
-      return result;
+      return UserModel.findAll({ attributes: ["id"], where: { email } });
     } catch (error:any) {
-      return error.sqlMesage || error.message;
+      return error.message;
     }
   }
 
   public getProfileByEmail = async (email: string) => {
     try {
-      const result = await this.getConnection()
-        .from("Lama_User")
-        .select()
-        .where({email});
-      return result[0];
+      const result = await UserModel.findOne({ where: { email } });
+      return result?.toJSON();
     } catch (error:any) {
-      return error.sqlMesage || error.message;
+      return error.message;
     }
   };
 
-
-  async updateUser(
-    id: string,
-    name: string,
-    cpf: string,
-    data: string,
-    email:string
-  ) {
+  async updateUser(id: string, name: string, cpf: string, data: string, email: string) {
     try {
-      const result = await this.getConnection()
-        .from("Lama_User")
-        .select()
-        .where("id", "LIKE", `${id}`);
-
-      if (result.length === 0) {
-        throw new Error("Usuário não encontrada");
+      const result = await UserModel.findOne({ where: { id } });
+      if (!result) {
+        throw new Error("Usuário não encontrado");
       }
-      await this.getConnection()
-        .from("Lama_User")
-        .update({
-          name,
-          cpf,
-          data,
-          email
-        })
-        .where("id", "LIKE", `${id}`)
+      await result.update({ name, cpf, data, email });
       return "Alterações realizadas com sucesso";
     } catch (error:any) {
-      return error.sqlMessage || error.message;
+      return error.message;
     }
   }
 
-  async updatePassword(
-    id: string,
-    password: string,
-  ) {
+  async updatePassword(id: string, password: string) {
     try {
-      const result = await this.getConnection()
-        .from("Lama_User")
-        .select()
-        .where("id", "LIKE", `${id}`);
-
-      if (result.length === 0) {
-        throw new Error("Usuário não encontrada");
+      const result = await UserModel.findOne({ where: { id } });
+      if (!result) {
+        throw new Error("Usuário não encontrado");
       }
-      await this.getConnection()
-        .from("Lama_User")
-        .update({
-         password
-        })
-        .where("id", "LIKE", `${id}`)
+      await result.update({ password });
       return "Senha alterada com sucesso";
     } catch (error:any) {
-      return error.sqlMessage || error.message;
+      return error.message;
     }
   }
 
   async deleteUser(token: string) {
     try {
-      await this.getConnection()
-        .from("Lama_User")
-        .where("id", token)
-        .delete();
-
+      await UserModel.destroy({ where: { id: token } });
       return "Conta deletada com sucesso";
     } catch (error:any) {
-      return error.sqlMesage || error.message;
+      return error.message;
     }
   }
 }

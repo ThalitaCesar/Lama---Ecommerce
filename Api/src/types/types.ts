@@ -42,7 +42,7 @@ export type GetAllAdresses ={
   street: string;
   city:string;
   complement: string;
-  number: string;  
+  number: number;  
   state: string;
   user_id: string;
 }
