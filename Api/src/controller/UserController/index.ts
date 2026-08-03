@@ -5,6 +5,7 @@ import { ROLES, User } from "../../models/UserModel";
 import { Autheticator } from "../../services/Authenticator";
 import { GenerateId } from "../../services/GenerateId";
 import { HashManager } from "../../services/HashManager";
+import { loginSchema, signUpSchema } from "../../validators/userValidator";
 
 export class UserController {
 
@@ -12,27 +13,12 @@ export class UserController {
    async signUpUser(req: Request, res: Response) {
       let erroStatus = 500;
       try {
-        const { name, cpf, data, email, password, role } = req.body;
+        const validated = signUpSchema.parse(req.body);
+        const { name, cpf, data, email, password, role } = validated;
         const id = new GenerateId().generateId();
-  
-        if (!name) {
-          erroStatus = 422;
-          throw new Error("Digite um nome");
-        }
-        if (!role || (role !== ROLES.NORMAL && role !== ROLES.ADMIN)) {
-          erroStatus = 422;
-          throw new Error("Parametro ROLE invalido");
-        }
-        if (!email || !email.includes("@") || !email.includes(".com")) {
-          erroStatus = 422;
-          throw new Error("Email invalido, formato => teste@teste.com");
-        }
-        if (!password || password.length < 6) {
-          erroStatus = 422;
-          throw new Error("Digite password valido, nominimo 6 digitos");
-        }
+        const normalizedRole = (role || ROLES.NORMAL) as ROLES;
         const newPassword = await new HashManager().generateHash(password);
-        const newUser = new User(id, name, cpf, data, email, newPassword, role);
+        const newUser = new User(id, name, email, data, cpf, newPassword, normalizedRole);
         const userdata = new UserData();
         const result = await userdata.signUpUser(newUser);
         console.log(result);
@@ -45,21 +31,14 @@ export class UserController {
     async loginUser(req: Request, res: Response) {
       let erroStatus = 500;
       try {
-        const { email, password } = req.body;
-        if (!email || !email.includes("@") || !email.includes(".com")) {
-          erroStatus = 422;
-          throw new Error("Email invalido, formato => teste@teste.com");
-        }
-        if (!password || password.length < 6) {
-          erroStatus = 422;
-          throw new Error("digite password valido com no minimo 6 digitos");
-        }
+        const validated = loginSchema.parse(req.body);
+        const { email, password } = validated;
         const userData = new UserData();
         const [result] = await userData.loginUser(email);
         const authenticator = new Autheticator().generateToken(result);
         res.status(200).send({ result: authenticator });
       } catch (error:any) {
-        res.status(erroStatus).send(error.sqlMessage || error.message);
+        res.status(erroStatus).send(error.message);
       }
     }
   
